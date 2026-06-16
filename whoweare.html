@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,152 +9,184 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
-.hero-about {
-    background-image: url("immagini/si.jpg"); 
-}
+    .hero-about {
+        background-image: url("immagini/officina.webp");
+    }
 
-.about-container {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    padding: 60px 8%;
-    background: #E30613; /* Sincronizzato con l'Header/Footer */
-}
+    .hero-about::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+    }
 
-.about-text {
-    flex: 1;
-}
+    .hero-overlay {
+        position: relative;
+        align-items: flex-start;
+        text-align: left;
+        color: #FFFFFF;
+        top: 25%;
+        left: 20px;
+    }
 
-.about-text h2 {
-    font-size: 2rem;
-    color: #E30613; /* Rosso ufficiale Racing */
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    background-color: #ffffff;
-    text-align: center;
-}
 
-.about-text p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #ffffff; /* Testo chiaro puro su sfondo scuro */
-}
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 60px 8%;
+        background: #E30613;
+        /* Sincronizzato con l'Header/Footer */
+    }
 
-.about-image {
-    flex: 1;
-}
+    .about-text {
+        flex: 1;
+    }
 
-.about-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombra scura e definita */
-}
+    .about-text h2 {
+        font-size: 2rem;
+        color: #E30613;
+        /* Rosso ufficiale Racing */
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        background-color: #ffffff;
+        text-align: center;
+    }
 
-/* Sezione Valori Aziendali */
-.values-section {
-    text-align: center;
-    padding: 60px 8%;
-    background: #FFFFFF; /* Sfondo chiaro come richiesto */
-    color: #1A1A1A; /* Testo scuro per alta leggibilità */
-}
+    .about-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        color: #ffffff;
+        /* Testo chiaro puro su sfondo scuro */
+    }
 
-.values-section h2 {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    color: #1A1A1A;
-    text-transform: uppercase;
-    font-weight: 800;
-    
-}
+    .about-image {
+        flex: 1;
+    }
 
-.values-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
+    .about-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        /* Ombra scura e definita */
+    }
 
-.value-card {
-    background: #F7F7F7; /* Grigio chiarissimo (stile background placeholder prodotti) */
-    padding: 30px 20px;
-    border-radius: 12px; /* Angoli morbidi uniformati alle product-card */
-    flex: 1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
-}
+    /* Sezione Valori Aziendali */
+    .values-section {
+        text-align: center;
+        padding: 60px 8%;
+        background: #FFFFFF;
+        /* Sfondo chiaro come richiesto */
+        color: #1A1A1A;
+        /* Testo scuro per alta leggibilità */
+    }
 
-.value-card:hover {
-    transform: translateY(-6px); /* Uniformato all'effetto hover dei prodotti */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-}
+    .values-section h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: #1A1A1A;
+        text-transform: uppercase;
+        font-weight: 800;
 
-.value-card i {
-    font-size: 40px;
-    color: #E30613; /* Icone coordinate con il Rosso ufficiale */
-    margin-bottom: 15px;
-}
+    }
 
-.value-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #1A1A1A;
-    text-transform: uppercase;
-    font-weight: 700;
-}
+    .values-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
 
-.value-card p {
-    font-size: 14px;
-    color: #777777; /* Grigio medio per i testi secondari su fondo chiaro */
-    line-height: 1.4;
-}
+    .value-card {
+        background: #F7F7F7;
+        /* Grigio chiarissimo (stile background placeholder prodotti) */
+        padding: 30px 20px;
+        border-radius: 12px;
+        /* Angoli morbidi uniformati alle product-card */
+        flex: 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    }
 
-/* Sezione Team */
-.team-section {
-    text-align: center;
-    padding: 60px 8%;
-    background: #1F1F1F; /* Sincronizzato con lo sfondo del Body principale */
-    color: #FFFFFF;
-}
+    .value-card:hover {
+        transform: translateY(-6px);
+        /* Uniformato all'effetto hover dei prodotti */
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
 
-.team-section h2 {
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    color: #FFFFFF;
-}
+    .value-card i {
+        font-size: 40px;
+        color: #E30613;
+        /* Icone coordinate con il Rosso ufficiale */
+        margin-bottom: 15px;
+    }
 
-.team-subtitle {
-    font-size: 16px;
-    color: #DDDDDD; /* Grigio chiaro per risaltare sul fondo #1F1F1F */
-    margin-bottom: 40px;
-    font-style: italic;
-}
+    .value-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #1A1A1A;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
 
-.team-image-container {
-    width: 100%;
-    max-width: 1100px; 
-    margin: 0 auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #2A2A2A; /* Bordura coordinata con i toni scuri */
-}
+    .value-card p {
+        font-size: 14px;
+        color: #777777;
+        /* Grigio medio per i testi secondari su fondo chiaro */
+        line-height: 1.4;
+    }
 
-.team-image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
+    /* Sezione Team */
+    .team-section {
+        text-align: center;
+        padding: 60px 8%;
+        background: #1F1F1F;
+        /* Sincronizzato con lo sfondo del Body principale */
+        color: #FFFFFF;
+    }
 
-.team-image-container:hover img {
-    transform: scale(1.02);
-}
+    .team-section h2 {
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        color: #FFFFFF;
+    }
+
+    .team-subtitle {
+        font-size: 16px;
+        color: #DDDDDD;
+        /* Grigio chiaro per risaltare sul fondo #1F1F1F */
+        margin-bottom: 40px;
+        font-style: italic;
+    }
+
+    .team-image-container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid #2A2A2A;
+        /* Bordura coordinata con i toni scuri */
+    }
+
+    .team-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .team-image-container:hover img {
+        transform: scale(1.02);
+    }
 </style>
+
 <body>
 
     <header>
@@ -178,8 +211,12 @@
     <section class="about-container">
         <div class="about-text">
             <h2> CHI SIAMO NOI DI DBRACE?</h2>
-            <p>DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di precisione. Progettiamo e realizziamo componenti unici, pensati per chi non accetta compromessi tra estetica e performance.</p>
-            <p>Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su strada e rifiniture artigianali. Utilizziamo solo materiali di altissima qualità per garantire prodotti durevoli, sicuri e con un design che si distingue al primo sguardo.</p>
+            <p>DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di precisione.
+                Progettiamo e realizziamo componenti unici, pensati per chi non accetta compromessi tra estetica e
+                performance.</p>
+            <p>Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su strada e rifiniture
+                artigianali. Utilizziamo solo materiali di altissima qualità per garantire prodotti durevoli, sicuri e
+                con un design che si distingue al primo sguardo.</p>
         </div>
         <div class="about-image">
             <img src="immagini/about-officina.webp" alt="Officina DB Race">
@@ -210,7 +247,7 @@
     <section class="team-section">
         <h2>IL TEAM DB RACE</h2>
         <p class="team-subtitle">Le facce e le mani dietro a ogni singolo pezzo</p>
-        
+
         <div class="team-image-container">
             <img src="immagini/teamdbrace.png" alt="Il Team DB Race al completo">
         </div>
@@ -238,4 +275,5 @@
     </footer>
 
 </body>
+
 </html>
