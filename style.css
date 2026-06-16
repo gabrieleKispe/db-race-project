@@ -221,34 +221,47 @@ nav a:hover {
 .community {
     background: #E30613;
     text-align: center;
-    padding: 40px 10px;
+    padding: 40px 0;
+    overflow: hidden;
 }
 
-.community h2 {
-    font-size: 22px;
-    color: #FFFFFF;
-}
-
+.community h2,
 .community p {
-    margin-bottom: 25px;
-    color: #FFFFFF;
+    color: #fff;
 }
 
-.gallery {
+.carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-track {
     display: flex;
     gap: 8px;
-    justify-content: center;
+    width: max-content;
+    animation: scroll 30s linear infinite;
 }
 
-.gallery img {
-    width: 24%;
+.carousel-track img {
+    width: 320px;
     height: 345px;
+    object-fit: cover;
     border-radius: 4px;
+    flex-shrink: 0;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-25%);
+    }
 }
 
 /* BLACK SECTION */
 
-.black-space {
+.white-space {
     background: #F2F2F2;
     height: 200px;
 }
