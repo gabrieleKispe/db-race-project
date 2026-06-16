@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Race - Chi Siamo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<style>
+    /* ==========================================================================
+   STILI SPECIFICI PER LA PAGINA CHI SIAMO
+   ========================================================================== */
+
+/* Cambio sfondo della Hero per la pagina About (opzionale, se vuoi un'immagine diversa) */
+.hero-about {
+    background-image: url("immagini/sfondo-chi-siamo.png"); 
+}
+
+/* Griglia a due colonne (Testo e Immagine) */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 60px 8%;
+    background: #2b2b2b; /* Stacco leggero di colore rispetto al body #222 */
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    color: rgb(237, 29, 36);
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Sezione Valori Aziendali */
+.values-section {
+    text-align: center;
+    padding: 60px 8%;
+    background: #222;
+}
+
+.values-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.values-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.value-card {
+    background: #333;
+    padding: 30px 20px;
+    border-radius: 6px;
+    flex: 1;
+    transition: transform 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-card i {
+    font-size: 40px;
+    color: rgb(237, 29, 36);
+    margin-bottom: 15px;
+}
+
+.value-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.value-card p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   SEZIONE TEAM (INFONDO AL SITO)
+   ========================================================================== */
+.team-section {
+    text-align: center;
+    padding: 60px 8%;
+    background: #1e1e1e; /* Un tono di nero leggermente più profondo per dare stacco */
+}
+
+.team-section h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.team-subtitle {
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.team-image-container {
+    width: 100%;
+    max-width: 1100px; /* Evita che la foto diventi troppo gigante sui monitor enormi */
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden; /* Taglia gli angoli della foto per seguire il raggio del container */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Effetto ombra per dare profondità */
+    border: 1px solid #333; /* Un leggerissimo bordo per rifinire i contorni */
+}
+
+.team-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Piccolo effetto zoom elegante quando passi il mouse sopra la foto */
+.team-image-container:hover img {
+    transform: scale(1.02);
+}
+</style>
+<body>
+
+    <header>
+        <a href="index.html">
+            <img src="immagini/dbracelogo.png" alt="DB Race">
+        </a>
+        <nav>
+            <a href="#">SHOP</a>
+            <a href="whoweare.html">CHI SIAMO</a>
+            <a href="#">DEALERS</a>
+        </nav>
+        <div class="header-icons">
+            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </header>
+
+    <section class="hero hero-about">
+        <div class="hero-overlay">
+            <h1>LA NOSTRA STORIA<br>E LA NOSTRA PASSIONE</h1>
+        </div>
+    </section>
+
+    <section class="about-container">
+        <div class="about-text">
+            <h2>CHI È DB RACE?</h2>
+            <p>DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di precisione. Progettiamo e realizziamo componenti unici, pensati per chi non accetta compromessi tra estetica e performance.</p>
+            <p>Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su strada e rifiniture artigianali. Utilizziamo solo materiali di altissima qualità per garantire prodotti durevoli, sicuri e con un design che si distingue al primo sguardo.</p>
+        </div>
+        <div class="about-image">
+            <img src="immagini/about-officina.webp" alt="Officina DB Race">
+        </div>
+    </section>
+
+    <section class="values-section">
+        <h2>I NOSTRI PILASTRI</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Tecnologia</h3>
+                <p>Sviluppo assistito da software all'avanguardia per tolleranze millimetriche.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Qualità</h3>
+                <p>Materiali selezionati e trattamenti superficiali resistenti a ogni condizione.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Su Misura</h3>
+                <p>Soluzioni Plug & Play pensate specificatamente per il tuo modello di veicolo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h2>IL TEAM DB RACE</h2>
+        <p class="team-subtitle">Le facce e le mani dietro a ogni singolo pezzo</p>
+        
+        <div class="team-image-container">
+            <img src="immagini/team-dbrace.jpg" alt="Il Team DB Race al completo">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-col">
+            <img src="immagini/dbracelogo.png" alt="DB Race Logo">
+            <a href="#">negozio</a>
+            <a href="#">chi siamo</a>
+            <a href="#">dealers</a>
+        </div>
+        <div class="footer-col">
+            <a href="#">Termini e condizioni</a>
+            <a href="#">Norme su resi e rimborsi</a>
+            <a href="#">Note Legali</a>
+            <a href="#">Copyright</a>
+        </div>
+        <div class="footer-col">
+            <span class="footer-title">contattaci:</span>
+            <a href="#">assistenza</a>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+        </div>
+    </footer>
+
+</body>
+</html>
