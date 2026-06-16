@@ -39,7 +39,7 @@ nav {
 nav a {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;             
-    font-size: 15px;              
+    font-size: 18px;              
     letter-spacing: 1.5px;        
     text-transform: uppercase;    
     color: #FFFFFF;
@@ -274,7 +274,7 @@ nav a:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-.product-img-placeholder {
+.product-img {
     height: 200px; /* Altezza aumentata per dare importanza alla foto del prodotto */
     background-color: #F7F7F7; 
     background-image: url('https://via.placeholder.com/200x180?text=Prodotto');
@@ -299,7 +299,13 @@ nav a:hover {
     height: 11px;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.dot:hover {
+    transform: scale(1.2);
 }
 
 .dot.red { background-color: #E30613; } /* Sincronizzato con il tuo rosso ufficiale */
@@ -356,7 +362,7 @@ nav a:hover {
     display: flex;
     gap: 8px;
     width: max-content;
-    animation: scroll 67s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
 .carousel-track img {
@@ -372,11 +378,11 @@ nav a:hover {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
 }
 
-/* WHITE SECTION */
+/* BLACK SECTION */
 
 .white-space {
     background: #F2F2F2;
