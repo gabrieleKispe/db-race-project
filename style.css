@@ -39,7 +39,7 @@ nav {
 nav a {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;             
-    font-size: 18px;              
+    font-size: 15px;              
     letter-spacing: 1.5px;        
     text-transform: uppercase;    
     color: #FFFFFF;
@@ -299,13 +299,7 @@ nav a:hover {
     height: 11px;
     border-radius: 50%;
     display: inline-block;
-    cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.dot:hover {
-    transform: scale(1.2);
 }
 
 .dot.red { background-color: #E30613; } /* Sincronizzato con il tuo rosso ufficiale */
@@ -378,15 +372,15 @@ nav a:hover {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-25%);
+        transform: translateX(-50%);
     }
 }
 
-/* BLACK SECTION */
+/* WHITE SECTION */
 
 .white-space {
     background: #F2F2F2;
-    height: 200px;
+    height: 100px;
 }
 
 /* FOOTER */
