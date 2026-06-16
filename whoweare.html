@@ -8,22 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
-    /* ==========================================================================
-   STILI SPECIFICI PER LA PAGINA CHI SIAMO
-   ========================================================================== */
-
-/* Cambio sfondo della Hero per la pagina About (opzionale, se vuoi un'immagine diversa) */
 .hero-about {
     background-image: url("immagini/sfondo-chi-siamo.png"); 
 }
-
-/* Griglia a due colonne (Testo e Immagine) */
 .about-container {
     display: flex;
     align-items: center;
     gap: 50px;
     padding: 60px 8%;
-    background: #2b2b2b; /* Stacco leggero di colore rispetto al body #222 */
+    background: #2b2b2b;
 }
 
 .about-text {
@@ -102,13 +95,10 @@
     line-height: 1.4;
 }
 
-/* ==========================================================================
-   SEZIONE TEAM (INFONDO AL SITO)
-   ========================================================================== */
 .team-section {
     text-align: center;
     padding: 60px 8%;
-    background: #1e1e1e; /* Un tono di nero leggermente più profondo per dare stacco */
+    background: #1e1e1e;
 }
 
 .team-section h2 {
@@ -127,12 +117,12 @@
 
 .team-image-container {
     width: 100%;
-    max-width: 1100px; /* Evita che la foto diventi troppo gigante sui monitor enormi */
+    max-width: 1100px; 
     margin: 0 auto;
     border-radius: 8px;
-    overflow: hidden; /* Taglia gli angoli della foto per seguire il raggio del container */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Effetto ombra per dare profondità */
-    border: 1px solid #333; /* Un leggerissimo bordo per rifinire i contorni */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
 }
 
 .team-image-container img {
@@ -143,7 +133,6 @@
     transition: transform 0.5s ease;
 }
 
-/* Piccolo effetto zoom elegante quando passi il mouse sopra la foto */
 .team-image-container:hover img {
     transform: scale(1.02);
 }
