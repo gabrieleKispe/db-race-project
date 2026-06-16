@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
+    /* ==========================================
+   SEZIONE: HERO / COPERTINA
+   ========================================== */
     .hero-about {
         background-image: url("immagini/officina.webp");
     }
@@ -29,14 +32,15 @@
         left: 20px;
     }
 
-
+    /* ==========================================
+   SEZIONE: ABOUT / CHI SIAMO
+   ========================================== */
     .about-container {
         display: flex;
         align-items: center;
         gap: 50px;
         padding: 60px 8%;
         background: #E30613;
-        /* Sincronizzato con l'Header/Footer */
     }
 
     .about-text {
@@ -46,7 +50,6 @@
     .about-text h2 {
         font-size: 2rem;
         color: #E30613;
-        /* Rosso ufficiale Racing */
         margin-bottom: 20px;
         text-transform: uppercase;
         background-color: #ffffff;
@@ -58,7 +61,6 @@
         line-height: 1.6;
         margin-bottom: 15px;
         color: #ffffff;
-        /* Testo chiaro puro su sfondo scuro */
     }
 
     .about-image {
@@ -71,26 +73,23 @@
         border-radius: 8px;
         object-fit: cover;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        /* Ombra scura e definita */
     }
 
-    /* Sezione Valori Aziendali */
+    /* ==========================================
+   SEZIONE: VALORI AZIENDALI
+   ========================================== */
     .values-section {
         text-align: center;
         padding: 60px 8%;
         background: #FFFFFF;
-        /* Sfondo chiaro come richiesto */
         color: #1A1A1A;
-        /* Testo scuro per alta leggibilità */
     }
 
     .values-section h2 {
         font-size: 2rem;
         margin-bottom: 40px;
-        color: #1A1A1A;
         text-transform: uppercase;
         font-weight: 800;
-
     }
 
     .values-grid {
@@ -101,10 +100,8 @@
 
     .value-card {
         background: #F7F7F7;
-        /* Grigio chiarissimo (stile background placeholder prodotti) */
         padding: 30px 20px;
         border-radius: 12px;
-        /* Angoli morbidi uniformati alle product-card */
         flex: 1;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
@@ -112,21 +109,18 @@
 
     .value-card:hover {
         transform: translateY(-6px);
-        /* Uniformato all'effetto hover dei prodotti */
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     }
 
     .value-card i {
         font-size: 40px;
         color: #E30613;
-        /* Icone coordinate con il Rosso ufficiale */
         margin-bottom: 15px;
     }
 
     .value-card h3 {
         font-size: 1.3rem;
         margin-bottom: 10px;
-        color: #1A1A1A;
         text-transform: uppercase;
         font-weight: 700;
     }
@@ -134,16 +128,16 @@
     .value-card p {
         font-size: 14px;
         color: #777777;
-        /* Grigio medio per i testi secondari su fondo chiaro */
         line-height: 1.4;
     }
 
-    /* Sezione Team */
+    /* ==========================================
+   SEZIONE: TEAM / STAFF
+   ========================================== */
     .team-section {
         text-align: center;
         padding: 60px 8%;
         background: #1F1F1F;
-        /* Sincronizzato con lo sfondo del Body principale */
         color: #FFFFFF;
     }
 
@@ -152,13 +146,12 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 5px;
-        color: #FFFFFF;
+        border-bottom: solid #ffffff;
     }
 
     .team-subtitle {
         font-size: 16px;
         color: #DDDDDD;
-        /* Grigio chiaro per risaltare sul fondo #1F1F1F */
         margin-bottom: 40px;
         font-style: italic;
     }
@@ -171,19 +164,47 @@
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         border: 1px solid #2A2A2A;
-        /* Bordura coordinata con i toni scuri */
     }
 
-    .team-image-container img {
+    .team-image-container-line {
+        display: flex;
         width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-        transition: transform 0.5s ease;
     }
 
-    .team-image-container:hover img {
-        transform: scale(1.02);
+    .single-member {
+        position: relative;
+        width: 25%;
+        overflow: hidden;
+    }
+
+    .single-member img {
+        width: 100%;
+        display: block;
+        opacity: 0.55;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .member-text {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-family: sans-serif;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+    }
+
+    .single-member:hover img {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    .single-member:hover .member-text {
+        opacity: 1;
     }
 </style>
 
@@ -249,7 +270,47 @@
         <p class="team-subtitle">Le facce e le mani dietro a ogni singolo pezzo</p>
 
         <div class="team-image-container">
-            <img src="immagini/teamdbrace.png" alt="Il Team DB Race al completo">
+            <div class="team-image-container-line">
+
+                <div class="single-member">
+                    <img src="immagini/team/member1.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/member2.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/member3.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/member4.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+
+            </div>
+            <div class="team-image-container-line">
+
+                <div class="single-member">
+                    <img src="immagini/team/member5.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/member6.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/member7.png" alt="Team 1" class="immag">
+                    <div class="member-text">Nome o Qualifica</div>
+                </div>
+                <div class="single-member">
+                    <img src="immagini/team/memberd.png" alt="Team 1" class="immag">
+                    <div class="member-text">andrea ardenghi <br> il duro</div>
+                </div>
+
+            </div>
+
         </div>
     </section>
     <section class="white-space"></section>
@@ -259,6 +320,7 @@
             <a href="#">negozio</a>
             <a href="whoweare.html">chi siamo</a>
             <a href="dealersPage.html">dealers</a>
+
         </div>
         <div class="footer-col">
             <a href="#">Termini e condizioni</a>
