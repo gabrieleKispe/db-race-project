@@ -145,75 +145,119 @@ nav a:hover {
     color: #FFFFFF;
 }
 
-/* BEST SELLERS */
-
+/* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
 .best-sellers {
-    background: #D9D9D9;
-    padding: 15px 10px 20px;
+    background-color: #DEDEDE;
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .best-sellers h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
-    color: #1F1F1F;
+    font-size: 32px;
+    margin-bottom: 35px;
+    color: #1A1A1A;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.products {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px; /* Spazio più ampio tra le card */
+}
+
+@media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-overlay { background: rgba(0,0,0,0.7); justify-content: center; padding: 0; }
+    .hero-content { text-align: center; }
 }
 
 .product-card {
-    min-width: 95px;
-    background: #FFFFFF;
-    color: #1F1F1F;
-    border-radius: 6px;
-    padding: 8px;
-}
-
-.product-image {
-    width: 100%;
-    height: 70px;
-    background: #ECECEC;
-    border-radius: 4px;
-    margin-bottom: 8px;
-}
-
-.dots {
+    background-color: #FFFFFF;
+    border-radius: 12px; /* Angoli più morbidi e moderni */
+    padding: 12px; /* Aggiunge spazio interno per non far toccare i bordi esterni */
     display: flex;
-    gap: 4px;
-    margin-bottom: 5px;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Ombra più sfumata e realistica */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
 }
 
-.dots span {
-    width: 8px;
-    height: 8px;
-    background: #BDBDBD;
+/* Effetto di sollevamento premium al passaggio del mouse */
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.product-img-placeholder {
+    height: 200px; /* Altezza aumentata per dare importanza alla foto del prodotto */
+    background-color: #F7F7F7; 
+    background-image: url('https://via.placeholder.com/200x180?text=Prodotto');
+    background-size: contain; /* Cambiato in contain così i prodotti PNG con trasparenza non vengono tagliati */
+    background-repeat: no-repeat;
+    background-position: center;
+    border-bottom: 1px solid #EEEEEE; /* Separatore sottile tra foto e info */
+}
+
+.product-info {
+    padding: 18px; /* Più spazio interno per far respirare i testi */
+}
+
+.color-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
-.dots .red {
-    background: #E30613;
+.dot:hover {
+    transform: scale(1.2);
 }
 
-.dots .blue {
-    background: #555555;
+.dot.red { background-color: #E30613; } /* Sincronizzato con il tuo rosso ufficiale */
+.dot.grey { background-color: #888888; }
+.dot.lightgrey { background-color: #DDDDDD; }
+.dot.blue { background-color: #5AC8FA; }
+
+
+.product-info h3 {
+    font-size: 15px;
+    text-transform: uppercase; /* Portato in uppercase per un look racing più aggressivo */
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
-.product-card h4 {
+.product-info .subtitle {
     font-size: 12px;
+    color: #777777;
+    margin-bottom: 14px;
+    font-weight: 500;
 }
 
-.product-card small {
-    display: block;
-    font-size: 8px;
-    margin: 4px 0;
-}
-
-.product-card p {
-    font-size: 11px;
-    font-weight: bold;
+.product-info .price {
+    font-size: 16px; /* Prezzo più grande e visibile */
+    font-weight: 800;
+    color: #E30613; /* Colore del prezzo abbinato al brand */
 }
 
 /* COMMUNITY */
