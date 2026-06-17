@@ -210,36 +210,45 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. Estrae l'ID (numero) passato nell'URL (?id=X)
-            const params = new URLSearchParams(window.location.search);
-            const idProdotto = parseInt(params.get('id'), 10);
 
-            if (!idProdotto) {
+    const params = new URLSearchParams(window.location.search);
+
+    const idProdotto = parseInt(params.get('id'), 10);
+    const source = params.get('source');
+
+    if (!idProdotto) {
+        mostraErrore();
+        return;
+    }
+
+    let jsonFile = 'filediprova.json';
+
+    if (source === 'bestseller') {
+        jsonFile = 'bestseller.json';
+    }
+
+    fetch(jsonFile)
+        .then(response => {
+            if (!response.ok) throw new Error();
+            return response.json();
+        })
+        .then(prodotti => {
+
+            const prodotto = prodotti.find(
+                p => Number(p.numero) === Number(idProdotto)
+            );
+
+            if (prodotto) {
+                mostraProdotto(prodotto);
+            } else {
                 mostraErrore();
-                return;
             }
-
-            // 2. Scarica il file JSON per cercare il pezzo corrispondente
-            fetch('filediprova.json')
-                .then(response => {
-                    if (!response.ok) throw new Error();
-                    return response.json();
-                })
-                .then(prodotti => {
-                    // Cerca il prodotto confrontando il campo "numero"
-                    const prodotto = prodotti.find(p => p.numero === idProdotto);
-                    
-                    if (prodotto) {
-                        mostraProdotto(prodotto);
-                    } else {
-                        mostraErrore();
-                    }
-                })
-                .catch(err => {
-                    console.log("Errore nel caricamento dettagli.");
-                    mostraErrore();
-                });
+        })
+        .catch(err => {
+            console.log("Errore nel caricamento dettagli.");
+            mostraErrore();
         });
+});
 
         function mostraProdotto(p) {
             document.getElementById('p-img').src = p.immagine;
