@@ -302,7 +302,10 @@
 
         <div class="header-icons">
             <img src="immagini/bandiera-inglese.png" alt="EN">
-            <i class="fa-solid fa-cart-shopping"></i>
+            <a href="cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
@@ -673,7 +676,7 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"> </a>
-            <a href="#">shop</a>
+            <a href="shop.html">shop</a>
             <a href="whoweare.html">chi siamo</a>
             <a href="dealersPage.html">dealers</a>
         </div>
@@ -691,6 +694,27 @@
         </div>
     </footer>
 
+    <script>
+        const CART_KEY = 'dbrace-cart';
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', updateCartBadge);
+        window.addEventListener('pageshow', updateCartBadge);
+        window.addEventListener('storage', (event) => {
+            if (event.key === CART_KEY) {
+                updateCartBadge();
+            }
+        });
+    </script>
 </body>
 
 </html>
