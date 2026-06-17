@@ -7,10 +7,10 @@
     <title>Shop - DB Race</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <style>
         /* --- STILI SPECIFICI PER LA PAGINA SHOP --- */
-        
+
         .filter-section {
             background: #2A2A2A;
             padding: 25px 8%;
@@ -109,21 +109,31 @@
         .products-grid::-webkit-scrollbar {
             height: 8px;
         }
+
         .products-grid::-webkit-scrollbar-track {
             background: #CCCCCC;
             border-radius: 4px;
         }
+
         .products-grid::-webkit-scrollbar-thumb {
             background: #E30613;
             border-radius: 4px;
         }
+
         .products-grid::-webkit-scrollbar-thumb:hover {
             background: #B3050F;
         }
 
         @media (max-width: 750px) {
-            .filter-container { flex-direction: column; align-items: stretch; }
-            .filter-group { flex-direction: column; align-items: stretch; }
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
 
         /* Card Prodotto */
@@ -273,6 +283,83 @@
             font-weight: 600;
             text-transform: uppercase;
         }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #E30613;
+            color: #FFFFFF;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .product-img-box {
+            height: 230px;
+            background-color: #F7F7F7;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-bottom: 1px solid #EEEEEE;
+            position: relative;
+        }
+
+        .product-img-box img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img-box img {
+            transform: scale(1.04);
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+
+        .product-details h3 {
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .product-compat {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .product-action-row {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 800;
+            color: #E30613;
+        }
     </style>
 </head>
 
@@ -287,16 +374,19 @@
         </nav>
         <div class="header-icons">
             <img src="immagini/bandiera-inglese.png" alt="EN">
-            <i class="fa-solid fa-cart-shopping"></i>
+            <a href="cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
     <section class="filter-section" id="shop-start">
         <div class="filter-container">
-            
+
             <div class="filter-group">
                 <span class="filter-label"><i class="fa-solid fa-motorcycle"></i> Trova per Moto:</span>
-                
+
                 <select id="tag-marca" class="filter-select">
                     <option value="all">Tutte le Marche</option>
                 </select>
@@ -335,7 +425,7 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">negozio</a>
+            <a href="shop.html">shop</a>
             <a href="whoweare.html">chi siamo</a>
             <a href="dealersPage.html">dealers</a>
         </div>
@@ -354,267 +444,302 @@
     </footer>
 
     <script>
-    const fallbackData = [
-        { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
-        { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
-        { "numero": 3, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Regolabile ad alte prestazioni." }
-    ];
+        const fallbackData = [
+            { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
+            { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
+            { "numero": 3, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Regolabile ad alte prestazioni." }
+        ];
 
-    let prodottiTutti = [];
+        let prodottiTutti = [];
+        const CART_KEY = 'dbrace-cart';
 
-    // ==========================
-    // POPOLAMENTO FILTRI DINAMICI
-    // ==========================
-
-    function popolaFiltri(prodotti) {
-        const selMarca = document.getElementById('tag-marca');
-
-        selMarca.innerHTML = '<option value="all">Tutte le Marche</option>';
-
-        const marche = [...new Set(
-            prodotti
-                .filter(p => p.marca && p.marca !== '-')
-                .map(p => p.marca)
-        )];
-
-        marche.sort().forEach(marca => {
-            selMarca.innerHTML += `<option value="${marca}">${marca}</option>`;
-        });
-
-        aggiornaModelli();
-    }
-
-    function aggiornaModelli() {
-        const marca = document.getElementById('tag-marca').value;
-        const selModello = document.getElementById('tag-modello');
-
-        selModello.innerHTML = '<option value="all">Tutti i Modelli</option>';
-
-        const modelli = [...new Set(
-            prodottiTutti
-                .filter(p =>
-                    marca === 'all' || p.marca === marca
-                )
-                .map(p => p.modello)
-        )];
-
-        modelli.sort().forEach(modello => {
-            if(modello && modello !== '-') {
-                selModello.innerHTML += `<option value="${modello}">${modello}</option>`;
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
             }
-        });
-
-        aggiornaVersioni();
-    }
-
-    function aggiornaVersioni() {
-        const marca = document.getElementById('tag-marca').value;
-        const modello = document.getElementById('tag-modello').value;
-        const selVersione = document.getElementById('tag-versione');
-
-        selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
-
-        const versioni = [...new Set(
-            prodottiTutti
-                .filter(p =>
-                    (marca === 'all' || p.marca === marca) &&
-                    (modello === 'all' || p.modello === modello)
-                )
-                .map(p => p.versione)
-        )];
-
-        versioni.sort().forEach(versione => {
-            if(versione && versione !== '-') {
-                selVersione.innerHTML += `<option value="${versione}">${versione}</option>`;
-            }
-        });
-    }
-
-    // ==========================
-    // RENDER SHOP
-    // ==========================
-
-    function renderShop(prodotti) {
-        const container = document.getElementById('products-container');
-
-        const righeEsistenti = container.querySelectorAll('.category-row');
-        righeEsistenti.forEach(r => r.remove());
-
-        if(prodotti.length === 0) {
-            document.getElementById('no-products-msg').style.display = 'block';
-            return;
         }
 
-        document.getElementById('no-products-msg').style.display = 'none';
+        function addToCart(prodotto) {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const existing = cart.find(item => item.numero === prodotto.numero);
 
-        const categorieMap = {};
-
-        prodotti.forEach(p => {
-            if(!categorieMap[p.categoria]) {
-                categorieMap[p.categoria] = [];
+            if (existing) {
+                existing.quantita += 1;
+            } else {
+                cart.push({
+                    ...prodotto,
+                    quantita: 1
+                });
             }
 
-            categorieMap[p.categoria].push(p);
-        });
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            updateCartBadge();
+            alert('Prodotto aggiunto al carrello!');
+        }
 
-        for (const categoria in categorieMap) {
+        window.addToCart = addToCart;
 
-            const catRow = document.createElement('div');
-            catRow.className = 'category-row';
+        // ==========================
+        // POPOLAMENTO FILTRI DINAMICI
+        // ==========================
 
-            catRow.innerHTML = `
+        function popolaFiltri(prodotti) {
+            const selMarca = document.getElementById('tag-marca');
+
+            selMarca.innerHTML = '<option value="all">Tutte le Marche</option>';
+
+            const marche = [...new Set(
+                prodotti
+                    .filter(p => p.marca && p.marca !== '-')
+                    .map(p => p.marca)
+            )];
+
+            marche.sort().forEach(marca => {
+                selMarca.innerHTML += `<option value="${marca}">${marca}</option>`;
+            });
+
+            aggiornaModelli();
+        }
+
+        function aggiornaModelli() {
+            const marca = document.getElementById('tag-marca').value;
+            const selModello = document.getElementById('tag-modello');
+
+            selModello.innerHTML = '<option value="all">Tutti i Modelli</option>';
+
+            const modelli = [...new Set(
+                prodottiTutti
+                    .filter(p =>
+                        marca === 'all' || p.marca === marca
+                    )
+                    .map(p => p.modello)
+            )];
+
+            modelli.sort().forEach(modello => {
+                if (modello && modello !== '-') {
+                    selModello.innerHTML += `<option value="${modello}">${modello}</option>`;
+                }
+            });
+
+            aggiornaVersioni();
+        }
+
+        function aggiornaVersioni() {
+            const marca = document.getElementById('tag-marca').value;
+            const modello = document.getElementById('tag-modello').value;
+            const selVersione = document.getElementById('tag-versione');
+
+            selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
+
+            const versioni = [...new Set(
+                prodottiTutti
+                    .filter(p =>
+                        (marca === 'all' || p.marca === marca) &&
+                        (modello === 'all' || p.modello === modello)
+                    )
+                    .map(p => p.versione)
+            )];
+
+            versioni.sort().forEach(versione => {
+                if (versione && versione !== '-') {
+                    selVersione.innerHTML += `<option value="${versione}">${versione}</option>`;
+                }
+            });
+        }
+
+        // ==========================
+        // RENDER SHOP
+        // ==========================
+
+        function renderShop(prodotti) {
+            const container = document.getElementById('products-container');
+
+            const righeEsistenti = container.querySelectorAll('.category-row');
+            righeEsistenti.forEach(r => r.remove());
+
+            if (prodotti.length === 0) {
+                document.getElementById('no-products-msg').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('no-products-msg').style.display = 'none';
+
+            const categorieMap = {};
+
+            prodotti.forEach(p => {
+                if (!categorieMap[p.categoria]) {
+                    categorieMap[p.categoria] = [];
+                }
+
+                categorieMap[p.categoria].push(p);
+            });
+
+            for (const categoria in categorieMap) {
+
+                const catRow = document.createElement('div');
+                catRow.className = 'category-row';
+
+                catRow.innerHTML = `
                 <div class="category-header">
                     <h2 class="category-title">${categoria}</h2>
                 </div>
             `;
 
-            const grid = document.createElement('div');
-            grid.className = 'products-grid';
+                const grid = document.createElement('div');
+                grid.className = 'products-grid';
 
-            categorieMap[categoria].forEach(p => {
+                categorieMap[categoria].forEach(p => {
 
-                const card = document.createElement('div');
-                card.className = 'product-card';
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
 
-                card.innerHTML = `
-                    <a href="prodotto.html?id=${p.numero}&source=shop" class="product-link-wrapper">
+                    card.innerHTML = `
+    <a href="prodotto.html?id=${p.numero}&source=shop" class="product-link-wrapper">
 
-                        <div class="product-img-box">
-                            <span class="product-badge">${p.marca}</span>
+        <div class="product-img-box">
+            <span class="product-badge">${p.marca}</span>
 
-                            <img
-                                src="${p.immagine}"
-                                alt="${p.nome}"
-                                onerror="this.src='https://via.placeholder.com/280x230?text=Immagine+DB+Race'"
-                            >
-                        </div>
+            <img
+                src="${p.immagine}"
+                alt="${p.nome}"
+                onerror="this.src='https://via.placeholder.com/280x230?text=Immagine+DB+Race'"
+            >
+        </div>
 
-                        <div class="product-details">
-                            <h3>${p.nome}</h3>
+        <div class="product-details">
+            <h3>${p.nome}</h3>
 
-                            <div class="product-compat">
-                                Moto:
-                                <strong>
-                                    ${p.marca}
-                                    ${p.modello}
-                                    ${p.versione !== '-' ? p.versione : ''}
-                                </strong>
-                            </div>
-                        </div>
+            <div class="product-compat">
+                Moto:
+                <strong>
+                    ${p.marca}
+                    ${p.modello}
+                    ${p.versione !== '-' ? p.versione : ''}
+                </strong>
+            </div>
+        </div>
+    </a>
 
-                    </a>
+    <div class="product-action-row">
+        <div class="product-price">
+            € ${p.prezzo.toFixed(2)}
+        </div>
 
-                    <div class="product-action-row">
-                        <div class="product-price">
-                            € ${p.prezzo.toFixed(2)}
-                        </div>
+        <button class="add-to-cart-btn">
+            <i class="fa-solid fa-cart-shopping"></i> +
+        </button>
+    </div>
+`;
 
-                        <button
-                            class="add-to-cart-btn"
-                            onclick="event.preventDefault(); alert('Prodotto aggiunto al carrello!');"
-                        >
-                            <i class="fa-solid fa-cart-shopping"></i> +
-                        </button>
-                    </div>
-                `;
+                    const addBtn = card.querySelector('.add-to-cart-btn');
+                    addBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        addToCart(p);
+                    });
 
-                grid.appendChild(card);
+                    grid.appendChild(card);
+                });
+
+                catRow.appendChild(grid);
+                container.appendChild(catRow);
+            }
+        }
+
+        // ==========================
+        // FILTRI
+        // ==========================
+
+        function applicaFiltri() {
+
+            const marca = document.getElementById('tag-marca').value;
+            const modello = document.getElementById('tag-modello').value;
+            const versione = document.getElementById('tag-versione').value;
+            const ordinamento = document.getElementById('price-sort').value;
+
+            let prodottiFiltrati = prodottiTutti.filter(p => {
+
+                const matchMarca =
+                    marca === 'all' || p.marca === marca;
+
+                const matchModello =
+                    modello === 'all' || p.modello === modello;
+
+                const matchVersione =
+                    versione === 'all' || p.versione === versione;
+
+                return matchMarca && matchModello && matchVersione;
             });
 
-            catRow.appendChild(grid);
-            container.appendChild(catRow);
+            if (ordinamento === 'low-high') {
+                prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
+            }
+
+            if (ordinamento === 'high-low') {
+                prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
+            }
+
+            renderShop(prodottiFiltrati);
         }
-    }
 
-    // ==========================
-    // FILTRI
-    // ==========================
+        // ==========================
+        // EVENTI
+        // ==========================
 
-    function applicaFiltri() {
-
-        const marca = document.getElementById('tag-marca').value;
-        const modello = document.getElementById('tag-modello').value;
-        const versione = document.getElementById('tag-versione').value;
-        const ordinamento = document.getElementById('price-sort').value;
-
-        let prodottiFiltrati = prodottiTutti.filter(p => {
-
-            const matchMarca =
-                marca === 'all' || p.marca === marca;
-
-            const matchModello =
-                modello === 'all' || p.modello === modello;
-
-            const matchVersione =
-                versione === 'all' || p.versione === versione;
-
-            return matchMarca && matchModello && matchVersione;
+        document.getElementById('tag-marca').addEventListener('change', () => {
+            aggiornaModelli();
+            applicaFiltri();
         });
 
-        if(ordinamento === 'low-high') {
-            prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
-        }
+        document.getElementById('tag-modello').addEventListener('change', () => {
+            aggiornaVersioni();
+            applicaFiltri();
+        });
 
-        if(ordinamento === 'high-low') {
-            prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
-        }
+        document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
 
-        renderShop(prodottiFiltrati);
-    }
+        document.getElementById('price-sort').addEventListener('change', applicaFiltri);
 
-    // ==========================
-    // EVENTI
-    // ==========================
+        // ==========================
+        // CARICAMENTO JSON
+        // ==========================
 
-    document.getElementById('tag-marca').addEventListener('change', () => {
-        aggiornaModelli();
-        applicaFiltri();
-    });
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
 
-    document.getElementById('tag-modello').addEventListener('change', () => {
-        aggiornaVersioni();
-        applicaFiltri();
-    });
+            fetch('prodotti.json')
+                .then(response => {
 
-    document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
+                    if (!response.ok) {
+                        throw new Error("File JSON non trovato");
+                    }
 
-    document.getElementById('price-sort').addEventListener('change', applicaFiltri);
+                    return response.json();
+                })
+                .then(data => {
 
-    // ==========================
-    // CARICAMENTO JSON
-    // ==========================
+                    prodottiTutti = data;
 
-    window.addEventListener('DOMContentLoaded', () => {
+                    popolaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                })
+                .catch(err => {
 
-        fetch('filediprova.json')
-            .then(response => {
+                    console.log(
+                        "Errore JSON. Avvio fallback interno.",
+                        err
+                    );
 
-                if(!response.ok) {
-                    throw new Error("File JSON non trovato");
-                }
+                    prodottiTutti = fallbackData;
 
-                return response.json();
-            })
-            .then(data => {
-
-                prodottiTutti = data;
-
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            })
-            .catch(err => {
-
-                console.log(
-                    "Errore JSON. Avvio fallback interno.",
-                    err
-                );
-
-                prodottiTutti = fallbackData;
-
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            });
-    });
-</script>
+                    popolaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                });
+        });
+    </script>
 </body>
+
 </html>
