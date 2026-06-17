@@ -10,166 +10,208 @@
 </head>
 <style>
     /* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
-.best-sellers {
-    background-color: #DEDEDE;
-    padding: 60px 20px;
-}
-
-.container {
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.best-sellers h2 {
-    font-size: 32px;
-    margin-bottom: 35px;
-    color: #1A1A1A;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 20px; /* Spazio più ampio tra le card */
-}
-
-@media (max-width: 1024px) {
-    .products-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-overlay { background: rgba(0,0,0,0.7); justify-content: center; padding: 0; }
-    .hero-content { text-align: center; }
-}
-
-.product-card {
-    background-color: #FFFFFF;
-    border-radius: 12px; /* Angoli più morbidi e moderni */
-    padding: 12px; /* Aggiunge spazio interno per non far toccare i bordi esterni */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Ombra più sfumata e realistica */
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
-}
-
-/* Effetto di sollevamento premium al passaggio del mouse */
-.product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-}
-
-.product-img {
-    height: 200px; /* Altezza aumentata per dare importanza alla foto del prodotto */
-    background-color: #F7F7F7; 
-    background-image: url('https://via.placeholder.com/200x180?text=Prodotto');
-    background-size: contain; /* Cambiato in contain così i prodotti PNG con trasparenza non vengono tagliati */
-    background-repeat: no-repeat;
-    background-position: center;
-    border-bottom: 1px solid #EEEEEE; /* Separatore sottile tra foto e info */
-}
-
-.product-info {
-    padding: 18px; /* Più spazio interno per far respirare i testi */
-}
-
-.color-dots {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.dot:hover {
-    transform: scale(1.2);
-}
-
-.dot.red { background-color: #E30613; } /* Sincronizzato con il tuo rosso ufficiale */
-.dot.grey { background-color: #888888; }
-.dot.lightgrey { background-color: #DDDDDD; }
-.dot.blue { background-color: #5AC8FA; }
-
-
-.product-info h3 {
-    font-size: 15px;
-    text-transform: uppercase; /* Portato in uppercase per un look racing più aggressivo */
-    font-weight: 700;
-    color: #1A1A1A;
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-}
-
-.product-info .subtitle {
-    font-size: 12px;
-    color: #777777;
-    margin-bottom: 14px;
-    font-weight: 500;
-}
-
-.product-info .price {
-    font-size: 16px; /* Prezzo più grande e visibile */
-    font-weight: 800;
-    color: #E30613; /* Colore del prezzo abbinato al brand */
-}
-
-/* COMMUNITY */
-
-.community {
-    background: #E30613;
-    text-align: center;
-    padding: 40px 0;
-    overflow: hidden;
-}
-
-.community h2{
-    font-family:'Courier New', Courier, monospace ;
-}
-.community p {
-    font-family:'Courier New', Courier, monospace ;
-    color: #fff;
-}
-
-.carousel {
-    width: 100%;
-    overflow: hidden;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 8px;
-    width: max-content;
-    animation: scroll 30s linear infinite;
-}
-
-.carousel-track img {
-    width: 320px;
-    height: 345px;
-    object-fit: cover;
-    border-radius: 4px;
-    flex-shrink: 0;
-}
-
-@keyframes scroll {
-    from {
-        transform: translateX(0);
+    .best-sellers {
+        background-color: #DEDEDE;
+        padding: 60px 25px;
     }
-    to {
-        transform: translateX(-25%);
-    }
-}
 
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .best-sellers h2 {
+        font-size: 32px;
+        margin-bottom: 35px;
+        color: #1A1A1A;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        border-bottom: solid 2px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        /* Spazio più ampio tra le card */
+    }
+
+    @media (max-width: 1024px) {
+        .products-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            padding: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+    }
+
+    .product-card {
+        background-color: #FFFFFF;
+        border-radius: 12px;
+        /* Angoli più morbidi e moderni */
+        padding: 12px;
+        /* Aggiunge spazio interno per non far toccare i bordi esterni */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        /* Ombra più sfumata e realistica */
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    }
+
+    /* Effetto di sollevamento premium al passaggio del mouse */
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-img {
+        height: 200px;
+        background-color: #F7F7F7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #EEEEEE;
+        overflow: hidden;
+        /* Importante per non far uscire l'immagine */
+    }
+
+    .product-img img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .product-info {
+        padding: 18px;
+        /* Più spazio interno per far respirare i testi */
+    }
+
+    .color-dots {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+
+    .dot:hover {
+        transform: scale(1.2);
+    }
+
+    .dot.red {
+        background-color: #E30613;
+    }
+
+    /* Sincronizzato con il tuo rosso ufficiale */
+    .dot.grey {
+        background-color: #888888;
+    }
+
+    .dot.lightgrey {
+        background-color: #DDDDDD;
+    }
+
+    .dot.blue {
+        background-color: #5AC8FA;
+    }
+
+
+    .product-info h3 {
+        font-size: 15px;
+        text-transform: uppercase;
+        /* Portato in uppercase per un look racing più aggressivo */
+        font-weight: 700;
+        color: #1A1A1A;
+        margin-bottom: 4px;
+        letter-spacing: 0.5px;
+    }
+
+    .product-info .subtitle {
+        font-size: 12px;
+        color: #777777;
+        margin-bottom: 14px;
+        font-weight: 500;
+    }
+
+    .product-info .price {
+        font-size: 16px;
+        /* Prezzo più grande e visibile */
+        font-weight: 800;
+        color: #E30613;
+        /* Colore del prezzo abbinato al brand */
+    }
+
+    /* COMMUNITY */
+
+    .community {
+        background: #E30613;
+        text-align: center;
+        padding: 40px 0;
+        overflow: hidden;
+    }
+
+    .community h2 {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .community p {
+        font-family: 'Courier New', Courier, monospace;
+        color: #fff;
+    }
+
+    .carousel {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 8px;
+        width: max-content;
+        animation: scroll 30s linear infinite;
+    }
+
+    .carousel-track img {
+        width: 320px;
+        height: 345px;
+        object-fit: cover;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-25%);
+        }
+    }
 </style>
 
 <body>
@@ -267,117 +309,45 @@
 
             </div>
         </div>
-
     </section>
 
-        <section class="best-sellers">
+    <section class="best-sellers">
         <div class="container">
             <h2>BEST SELLERS</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="immagini/shop/portatarga.png" alt="Nome Prodotto" class="product-img">
-                    <div class="product-info">
-                        <div class="color-dots">
-                            <span class="dot red active"></span>
-                            <span class="dot grey"></span>
-                            <span class="dot lightgrey"></span>
-                            <span class="dot blue"></span>
-                        </div>
-                        <h3>PORTATARGA</h3>
-                        <p class="subtitle">KTM Super Duke 1390,<br> Ducati Streetfighter V4</p>
-                        <p class="price">prezzo: 319,00 €</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="immagini/shop/coso.jpg" alt="Nome Prodotto" class="product-img">
-                    <div class="product-info">
-                        <div class="color-dots">
-                            <span class="dot red active"></span>
-                            <span class="dot grey"></span>
-                            <span class="dot lightgrey"></span>
-                            <span class="dot blue"></span>
-                        </div>
-                        <h3>PARAFANGO POSTERIORE</h3>
-                        <p class="subtitle">Honda Transalp XL750 2023-2026</p>
-                        <p class="price">prezzo: 40,00 €</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="immagini/shop/freccia-destra.jpeg" alt="Nome Prodotto" class="product-img">
-                    <div class="product-info">
-                        <div class="color-dots">
-                            <span class="dot red active"></span>
-                            <span class="dot grey"></span>
-                            <span class="dot lightgrey"></span>
-                            <span class="dot blue"></span>
-                        </div>
-                        <h3>FRECCIA</h3>
-                        <p class="subtitle">Yamaha MT-07 ABS 2021-2025</p>
-                        <p class="price">prezzo: 25,00 €</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="immagini/shop/nonsocosasono.png" alt="Nome Prodotto" class="product-img">
-                    <div class="product-info">
-                        <div class="color-dots">
-                            <span class="dot red active"></span>
-                            <span class="dot grey"></span>
-                            <span class="dot lightgrey"></span>
-                            <span class="dot blue"></span>
-                        </div>
-                        <h3>AMMORTIZZATORE POSTERIORE</h3>
-                        <p class="subtitle">BMW R 1300 GS (Edizione ESA)</p>
-                        <p class="price">prezzo: 999,99 €</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="immagini/shop/senzanonfreni.jpg" alt="Nome Prodotto" class="product-img">
-                    <div class="product-info">
-                        <div class="color-dots">
-                            <span class="dot red active"></span>
-                            <span class="dot grey"></span>
-                            <span class="dot lightgrey"></span>
-                            <span class="dot blue"></span>
-                        </div>
-                        <h3>LEVA FRENO</h3>
-                        <p class="subtitle">Kawasaki Ninja 650 KRT Edition</p>
-                        <p class="price">prezzo: 30,00 €</p>
-                    </div>
-                </div>
-            </div>
+            <div class="products-grid" id="best-sellers-container"></div>
         </div>
     </section>
-    
+
     <!-- INSTAGRAM -->
     <section class="community">
 
-    <h2>#dbracecrew</h2>
-    <p>condividi la tua passione</p>
+        <h2>#dbracecrew</h2>
+        <p>condividi la tua passione</p>
 
-    <div class="carousel">
-        <div class="carousel-track">
+        <div class="carousel">
+            <div class="carousel-track">
 
-            <img src="immagini/fotodb1.webp" alt="">
-            <img src="immagini/fotodb2.webp" alt="">
-            <img src="immagini/fotodb3.webp" alt="">
-            <img src="immagini/fotodb4.webp" alt="">
-            <img src="immagini/fotodb5.webp" alt="">
-            <img src="immagini/fotodb6.webp" alt="">
-            <img src="immagini/fotodb7.webp" alt="">
+                <img src="immagini/fotodb1.webp" alt="">
+                <img src="immagini/fotodb2.webp" alt="">
+                <img src="immagini/fotodb3.webp" alt="">
+                <img src="immagini/fotodb4.webp" alt="">
+                <img src="immagini/fotodb5.webp" alt="">
+                <img src="immagini/fotodb6.webp" alt="">
+                <img src="immagini/fotodb7.webp" alt="">
 
-            <!-- Duplico le immagini per creare il loop infinito -->
-            <img src="immagini/fotodb1.webp" alt="">
-            <img src="immagini/fotodb2.webp" alt="">
-            <img src="immagini/fotodb3.webp" alt="">
-            <img src="immagini/fotodb4.webp" alt="">
-            <img src="immagini/fotodb5.webp" alt="">
-            <img src="immagini/fotodb6.webp" alt="">
-            <img src="immagini/fotodb7.webp" alt="">
+                <!-- Duplico le immagini per creare il loop infinito -->
+                <img src="immagini/fotodb1.webp" alt="">
+                <img src="immagini/fotodb2.webp" alt="">
+                <img src="immagini/fotodb3.webp" alt="">
+                <img src="immagini/fotodb4.webp" alt="">
+                <img src="immagini/fotodb5.webp" alt="">
+                <img src="immagini/fotodb6.webp" alt="">
+                <img src="immagini/fotodb7.webp" alt="">
 
+            </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
     <!-- SPACER -->
     <section class="white-space"></section>
@@ -407,5 +377,35 @@
     </footer>
 
 </body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        fetch('bestseller.json')
+            .then(res => res.json())
+            .then(data => {
+                const bestSellers = data.slice(0, 5);
+                const container = document.getElementById('best-sellers-container');
 
+                bestSellers.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    
+                    // Inseriamo l'immagine come tag <img> dinamico
+                    card.innerHTML = `
+                        <a href="prodotto.html?id=${p.numero}&source=bestseller" style="text-decoration:none; color:inherit;">
+                            <div class="product-img">
+                                <img src="${p.immagine}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/200x180?text=No+Img'">
+                            </div>
+                            <div class="product-info">
+                                <h3>${p.nome}</h3>
+                                <p class="subtitle">${p.marca} ${p.modello}</p>
+                                <p class="price">€ ${p.prezzo.toFixed(2)}</p>
+                            </div>
+                        </a>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(err => console.error("Errore caricamento:", err));
+    });
+</script>
 </html>
