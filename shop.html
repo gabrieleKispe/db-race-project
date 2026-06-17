@@ -354,7 +354,6 @@
     </footer>
 
     <script>
-    // Fallback integrato in formato JSON nativo in caso di problemi di fetch locale
     const fallbackData = [
         { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
         { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
@@ -363,81 +362,162 @@
 
     let prodottiTutti = [];
 
-    // Popola i menu a tendina dinamici basandosi sul JSON ottenuto
-    function popolaFiltri(prodotti) {
-        const marche = new Set();
-        const modelli = new Set();
-        const versioni = new Set();
+    // ==========================
+    // POPOLAMENTO FILTRI DINAMICI
+    // ==========================
 
-        prodotti.forEach(p => {
-            if(p.marca && p.marca !== "-") marche.add(p.marca);
-            if(p.modello && p.modello !== "-") modelli.add(p.modello);
-            if(p.versione && p.versione !== "-") versioni.add(p.versione);
+    function popolaFiltri(prodotti) {
+        const selMarca = document.getElementById('tag-marca');
+
+        selMarca.innerHTML = '<option value="all">Tutte le Marche</option>';
+
+        const marche = [...new Set(
+            prodotti
+                .filter(p => p.marca && p.marca !== '-')
+                .map(p => p.marca)
+        )];
+
+        marche.sort().forEach(marca => {
+            selMarca.innerHTML += `<option value="${marca}">${marca}</option>`;
         });
 
-        const selMarca = document.getElementById('tag-marca');
-        const selModello = document.getElementById('tag-modello');
-        const selVersione = document.getElementById('tag-versione');
-
-        Array.from(marche).sort().forEach(m => selMarca.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(modelli).sort().forEach(m => selModello.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(versioni).sort().forEach(v => selVersione.innerHTML += `<option value="${v}">${v}</option>`);
+        aggiornaModelli();
     }
 
-    // Generazione HTML dei prodotti suddivisi per categorie (senza mostrare la descrizione)
+    function aggiornaModelli() {
+        const marca = document.getElementById('tag-marca').value;
+        const selModello = document.getElementById('tag-modello');
+
+        selModello.innerHTML = '<option value="all">Tutti i Modelli</option>';
+
+        const modelli = [...new Set(
+            prodottiTutti
+                .filter(p =>
+                    marca === 'all' || p.marca === marca
+                )
+                .map(p => p.modello)
+        )];
+
+        modelli.sort().forEach(modello => {
+            if(modello && modello !== '-') {
+                selModello.innerHTML += `<option value="${modello}">${modello}</option>`;
+            }
+        });
+
+        aggiornaVersioni();
+    }
+
+    function aggiornaVersioni() {
+        const marca = document.getElementById('tag-marca').value;
+        const modello = document.getElementById('tag-modello').value;
+        const selVersione = document.getElementById('tag-versione');
+
+        selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
+
+        const versioni = [...new Set(
+            prodottiTutti
+                .filter(p =>
+                    (marca === 'all' || p.marca === marca) &&
+                    (modello === 'all' || p.modello === modello)
+                )
+                .map(p => p.versione)
+        )];
+
+        versioni.sort().forEach(versione => {
+            if(versione && versione !== '-') {
+                selVersione.innerHTML += `<option value="${versione}">${versione}</option>`;
+            }
+        });
+    }
+
+    // ==========================
+    // RENDER SHOP
+    // ==========================
+
     function renderShop(prodotti) {
         const container = document.getElementById('products-container');
+
         const righeEsistenti = container.querySelectorAll('.category-row');
         righeEsistenti.forEach(r => r.remove());
 
         if(prodotti.length === 0) {
             document.getElementById('no-products-msg').style.display = 'block';
             return;
-        } else {
-            document.getElementById('no-products-msg').style.display = 'none';
         }
 
+        document.getElementById('no-products-msg').style.display = 'none';
+
         const categorieMap = {};
+
         prodotti.forEach(p => {
-            if(!categorieMap[p.categoria]) categorieMap[p.categoria] = [];
+            if(!categorieMap[p.categoria]) {
+                categorieMap[p.categoria] = [];
+            }
+
             categorieMap[p.categoria].push(p);
         });
 
         for (const categoria in categorieMap) {
+
             const catRow = document.createElement('div');
             catRow.className = 'category-row';
 
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-header';
-            catHeader.innerHTML = `<h2 class="category-title">${categoria}</h2>`;
-            catRow.appendChild(catHeader);
+            catRow.innerHTML = `
+                <div class="category-header">
+                    <h2 class="category-title">${categoria}</h2>
+                </div>
+            `;
 
             const grid = document.createElement('div');
             grid.className = 'products-grid';
 
             categorieMap[categoria].forEach(p => {
+
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                
-                // Il link ora prende SOLO il "numero" (id) del prodotto
+
                 card.innerHTML = `
                     <a href="prodotto.html?id=${p.numero}" class="product-link-wrapper">
+
                         <div class="product-img-box">
                             <span class="product-badge">${p.marca}</span>
-                            <img src="${p.immagine}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/280x230?text=Immagine+DB+Race'">
+
+                            <img
+                                src="${p.immagine}"
+                                alt="${p.nome}"
+                                onerror="this.src='https://via.placeholder.com/280x230?text=Immagine+DB+Race'"
+                            >
                         </div>
+
                         <div class="product-details">
                             <h3>${p.nome}</h3>
-                            <div class="product-compat">Moto: <strong>${p.marca} ${p.modello} ${p.versione !== '-' ? p.versione : ''}</strong></div>
+
+                            <div class="product-compat">
+                                Moto:
+                                <strong>
+                                    ${p.marca}
+                                    ${p.modello}
+                                    ${p.versione !== '-' ? p.versione : ''}
+                                </strong>
+                            </div>
                         </div>
+
                     </a>
+
                     <div class="product-action-row">
-                        <div class="product-price">€ ${p.prezzo.toFixed(2)}</div>
-                        <button class="add-to-cart-btn" onclick="event.preventDefault(); alert('Prodotto aggiunto al carrello!');">
+                        <div class="product-price">
+                            € ${p.prezzo.toFixed(2)}
+                        </div>
+
+                        <button
+                            class="add-to-cart-btn"
+                            onclick="event.preventDefault(); alert('Prodotto aggiunto al carrello!');"
+                        >
                             <i class="fa-solid fa-cart-shopping"></i> +
                         </button>
                     </div>
                 `;
+
                 grid.appendChild(card);
             });
 
@@ -446,49 +526,91 @@
         }
     }
 
-    // Gestione filtri logici e ordinamento dei prezzi numerici
+    // ==========================
+    // FILTRI
+    // ==========================
+
     function applicaFiltri() {
+
         const marca = document.getElementById('tag-marca').value;
         const modello = document.getElementById('tag-modello').value;
         const versione = document.getElementById('tag-versione').value;
         const ordinamento = document.getElementById('price-sort').value;
 
         let prodottiFiltrati = prodottiTutti.filter(p => {
-            const matchMarca = (marca === 'all') || (p.marca === marca);
-            const matchModello = (modello === 'all') || (p.modello === modello);
-            const matchVersione = (versione === 'all') || (p.versione === versione);
+
+            const matchMarca =
+                marca === 'all' || p.marca === marca;
+
+            const matchModello =
+                modello === 'all' || p.modello === modello;
+
+            const matchVersione =
+                versione === 'all' || p.versione === versione;
+
             return matchMarca && matchModello && matchVersione;
         });
 
         if(ordinamento === 'low-high') {
             prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
-        } else if(ordinamento === 'high-low') {
+        }
+
+        if(ordinamento === 'high-low') {
             prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
         }
 
         renderShop(prodottiFiltrati);
     }
 
-    document.getElementById('tag-marca').addEventListener('change', applicaFiltri);
-    document.getElementById('tag-modello').addEventListener('change', applicaFiltri);
+    // ==========================
+    // EVENTI
+    // ==========================
+
+    document.getElementById('tag-marca').addEventListener('change', () => {
+        aggiornaModelli();
+        applicaFiltri();
+    });
+
+    document.getElementById('tag-modello').addEventListener('change', () => {
+        aggiornaVersioni();
+        applicaFiltri();
+    });
+
     document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
+
     document.getElementById('price-sort').addEventListener('change', applicaFiltri);
 
-    // Caricamento asincrono del file JSON reale
+    // ==========================
+    // CARICAMENTO JSON
+    // ==========================
+
     window.addEventListener('DOMContentLoaded', () => {
+
         fetch('filediprova.json')
             .then(response => {
-                if (!response.ok) throw new Error("File JSON non trovato o non valido");
+
+                if(!response.ok) {
+                    throw new Error("File JSON non trovato");
+                }
+
                 return response.json();
             })
             .then(data => {
+
                 prodottiTutti = data;
+
                 popolaFiltri(prodottiTutti);
                 renderShop(prodottiTutti);
             })
             .catch(err => {
-                console.log("Errore JSON. Avvio fallback interno dati.", err);
+
+                console.log(
+                    "Errore JSON. Avvio fallback interno.",
+                    err
+                );
+
                 prodottiTutti = fallbackData;
+
                 popolaFiltri(prodottiTutti);
                 renderShop(prodottiTutti);
             });
