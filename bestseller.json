@@ -1,0 +1,57 @@
+[
+  {
+    "numero": 1,
+    "categoria": "Specchietti",
+    "nome": "Specchietto Carbon",
+    "marca": "KTM",
+    "modello": "Duke",
+    "versione": "890",
+    "prezzo": 189.00,
+    "immagine": "immagini/shop/specchietto.png",
+    "descrizione": "Specchietto aerodinamico realizzato in fibra di carbonio strutturale. Riduce le turbolenze ad alte velocità e offre un look minimale."
+  },
+  {
+    "numero": 2,
+    "categoria": "Specchietti",
+    "nome": "Specchietto Viper End Bar",
+    "marca": "Ducati",
+    "modello": "Monster",
+    "versione": "937",
+    "prezzo": 145.00,
+    "immagine": "immagini/shop/specchietto.png",
+    "descrizione": "Specchietto installabile all'estremità del manubrio. Interamente ricavato dal pieno tramite lavorazione CNC ad alta precisione."
+  },
+  {
+    "numero": 3,
+    "categoria": "Specchietti",
+    "nome": "Specchietto Race Evo",
+    "marca": "Yamaha",
+    "modello": "MT-09",
+    "versione": "SP",
+    "prezzo": 160.00,
+    "immagine": "immagini/shop/specchietto.png",
+    "descrizione": "Design spigoloso e aggressivo, perfetto per le naked moderne. Vetro azzurrato antiriflesso per una visibilità ottimale in ogni condizione."
+  },
+  {
+    "numero": 4,
+    "categoria": "Specchietti",
+    "nome": "Specchietto Classic Short",
+    "marca": "Triumph",
+    "modello": "Bonneville",
+    "versione": "T120",
+    "prezzo": 130.00,
+    "immagine": "immagini/shop/specchietto.png",
+    "descrizione": "Linea retrò rivisitata in chiave moderna. Finitura nera opaca anodizzata resistente ai graffi e agli agenti atmosferici."
+  },
+  {
+    "numero": 5,
+    "categoria": "Specchietti",
+    "nome": "matteo moranda",
+    "marca": "Aprilia",
+    "modello": "Tuono",
+    "versione": "V4",
+    "prezzo": 175.00,
+    "immagine": "immagini/shop/specchietto.png",
+    "descrizione": "Ispirato alle appendici aerodinamiche della MotoGP. Genera carico verticale alle alte velocità unendo stile e funzionalità."
+  }
+]
