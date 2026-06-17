@@ -1,7 +1,7 @@
 [
   {
     "numero": 1,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Stealth Carbon",
     "marca": "KTM",
     "modello": "Duke",
@@ -12,7 +12,7 @@
   },
   {
     "numero": 2,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Viper End Bar",
     "marca": "Ducati",
     "modello": "Monster",
@@ -23,7 +23,7 @@
   },
   {
     "numero": 3,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Race Evo",
     "marca": "Yamaha",
     "modello": "MT-09",
@@ -34,7 +34,7 @@
   },
   {
     "numero": 4,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Classic Short",
     "marca": "Triumph",
     "modello": "Bonneville",
@@ -45,7 +45,7 @@
   },
   {
     "numero": 5,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Aero Wing",
     "marca": "Aprilia",
     "modello": "Tuono",
@@ -56,7 +56,7 @@
   },
   {
     "numero": 6,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Circuit Naked",
     "marca": "Honda",
     "modello": "CB1000R",
@@ -67,7 +67,7 @@
   },
   {
     "numero": 7,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Tomok GT",
     "marca": "Kawasaki",
     "modello": "Z900",
@@ -78,7 +78,7 @@
   },
   {
     "numero": 8,
-    "categoria": "Specchietti",
+    "categoria": "portatarga",
     "nome": "portatarga Blade Pro",
     "marca": "BMW",
     "modello": "S1000R",
