@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Prodotto - DB Race</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Stili specifici per la scheda prodotto dettagliata */
+        .product-page-content {
+            background-color: #DEDEDE;
+            padding: 80px 8%;
+            min-height: 600px;
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+
+        .detail-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            gap: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .detail-media {
+            flex: 1;
+            background: #F7F7F7;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 1px solid #EEEEEE;
+            max-height: 450px;
+        }
+
+        .detail-media img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .detail-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-info .category-badge {
+            color: #E30613;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .detail-info h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1A1A1A;
+            text-transform: uppercase;
+            margin: 0 0 15px 0;
+            line-height: 1.1;
+        }
+
+        .detail-compat-box {
+            background: #F9F9F9;
+            border-left: 4px solid #1A1A1A;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #444444;
+        }
+
+        .detail-compat-box strong {
+            color: #E30613;
+        }
+
+        .detail-description {
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-family: sans-serif; /* Più leggibile per testi lunghi */
+        }
+
+        .detail-action-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-top: 1px solid #EEEEEE;
+            padding-top: 25px;
+        }
+
+        .detail-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #E30613;
+        }
+
+        .buy-now-btn {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .buy-now-btn:hover {
+            background: #E30613;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1A1A1A;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 850px) {
+            .detail-wrapper { flex-direction: column; padding: 20px; }
+            .detail-media { max-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
+        <nav>
+            <a href="shop.html">SHOP</a>
+            <a href="whoweare.html">CHI SIAMO</a>
+            <a href="dealersPage.html">DEALERS</a>
+        </nav>
+        <div class="header-icons">
+            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </header>
+
+    <section class="product-page-content">
+        <div class="detail-wrapper" id="product-card-detail" style="display: none;">
+            <div class="detail-media">
+                <img id="p-img" src="" alt="">
+            </div>
+            <div class="detail-info">
+                <div class="category-badge" id="p-categoria"></div>
+                <h1 id="p-nome"></h1>
+                
+                <div class="detail-compat-box">
+                    Compatibilità: <strong id="p-compatibilita"></strong>
+                </div>
+
+                <div class="detail-description" id="p-descrizione"></div>
+
+                <div class="detail-action-row">
+                    <div class="detail-price" id="p-prezzo"></div>
+                    <button class="buy-now-btn" onclick="alert('Aggiunto al carrello!');">
+                        <i class="fa-solid fa-cart-shopping"></i> Aggiungi al carrello
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="error-box" class="error-message" style="display: none;">
+            Prodotto non trovato o ID non valido.
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-col">
+            <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
+            <a href="shop.html">negozio</a>
+            <a href="whoweare.html">chi siamo</a>
+            <a href="dealersPage.html">dealers</a>
+        </div>
+        <div class="footer-col">
+            <a href="#">Termini e condizioni</a>
+            <a href="#">Norme su resi e rimborsi</a>
+            <a href="#">Note Legali</a>
+            <a href="#">Copyright</a>
+        </div>
+        <div class="footer-col">
+            <span class="footer-title">contattaci:</span>
+            <a href="#">assistenza</a>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // 1. Estrae l'ID (numero) passato nell'URL (?id=X)
+            const params = new URLSearchParams(window.location.search);
+            const idProdotto = parseInt(params.get('id'), 10);
+
+            if (!idProdotto) {
+                mostraErrore();
+                return;
+            }
+
+            // 2. Scarica il file JSON per cercare il pezzo corrispondente
+            fetch('filediprova.json')
+                .then(response => {
+                    if (!response.ok) throw new Error();
+                    return response.json();
+                })
+                .then(prodotti => {
+                    // Cerca il prodotto confrontando il campo "numero"
+                    const prodotto = prodotti.find(p => p.numero === idProdotto);
+                    
+                    if (prodotto) {
+                        mostraProdotto(prodotto);
+                    } else {
+                        mostraErrore();
+                    }
+                })
+                .catch(err => {
+                    console.log("Errore nel caricamento dettagli.");
+                    mostraErrore();
+                });
+        });
+
+        function mostraProdotto(p) {
+            document.getElementById('p-img').src = p.immagine;
+            document.getElementById('p-img').alt = p.nome;
+            document.getElementById('p-categoria').innerText = p.categoria;
+            document.getElementById('p-nome').innerText = p.nome;
+            
+            // Unisce Marca, Modello e Versione nel box compatibilità
+            const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
+            document.getElementById('p-compatibilita').innerText = `${p.marca} ${p.modello} ${versioneTesto}`;
+            
+            // Inietta la descrizione estesa
+            document.getElementById('p-descrizione').innerText = p.descrizione;
+            document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
+            
+            // Mostra la scheda prodotto nascosta
+            document.getElementById('product-card-detail').style.display = 'flex';
+        }
+
+        function mostraErrore() {
+            document.getElementById('error-box').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
