@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettaglio Prodotto - DB Race</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <style>
         /* Stili specifici per la scheda prodotto dettagliata */
         .product-page-content {
@@ -24,7 +25,7 @@
             padding: 40px;
             display: flex;
             gap: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         .detail-media {
@@ -89,7 +90,8 @@
             color: #555555;
             line-height: 1.6;
             margin-bottom: 30px;
-            font-family: sans-serif; /* Più leggibile per testi lunghi */
+            font-family: sans-serif;
+            /* Più leggibile per testi lunghi */
         }
 
         .detail-action-row {
@@ -138,23 +140,33 @@
         }
 
         @media (max-width: 850px) {
-            .detail-wrapper { flex-direction: column; padding: 20px; }
-            .detail-media { max-height: 300px; }
+            .detail-wrapper {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .detail-media {
+                max-height: 300px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
         <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
+            <a href="shop.html" data-i18n="navShop">SHOP</a>
+            <a href="whoweare.html" data-i18n="navAbout">CHI SIAMO</a>
+            <a href="dealersPage.html" data-i18n="navDealers">DEALERS</a>
         </nav>
         <div class="header-icons">
             <img src="immagini/bandiera-inglese.png" alt="EN">
-            <i class="fa-solid fa-cart-shopping"></i>
+            <a href="cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
@@ -166,7 +178,7 @@
             <div class="detail-info">
                 <div class="category-badge" id="p-categoria"></div>
                 <h1 id="p-nome"></h1>
-                
+
                 <div class="detail-compat-box">
                     Compatibilità: <strong id="p-compatibilita"></strong>
                 </div>
@@ -175,13 +187,13 @@
 
                 <div class="detail-action-row">
                     <div class="detail-price" id="p-prezzo"></div>
-                    <button class="buy-now-btn" onclick="alert('Aggiunto al carrello!');">
+                    <button class="buy-now-btn" id="add-to-cart-btn">
                         <i class="fa-solid fa-cart-shopping"></i> Aggiungi al carrello
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <div id="error-box" class="error-message" style="display: none;">
             Prodotto non trovato o ID non valido.
         </div>
@@ -190,9 +202,9 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">negozio</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
+            <a href="shop.html" data-i18n="navShop">shop</a>
+            <a href="whoweare.html" data-i18n="navAbout">chi siamo</a>
+            <a href="dealersPage.html" data-i18n="navDealers">dealers</a>
         </div>
         <div class="footer-col">
             <a href="#">Termini e condizioni</a>
@@ -209,7 +221,60 @@
     </footer>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+const CART_KEY = 'dbrace-cart';
+let prodottoCorrente = null;
+
+// ==========================
+// CARRELLO (INVARIATO - PRIMO FILE)
+// ==========================
+
+function updateCartBadge() {
+    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+
+    const badge = document.getElementById('cart-count');
+    if (badge) {
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+}
+
+function addToCart(prodotto) {
+    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    const existing = cart.find(item => item.numero === prodotto.numero);
+
+    if (existing) {
+        existing.quantita += 1;
+    } else {
+        cart.push({
+            ...prodotto,
+            quantita: 1
+        });
+    }
+
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartBadge();
+    alert('Prodotto aggiunto al carrello!');
+}
+
+window.addToCart = addToCart;
+
+// ==========================
+// INIT
+// ==========================
+
+window.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+
+    document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+        if (prodottoCorrente) {
+            addToCart(prodottoCorrente);
+        }
+    });
+
+    // ==========================
+    // URL PARAMS (MIGLIORATO SECONDO FILE)
+    // ==========================
 
     const params = new URLSearchParams(window.location.search);
 
@@ -221,7 +286,7 @@
         return;
     }
 
-    let jsonFile = 'filediprova.json';
+    let jsonFile = 'prodotti.json';
 
     if (source === 'bestseller') {
         jsonFile = 'bestseller.json';
@@ -250,27 +315,32 @@
         });
 });
 
-        function mostraProdotto(p) {
-            document.getElementById('p-img').src = p.immagine;
-            document.getElementById('p-img').alt = p.nome;
-            document.getElementById('p-categoria').innerText = p.categoria;
-            document.getElementById('p-nome').innerText = p.nome;
-            
-            // Unisce Marca, Modello e Versione nel box compatibilità
-            const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
-            document.getElementById('p-compatibilita').innerText = `${p.marca} ${p.modello} ${versioneTesto}`;
-            
-            // Inietta la descrizione estesa
-            document.getElementById('p-descrizione').innerText = p.descrizione;
-            document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
-            
-            // Mostra la scheda prodotto nascosta
-            document.getElementById('product-card-detail').style.display = 'flex';
-        }
+// ==========================
+// RENDER PRODOTTO
+// ==========================
 
-        function mostraErrore() {
-            document.getElementById('error-box').style.display = 'block';
-        }
-    </script>
+function mostraProdotto(p) {
+    prodottoCorrente = p;
+
+    document.getElementById('p-img').src = p.immagine;
+    document.getElementById('p-img').alt = p.nome;
+    document.getElementById('p-categoria').innerText = p.categoria;
+    document.getElementById('p-nome').innerText = p.nome;
+
+    const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
+    document.getElementById('p-compatibilita').innerText =
+        `${p.marca} ${p.modello} ${versioneTesto}`;
+
+    document.getElementById('p-descrizione').innerText = p.descrizione;
+    document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
+
+    document.getElementById('product-card-detail').style.display = 'flex';
+}
+
+function mostraErrore() {
+    document.getElementById('error-box').style.display = 'block';
+}
+</script>
 </body>
+
 </html>
