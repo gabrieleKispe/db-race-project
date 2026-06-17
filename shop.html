@@ -291,12 +291,18 @@
         </div>
     </header>
 
+    <section class="hero hero-about">
+        <div class="hero-overlay">
+            <h1>SI</h1>
+        </div>
+    </section>
+
     <section class="filter-section" id="shop-start">
         <div class="filter-container">
-            
+
             <div class="filter-group">
                 <span class="filter-label"><i class="fa-solid fa-motorcycle"></i> Trova per Moto:</span>
-                
+
                 <select id="tag-marca" class="filter-select">
                     <option value="all">Tutte le Marche</option>
                 </select>
@@ -354,73 +360,150 @@
     </footer>
 
     <script>
-    // Fallback integrato in formato JSON nativo in caso di problemi di fetch locale
-    const fallbackData = [
-        { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
-        { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
-        { "numero": 3, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Regolabile ad alte prestazioni." }
-    ];
+        // Database interno completo con tutti i 40 prodotti reali
+        const fallbackData = [
+          { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico realizzato in fibra di carbonio strutturale. Riduce le turbolenze ad alte velocità e offre un look minimale." },
+          { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto installabile all'estremità del manubrio. Interamente ricavato dal pieno tramite lavorazione CNC ad alta precisione." },
+          { "numero": 3, "categoria": "Specchietti", "nome": "Specchietto Race Evo", "marca": "Yamaha", "modello": "MT-09", "versione": "SP", "prezzo": 160.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Design spigoloso e aggressivo, perfetto per le naked moderne. Vetro azzurrato antiriflesso per una visibilità ottimale in ogni condizione." },
+          { "numero": 4, "categoria": "Specchietti", "nome": "Specchietto Classic Short", "marca": "Triumph", "modello": "Bonneville", "versione": "T120", "prezzo": 130.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Linea retrò rivisitata in chiave moderna. Finitura nera opaca anodizzata resistente ai graffi e agli agenti atmosferici." },
+          { "numero": 5, "categoria": "Specchietti", "nome": "Specchietto Aero Wing", "marca": "Aprilia", "modello": "Tuono", "versione": "V4", "prezzo": 175.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Ispirato alle appendici aerodinamiche della MotoGP. Genera carico verticale alle alte velocità unendo stile e funzionalità." },
+          { "numero": 6, "categoria": "Specchietti", "nome": "Specchietto Circuit Naked", "marca": "Honda", "modello": "CB1000R", "versione": "Neo Sports", "prezzo": 150.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Profilo ultra-ribassato per mantenere la linea della moto pulita. Snodo sferico indurito per evitare spostamenti dovuti alle vibrazioni." },
+          { "numero": 7, "categoria": "Specchietti", "nome": "Specchietto Tomok GT", "marca": "Kawasaki", "modello": "Z900", "versione": "-", "prezzo": 138.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Linee tese e finitura bicolore. Personalizza l'avantreno della tua Z900 garantendo un ampio campo visivo posteriore." },
+          { "numero": 8, "categoria": "Specchietti", "nome": "Specchietto Blade Pro", "marca": "BMW", "modello": "S1000R", "versione": "2024", "prezzo": 195.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Il top della gamma DB Race. Lavorazione superficiale con micro-rigature 3D che esaltano l'esclusività del pezzo in alluminio." },
+          { "numero": 9, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas TTX", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Ammortizzatore posteriore pluriregolabile con serbatoio di azoto separato. Progettato per l'utilizzo estremo in pista." },
+          { "numero": 10, "categoria": "Ammortizzatori", "nome": "Ammortizzatore Sterzo Lineare", "marca": "KTM", "modello": "RC", "versione": "390", "prezzo": 349.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Smorza le oscillazioni violente dello sterzo in accelerazione sui terreni sconnessi. 16 scatti di regolazione idraulica." },
+          { "numero": 11, "categoria": "Ammortizzatori", "nome": "Mono Posteriore Racing Idraulico", "marca": "Ducati", "modello": "Panigale V4", "versione": "S", "prezzo": 1150.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Sviluppato in collaborazione con i reparti corse. Offre un feeling millimetrico con la gomma posteriore riducendo l'usura dello pneumatico." },
+          { "numero": 12, "categoria": "Ammortizzatori", "nome": "Kit Cartucce Forcella Pro", "marca": "Yamaha", "modello": "R6", "versione": "Race", "prezzo": 780.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Sostituisce completamente i componenti interni originali della forcella. Regolazione separata del flusso idraulico per compressione ed estensione." },
+          { "numero": 13, "categoria": "Ammortizzatori", "nome": "Molla Mono Rinforzata", "marca": "Honda", "modello": "Africa Twin", "versione": "1100", "prezzo": 110.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Molla con carico maggiorato per viaggiare a pieno carico con valigie e passeggero senza penalizzare l'assetto della moto." },
+          { "numero": 14, "categoria": "Ammortizzatori", "nome": "Ammortizzatore Posteriore EcoSport", "marca": "Kawasaki", "modello": "Ninja 400", "versione": "-", "prezzo": 420.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Upgrade eccellente per sostituire l'ammortizzatore di serie. Migliora la stabilità in curva e il comfort sulle imperfezioni stradali." },
+          { "numero": 15, "categoria": "Accessori Racing", "nome": "Portatarga Regolabile Rock", "marca": "KTM", "modello": "Superduke", "versione": "1290", "prezzo": 119.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Struttura in alluminio alleggerito con inclinazione variabile. Include luce targa a LED omologata e supporti per frecce aftermarket." },
+          { "numero": 16, "categoria": "Accessori Racing", "nome": "Pedane Arretrate Ergal 7075", "marca": "Ducati", "modello": "Streetfighter V4", "versione": "-", "prezzo": 460.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Interamente regolabili in altezza e arretramento. Poggiapiedi godronati ad altissimo grip per una guida sportiva precisa." },
+          { "numero": 17, "categoria": "Accessori Racing", "nome": "Leva Freno Snodata Antirottura", "marca": "Yamaha", "modello": "MT-07", "versione": "-", "prezzo": 85.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Dotata di snodo di sicurezza che si ribalta verso l'alto in caso di caduta, evitando la rottura della leva stessa." },
+          { "numero": 18, "categoria": "Accessori Racing", "nome": "Leva Frizione Light CNC", "marca": "Yamaha", "modello": "MT-07", "versione": "-", "prezzo": 80.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Abbinata alla leva freno, presenta un foro aerodinamico all'estremità per eliminare la pressione dell'aria ad alta velocità." },
+          { "numero": 19, "categoria": "Accessori Racing", "nome": "Paraleva Freno in Carbonio", "marca": "Aprilia", "modello": "RSV4", "versione": "Factory", "prezzo": 125.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Protezione obbligatoria in pista per evitare il contatto accidentale della leva del freno con altri piloti. Realizzato in autoclave." },
+          { "numero": 20, "categoria": "Accessori Racing", "nome": "Tappo Serbatoio Sgancio Rapido", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 95.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Elimina la necessità della chiave per il rifornimento. Apertura rapida a pressione/rotazione ideale per le sessioni in pista." },
+          { "numero": 21, "categoria": "Accessori Racing", "nome": "Protezioni Carter Motore Set", "marca": "Kawasaki", "modello": "Z900", "versione": "-", "prezzo": 140.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "Gusci protettivi compositi termoformati ad alta resistenza agli urti. Si avvitano direttamente sopra i carter originali." },
+          { "numero": 22, "categoria": "Accessori Racing", "nome": "Griglia Protezione Radiatore", "marca": "Triumph", "modello": "Street Triple", "versione": "765 R", "prezzo": 65.00, "immagine": "immagini/shop/coso.jpg", "descrizione": "In alluminio traforato al laser. Protegge le delicate alette del radiatore da sassi e detriti sollevati dalla ruota anteriore." },
+          { "numero": 23, "categoria": "Scarichi e Componenti", "nome": "Terminale Slip-On Titanium", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 680.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Silenziatore sportivo con camicia in titanio e fondello in fibra di carbonio. Sound cupo e risparmio di peso rispetto allo scarico di serie." },
+          { "numero": 24, "categoria": "Scarichi e Componenti", "nome": "Collettori Racing Acciaio Inox", "marca": "Yamaha", "modello": "MT-09", "versione": "SP", "prezzo": 450.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Gruppo collettori decatalizzato per il massimo incremento di potenza agli alti regimi. Richiede la rimappatura della centralina." },
+          { "numero": 25, "categoria": "Scarichi e Componenti", "nome": "Silenziatore GP Pro Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 490.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Scarico super-leggero con design ispirato alle moto della classe regina. Completo di DB-killer estraibile per uso pista." },
+          { "numero": 26, "categoria": "Scarichi e Componenti", "nome": "Filtro Aria Sportivo High-Flow", "marca": "Honda", "modello": "CB1000R", "versione": "Neo Sports", "prezzo": 75.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Filtro in cotone multistrato rigenerabile tramite lavaggio. Aumenta la portata d'aria nel motore migliorando la reattività del gas." },
+          { "numero": 27, "categoria": "Scarichi e Componenti", "nome": "Centralina Aggiuntiva DB-Map", "marca": "Kawasaki", "modello": "Z900", "versione": "-", "prezzo": 320.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Modulo plug-and-play per l'ottimizzazione dei tempi di iniezione. Corregge l'erogazione dopo l'installazione di scarichi sportivi." },
+          { "numero": 28, "categoria": "Scarichi e Componenti", "nome": "Paracalore Scarico in Carbonio", "marca": "Aprilia", "modello": "Tuono", "versione": "V4", "prezzo": 85.00, "immagine": "immagini/shop/scarico.jpg", "descrizione": "Sostituisce la protezione metallica di serie. Isola il calore dello scarico salvaguardando lo stivale del pilota." },
+          { "numero": 29, "categoria": "Freni e Ciclistica", "nome": "Dischi Freno Margherita Wave Set", "marca": "Kawasaki", "modello": "Z900", "versione": "-", "prezzo": 340.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Coppia di dischi anteriori flottanti con profilo a margherita. Migliorano la dissipazione termica e mantengono le pastiglie pulite." },
+          { "numero": 30, "categoria": "Freni e Ciclistica", "nome": "Pastiglie Freno Sinterizzate Race", "marca": "Honda", "modello": "CB1000R", "versione": "Neo Sports", "prezzo": 45.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Mescola sinterizzata ad altissimo coefficiente d'attrito iniziale. Eccellente stabilità del rendimento anche a temperature elevate." },
+          { "numero": 31, "categoria": "Freni e Ciclistica", "nome": "Tubi Freno Treccia Aeronautica", "marca": "Yamaha", "modello": "MT-07", "versione": "-", "prezzo": 95.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Kit completo anterioriore e posteriore. Elimina l'effetto spugnoso della leva del freno sotto sforzo prolungato." },
+          { "numero": 32, "categoria": "Freni e Ciclistica", "nome": "Pompa Radiale Freno 19RCS", "marca": "BMW", "modello": "S1000R", "versione": "2024", "prezzo": 299.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Pompa freno radiale per impianti a doppio disco. Consente di modulare la frenata con precisione millimetrica usando un solo dito." },
+          { "numero": 33, "categoria": "Freni e Ciclistica", "nome": "Kit Nottolini Forcellone M8", "marca": "Honda", "modello": "CBR 600 RR", "versione": "-", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Nottolini in ergal anodizzato per il sollevamento della moto tramite cavalletto posteriore a forchette. Filettatura passo standard M8." },
+          { "numero": 34, "categoria": "Freni e Ciclistica", "nome": "Tendicatena Ergal da Corsa", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 180.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Permette una regolazione millimetrica della tensione della catena tramite una vite micrometrica posteriore. Scala graduata incisa al laser." },
+          { "numero": 35, "categoria": "Freni e Ciclistica", "nome": "Contrappesi Manubrio Antivibrazione", "marca": "Triumph", "modello": "Street Triple", "versione": "765 R", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Terminali manubrio pesanti studiati per smorzare le vibrazioni ad alta frequenza generate dai motori a tre cilindri." },
+          { "numero": 36, "categoria": "Freni e Ciclistica", "nome": "Pinza Freno Monoblocco CNC CNC-4", "marca": "Ducati", "modello": "Panigale V4", "versione": "S", "prezzo": 720.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Pinza ad attacco radiale ricavata da un unico blocco di metallo. Massima rigidità strutturale e flessione zero nelle staccate al limite." },
+          { "numero": 37, "categoria": "Freni e Ciclistica", "nome": "Corona Alluminio Alleggerita 520", "marca": "Aprilia", "modello": "RSV4", "versione": "Factory", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Corona per passo catena 520 da competizione. Riduce le masse sospense rotanti regalando maggiore rapidità nei cambi di direzione." },
+          { "numero": 38, "categoria": "Freni e Ciclistica", "nome": "Dado Perno Ruota Posteriore Ergal", "marca": "Ducati", "modello": "Streetfighter V4", "versione": "-", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Dado di bloccaggio ruota anodizzato duro. Compatibile con i monobracci Ducati per un tocco estetico racing." },
+          { "numero": 39, "categoria": "Freni e Ciclistica", "nome": "Kit Viteria Carena Ergal", "marca": "Yamaha", "modello": "R6", "versione": "Race", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Sostituisce tutte le viti visibili delle carene originali con viti in Ergal ultra-leggero con testa a brugola ribassata." },
+          { "numero": 40, "categoria": "Freni e Ciclistica", "nome": "Flangia Portacorona CNC", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 67.00, "immagine": "immagini/shop/freni.jpg", "descrizione": "Flangia di contenimento parastrappi ricavata in CNC. Unisce una resistenza strutturale incrementata ad un impatto estetico superlativo." }
+        ];
 
-    let prodottiTutti = [];
+        let prodottiTutti = [];
 
-    // Popola i menu a tendina dinamici basandosi sul JSON ottenuto
-    function popolaFiltri(prodotti) {
-        const marche = new Set();
-        const modelli = new Set();
-        const versioni = new Set();
+        // 1. Inizializzazione: Popola SOLO le marche all'inizio
+        function inizializzaFiltri(prodotti) {
+            const marche = new Set();
+            prodotti.forEach(p => {
+                if (p.marca && p.marca !== "-") marche.add(p.marca);
+            });
 
-        prodotti.forEach(p => {
-            if(p.marca && p.marca !== "-") marche.add(p.marca);
-            if(p.modello && p.modello !== "-") modelli.add(p.modello);
-            if(p.versione && p.versione !== "-") versioni.add(p.versione);
-        });
+            const selMarca = document.getElementById('tag-marca');
+            selMarca.innerHTML = '<option value="all">Tutte le Marche</option>';
+            Array.from(marche).sort().forEach(m => {
+                selMarca.innerHTML += `<option value="${m}">${m}</option>`;
+            });
 
-        const selMarca = document.getElementById('tag-marca');
-        const selModello = document.getElementById('tag-modello');
-        const selVersione = document.getElementById('tag-versione');
-
-        Array.from(marche).sort().forEach(m => selMarca.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(modelli).sort().forEach(m => selModello.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(versioni).sort().forEach(v => selVersione.innerHTML += `<option value="${v}">${v}</option>`);
-    }
-
-    // Generazione HTML dei prodotti suddivisi per categorie (senza mostrare la descrizione)
-    function renderShop(prodotti) {
-        const container = document.getElementById('products-container');
-        const righeEsistenti = container.querySelectorAll('.category-row');
-        righeEsistenti.forEach(r => r.remove());
-
-        if(prodotti.length === 0) {
-            document.getElementById('no-products-msg').style.display = 'block';
-            return;
-        } else {
-            document.getElementById('no-products-msg').style.display = 'none';
+            // Resetta i successivi
+            document.getElementById('tag-modello').innerHTML = '<option value="all">Tutti i Modelli</option>';
+            document.getElementById('tag-versione').innerHTML = '<option value="all">Tutte le Versioni</option>';
         }
 
-        const categorieMap = {};
-        prodotti.forEach(p => {
-            if(!categorieMap[p.categoria]) categorieMap[p.categoria] = [];
-            categorieMap[p.categoria].push(p);
-        });
+        // 2. Aggiorna dinamicamente i modelli in base alla marca scelta
+        function aggiornaModelli() {
+            const marcaSelezionata = document.getElementById('tag-marca').value;
+            const selModello = document.getElementById('tag-modello');
+            const selVersione = document.getElementById('tag-versione');
 
-        for (const categoria in categorieMap) {
-            const catRow = document.createElement('div');
-            catRow.className = 'category-row';
+            selModello.innerHTML = '<option value="all">Tutti i Modelli</option>';
+            selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
 
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-header';
-            catHeader.innerHTML = `<h2 class="category-title">${categoria}</h2>`;
-            catRow.appendChild(catHeader);
+            const modelliFiltrati = new Set();
+            prodottiTutti.forEach(p => {
+                if ((marcaSelezionata === 'all' || p.marca === marcaSelezionata) && p.modello && p.modello !== "-") {
+                    modelliFiltrati.add(p.modello);
+                }
+            });
 
-            const grid = document.createElement('div');
-            grid.className = 'products-grid';
+            Array.from(modelliFiltrati).sort().forEach(m => {
+                selModello.innerHTML += `<option value="${m}">${m}</option>`;
+            });
+        }
 
-            categorieMap[categoria].forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
+        // 3. Aggiorna dinamicamente le versioni in base a marca e modello scelti
+        function aggiornaVersioni() {
+            const marcaSelezionata = document.getElementById('tag-marca').value;
+            const modelloSelezionato = document.getElementById('tag-modello').value;
+            const selVersione = document.getElementById('tag-versione');
+
+            selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
+
+            const versioniFiltrati = new Set();
+            prodottiTutti.forEach(p => {
+                const matchMarca = (marcaSelezionata === 'all' || p.marca === marcaSelezionata);
+                const matchModello = (modelloSelezionato === 'all' || p.modello === modelloSelezionato);
                 
-                // Il link ora prende SOLO il "numero" (id) del prodotto
-                card.innerHTML = `
+                if (matchMarca && matchModello && p.versione && p.versione !== "-") {
+                    versioniFiltrati.add(p.versione);
+                }
+            });
+
+            Array.from(versioniFiltrati).sort().forEach(v => {
+                selVersione.innerHTML += `<option value="${v}">${v}</option>`;
+            });
+        }
+
+        // Generazione grafica delle schede prodotto
+        function renderShop(prodotti) {
+            const container = document.getElementById('products-container');
+            const righeEsistenti = container.querySelectorAll('.category-row');
+            righeEsistenti.forEach(r => r.remove());
+
+            if (prodotti.length === 0) {
+                document.getElementById('no-products-msg').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('no-products-msg').style.display = 'none';
+            }
+
+            const categorieMap = {};
+            prodotti.forEach(p => {
+                if (!categorieMap[p.categoria]) categorieMap[p.categoria] = [];
+                categorieMap[p.categoria].push(p);
+            });
+
+            for (const categoria in categorieMap) {
+                const catRow = document.createElement('div');
+                catRow.className = 'category-row';
+
+                const catHeader = document.createElement('div');
+                catHeader.className = 'category-header';
+                catHeader.innerHTML = `<h2 class="category-title">${categoria}</h2>`;
+                catRow.appendChild(catHeader);
+
+                const grid = document.createElement('div');
+                grid.className = 'products-grid';
+
+                categorieMap[categoria].forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+
+                    card.innerHTML = `
                     <a href="prodotto.html?id=${p.numero}" class="product-link-wrapper">
                         <div class="product-img-box">
                             <span class="product-badge">${p.marca}</span>
@@ -438,61 +521,70 @@
                         </button>
                     </div>
                 `;
-                grid.appendChild(card);
+                    grid.appendChild(card);
+                });
+
+                catRow.appendChild(grid);
+                container.appendChild(catRow);
+            }
+        }
+
+        // Esegue il filtraggio logico degli elementi a schermo
+        function applicaFiltri() {
+            const marca = document.getElementById('tag-marca').value;
+            const modello = document.getElementById('tag-modello').value;
+            const versione = document.getElementById('tag-versione').value;
+            const ordinamento = document.getElementById('price-sort').value;
+
+            let prodottiFiltrati = prodottiTutti.filter(p => {
+                const matchMarca = (marca === 'all') || (p.marca === marca);
+                const matchModello = (modello === 'all') || (p.modello === modello);
+                const matchVersione = (versione === 'all') || (p.versione === versione);
+                return matchMarca && matchModello && matchVersione;
             });
 
-            catRow.appendChild(grid);
-            container.appendChild(catRow);
+            if (ordinamento === 'low-high') {
+                prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
+            } else if (ordinamento === 'high-low') {
+                prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
+            }
+
+            renderShop(prodottiFiltrati);
         }
-    }
 
-    // Gestione filtri logici e ordinamento dei prezzi numerici
-    function applicaFiltri() {
-        const marca = document.getElementById('tag-marca').value;
-        const modello = document.getElementById('tag-modello').value;
-        const versione = document.getElementById('tag-versione').value;
-        const ordinamento = document.getElementById('price-sort').value;
-
-        let prodottiFiltrati = prodottiTutti.filter(p => {
-            const matchMarca = (marca === 'all') || (p.marca === marca);
-            const matchModello = (modello === 'all') || (p.modello === modello);
-            const matchVersione = (versione === 'all') || (p.versione === versione);
-            return matchMarca && matchModello && matchVersione;
+        // EVENT LISTENERS ASINCRONI COMPLETI
+        document.getElementById('tag-marca').addEventListener('change', () => {
+            aggiornaModelli();    // Aggiorna la lista modelli
+            applicaFiltri();     // Filtra la grafica dello shop
         });
 
-        if(ordinamento === 'low-high') {
-            prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
-        } else if(ordinamento === 'high-low') {
-            prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
-        }
+        document.getElementById('tag-modello').addEventListener('change', () => {
+            aggiornaVersioni();   // Aggiorna la lista versioni
+            applicaFiltri();     // Filtra la grafica dello shop
+        });
 
-        renderShop(prodottiFiltrati);
-    }
+        document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
+        document.getElementById('price-sort').addEventListener('change', applicaFiltri);
 
-    document.getElementById('tag-marca').addEventListener('change', applicaFiltri);
-    document.getElementById('tag-modello').addEventListener('change', applicaFiltri);
-    document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
-    document.getElementById('price-sort').addEventListener('change', applicaFiltri);
-
-    // Caricamento asincrono del file JSON reale
-    window.addEventListener('DOMContentLoaded', () => {
-        fetch('filediprova.json')
-            .then(response => {
-                if (!response.ok) throw new Error("File JSON non trovato o non valido");
-                return response.json();
-            })
-            .then(data => {
-                prodottiTutti = data;
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            })
-            .catch(err => {
-                console.log("Errore JSON. Avvio fallback interno dati.", err);
-                prodottiTutti = fallbackData;
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            });
-    });
-</script>
+        // Caricamento del database JSON esterno
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('filediprova.json')
+                .then(response => {
+                    if (!response.ok) throw new Error("File JSON non trovato o non valido");
+                    return response.json();
+                })
+                .then(data => {
+                    prodottiTutti = data;
+                    inizializzaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                })
+                .catch(err => {
+                    console.log("Errore JSON. Avvio fallback interno dati.", err);
+                    prodottiTutti = fallbackData;
+                    inizializzaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                });
+        });
+    </script>
 </body>
 </html>
