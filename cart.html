@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrello - DB Race</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .cart-page {
+            background: #DEDEDE;
+            padding: 60px 8%;
+            min-height: 500px;
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .cart-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #EDEDED;
+        }
+
+        .cart-header-row h1 {
+            margin: 0;
+            color: #1A1A1A;
+            font-size: 32px;
+            text-transform: uppercase;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+        }
+
+        .cart-items {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .cart-item img {
+            width: 100%;
+            max-height: 110px;
+            object-fit: contain;
+            background: #F7F7F7;
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .cart-item-info h3 {
+            margin: 0 0 6px;
+            font-size: 20px;
+            color: #1A1A1A;
+            text-transform: uppercase;
+        }
+
+        .cart-item-info p {
+            margin: 0;
+            color: #555555;
+            font-size: 14px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-controls span {
+            color: #1A1A1A;
+            font-size: 16px;
+            font-weight: 700;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .qty-btn,
+        .remove-btn {
+            border: none;
+            background: #F3F3F3;
+            color: #1A1A1A;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        .qty-btn:hover,
+        .remove-btn:hover {
+            background: #E30613;
+            color: #FFFFFF;
+        }
+
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #E30613;
+            min-width: 90px;
+            text-align: right;
+        }
+
+        .cart-summary {
+            background: #F8F8F8;
+            padding: 30px;
+            border-left: 1px solid #EDEDED;
+        }
+
+        .summary-box h2 {
+            margin: 0 0 18px;
+            font-size: 26px;
+            text-transform: uppercase;
+            color: #1A1A1A;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #444444;
+            font-size: 16px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid #E0E0E0;
+            font-size: 24px;
+            font-weight: 800;
+            color: #1A1A1A;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 22px;
+            background: #E30613;
+            color: #FFFFFF;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #555555;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                border-left: none;
+                border-top: 1px solid #EDEDED;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cart-item {
+                grid-template-columns: 90px 1fr;
+            }
+
+            .cart-item-price {
+                grid-column: 2;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
+        <nav>
+            <a href="shop.html">SHOP</a>
+            <a href="whoweare.html">CHI SIAMO</a>
+            <a href="dealersPage.html">DEALERS</a>
+        </nav>
+        <div class="header-icons">
+            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <a href="cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="cart-page">
+        <div class="cart-container">
+            <div class="cart-header-row">
+                <h1>Carrello</h1>
+            </div>
+            <div class="cart-layout">
+                <div class="cart-items" id="cart-items"></div>
+                <div class="cart-summary">
+                    <div class="summary-box">
+                        <h2>Riepilogo</h2>
+                        <div class="summary-row">
+                            <span>Subtotale</span>
+                            <span id="subtotal">€ 0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Spedizione</span>
+                            <span>Gratis</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Totale</span>
+                            <span id="total">€ 0.00</span>
+                        </div>
+                        <button class="checkout-btn" id="checkout-btn">Procedi all'ordine</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="white-space"></section>
+
+    <footer>
+        <div class="footer-col">
+            <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
+            <a href="shop.html">negozio</a>
+            <a href="whoweare.html">chi siamo</a>
+            <a href="dealersPage.html">dealers</a>
+        </div>
+        <div class="footer-col">
+            <a href="#">Termini e condizioni</a>
+            <a href="#">Norme su resi e rimborsi</a>
+            <a href="#">Note Legali</a>
+            <a href="#">Copyright</a>
+        </div>
+        <div class="footer-col">
+            <span class="footer-title">contattaci:</span>
+            <a href="#">assistenza</a>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        const CART_KEY = 'dbrace-cart';
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+
+        window.addEventListener('pageshow', updateCartBadge);
+        window.addEventListener('storage', (event) => {
+            if (event.key === CART_KEY) {
+                updateCartBadge();
+            }
+        });
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        function formatEuro(value) {
+            return `€ ${value.toFixed(2)}`;
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const container = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+
+            if (!cart.length) {
+                container.innerHTML = '<div class="empty-cart">Il tuo carrello è vuoto</div>';
+                subtotalEl.textContent = formatEuro(0);
+                totalEl.textContent = formatEuro(0);
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = '';
+
+            cart.forEach(item => {
+                const itemTotal = item.prezzo * item.quantita;
+                subtotal += itemTotal;
+
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                row.innerHTML = `
+                    <img src="${item.immagine}" alt="${item.nome}" onerror="this.src='https://via.placeholder.com/120x110?text=DB+Race'">
+                    <div class="cart-item-info">
+                        <h3>${item.nome}</h3>
+                        <p>${item.marca} ${item.modello} ${item.versione !== '-' ? item.versione : ''}</p>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" data-action="decrease" data-id="${item.numero}">−</button>
+                        <span>${item.quantita}</span>
+                        <button class="qty-btn" data-action="increase" data-id="${item.numero}">+</button>
+                        <button class="remove-btn" data-action="remove" data-id="${item.numero}"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <div class="cart-item-price">${formatEuro(itemTotal)}</div>
+                `;
+                container.appendChild(row);
+            });
+
+            subtotalEl.textContent = formatEuro(subtotal);
+            totalEl.textContent = formatEuro(subtotal);
+
+            container.querySelectorAll('[data-action]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = Number(btn.dataset.id);
+                    const action = btn.dataset.action;
+                    const updated = getCart();
+                    const item = updated.find(p => p.numero === id);
+
+                    if (!item) return;
+
+                    if (action === 'increase') {
+                        item.quantita += 1;
+                    } else if (action === 'decrease') {
+                        item.quantita -= 1;
+                        if (item.quantita <= 0) {
+                            const index = updated.findIndex(p => p.numero === id);
+                            updated.splice(index, 1);
+                        }
+                    } else if (action === 'remove') {
+                        const index = updated.findIndex(p => p.numero === id);
+                        if (index !== -1) updated.splice(index, 1);
+                    }
+
+                    saveCart(updated);
+                });
+            });
+        }
+
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            localStorage.removeItem(CART_KEY);
+            updateCartBadge();
+            renderCart();
+            alert('Ordine confermato!');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+            renderCart();
+        });
+    </script>
+</body>
+</html>
