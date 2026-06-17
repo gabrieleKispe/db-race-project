@@ -7,10 +7,14 @@
     <title>Shop - DB Race</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <style>
+        .hero-about {
+            background-image: url("immagini/shopherom.webp");
+        }
+
         /* --- STILI SPECIFICI PER LA PAGINA SHOP --- */
-        
+
         .filter-section {
             background: #2A2A2A;
             padding: 25px 8%;
@@ -109,21 +113,31 @@
         .products-grid::-webkit-scrollbar {
             height: 8px;
         }
+
         .products-grid::-webkit-scrollbar-track {
             background: #CCCCCC;
             border-radius: 4px;
         }
+
         .products-grid::-webkit-scrollbar-thumb {
             background: #E30613;
             border-radius: 4px;
         }
+
         .products-grid::-webkit-scrollbar-thumb:hover {
             background: #B3050F;
         }
 
         @media (max-width: 750px) {
-            .filter-container { flex-direction: column; align-items: stretch; }
-            .filter-group { flex-direction: column; align-items: stretch; }
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
 
         /* Card Prodotto */
@@ -290,23 +304,19 @@
             <i class="fa-solid fa-cart-shopping"></i>
         </div>
     </header>
-    
-    <section class="hero">
+
+    <section class="hero hero-about">
         <div class="hero-overlay">
-            <h1>
-                SERVIAMO SOLO<br>
-                I MIGLIORI PEZZI
-            </h1>
-            <a href="#shop-start" class="hero-btn">COMPRA ORA →</a>
+            <h1>SI</h1>
         </div>
     </section>
 
     <section class="filter-section" id="shop-start">
         <div class="filter-container">
-            
+
             <div class="filter-group">
                 <span class="filter-label"><i class="fa-solid fa-motorcycle"></i> Trova per Moto:</span>
-                
+
                 <select id="tag-marca" class="filter-select">
                     <option value="all">Tutte le Marche</option>
                 </select>
@@ -364,73 +374,73 @@
     </footer>
 
     <script>
-    // Fallback integrato in formato JSON nativo in caso di problemi di fetch locale
-    const fallbackData = [
-        { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
-        { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
-        { "numero": 3, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Regolabile ad alte prestazioni." }
-    ];
+        // Fallback integrato in formato JSON nativo in caso di problemi di fetch locale
+        const fallbackData = [
+            { "numero": 1, "categoria": "Specchietti", "nome": "Specchietto Stealth Carbon", "marca": "KTM", "modello": "Duke", "versione": "890", "prezzo": 189.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Specchietto aerodinamico in carbonio." },
+            { "numero": 2, "categoria": "Specchietti", "nome": "Specchietto Viper End Bar", "marca": "Ducati", "modello": "Monster", "versione": "937", "prezzo": 145.00, "immagine": "immagini/shop/specchietto.png", "descrizione": "Alluminio CNC da manubrio." },
+            { "numero": 3, "categoria": "Ammortizzatori", "nome": "Monoammortizzatore Gas", "marca": "BMW", "modello": "S1000RR", "versione": "2023", "prezzo": 890.00, "immagine": "immagini/shop/senzanonfreni.jpg", "descrizione": "Regolabile ad alte prestazioni." }
+        ];
 
-    let prodottiTutti = [];
+        let prodottiTutti = [];
 
-    // Popola i menu a tendina dinamici basandosi sul JSON ottenuto
-    function popolaFiltri(prodotti) {
-        const marche = new Set();
-        const modelli = new Set();
-        const versioni = new Set();
+        // Popola i menu a tendina dinamici basandosi sul JSON ottenuto
+        function popolaFiltri(prodotti) {
+            const marche = new Set();
+            const modelli = new Set();
+            const versioni = new Set();
 
-        prodotti.forEach(p => {
-            if(p.marca && p.marca !== "-") marche.add(p.marca);
-            if(p.modello && p.modello !== "-") modelli.add(p.modello);
-            if(p.versione && p.versione !== "-") versioni.add(p.versione);
-        });
+            prodotti.forEach(p => {
+                if (p.marca && p.marca !== "-") marche.add(p.marca);
+                if (p.modello && p.modello !== "-") modelli.add(p.modello);
+                if (p.versione && p.versione !== "-") versioni.add(p.versione);
+            });
 
-        const selMarca = document.getElementById('tag-marca');
-        const selModello = document.getElementById('tag-modello');
-        const selVersione = document.getElementById('tag-versione');
+            const selMarca = document.getElementById('tag-marca');
+            const selModello = document.getElementById('tag-modello');
+            const selVersione = document.getElementById('tag-versione');
 
-        Array.from(marche).sort().forEach(m => selMarca.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(modelli).sort().forEach(m => selModello.innerHTML += `<option value="${m}">${m}</option>`);
-        Array.from(versioni).sort().forEach(v => selVersione.innerHTML += `<option value="${v}">${v}</option>`);
-    }
-
-    // Generazione HTML dei prodotti suddivisi per categorie (senza mostrare la descrizione)
-    function renderShop(prodotti) {
-        const container = document.getElementById('products-container');
-        const righeEsistenti = container.querySelectorAll('.category-row');
-        righeEsistenti.forEach(r => r.remove());
-
-        if(prodotti.length === 0) {
-            document.getElementById('no-products-msg').style.display = 'block';
-            return;
-        } else {
-            document.getElementById('no-products-msg').style.display = 'none';
+            Array.from(marche).sort().forEach(m => selMarca.innerHTML += `<option value="${m}">${m}</option>`);
+            Array.from(modelli).sort().forEach(m => selModello.innerHTML += `<option value="${m}">${m}</option>`);
+            Array.from(versioni).sort().forEach(v => selVersione.innerHTML += `<option value="${v}">${v}</option>`);
         }
 
-        const categorieMap = {};
-        prodotti.forEach(p => {
-            if(!categorieMap[p.categoria]) categorieMap[p.categoria] = [];
-            categorieMap[p.categoria].push(p);
-        });
+        // Generazione HTML dei prodotti suddivisi per categorie (senza mostrare la descrizione)
+        function renderShop(prodotti) {
+            const container = document.getElementById('products-container');
+            const righeEsistenti = container.querySelectorAll('.category-row');
+            righeEsistenti.forEach(r => r.remove());
 
-        for (const categoria in categorieMap) {
-            const catRow = document.createElement('div');
-            catRow.className = 'category-row';
+            if (prodotti.length === 0) {
+                document.getElementById('no-products-msg').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('no-products-msg').style.display = 'none';
+            }
 
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-header';
-            catHeader.innerHTML = `<h2 class="category-title">${categoria}</h2>`;
-            catRow.appendChild(catHeader);
+            const categorieMap = {};
+            prodotti.forEach(p => {
+                if (!categorieMap[p.categoria]) categorieMap[p.categoria] = [];
+                categorieMap[p.categoria].push(p);
+            });
 
-            const grid = document.createElement('div');
-            grid.className = 'products-grid';
+            for (const categoria in categorieMap) {
+                const catRow = document.createElement('div');
+                catRow.className = 'category-row';
 
-            categorieMap[categoria].forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                
-                // Il link ora prende SOLO il "numero" (id) del prodotto
-                card.innerHTML = `
+                const catHeader = document.createElement('div');
+                catHeader.className = 'category-header';
+                catHeader.innerHTML = `<h2 class="category-title">${categoria}</h2>`;
+                catRow.appendChild(catHeader);
+
+                const grid = document.createElement('div');
+                grid.className = 'products-grid';
+
+                categorieMap[categoria].forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+
+                    // Il link ora prende SOLO il "numero" (id) del prodotto
+                    card.innerHTML = `
                     <a href="prodotto.html?id=${p.numero}" class="product-link-wrapper">
                         <div class="product-img-box">
                             <span class="product-badge">${p.marca}</span>
@@ -448,61 +458,62 @@
                         </button>
                     </div>
                 `;
-                grid.appendChild(card);
+                    grid.appendChild(card);
+                });
+
+                catRow.appendChild(grid);
+                container.appendChild(catRow);
+            }
+        }
+
+        // Gestione filtri logici e ordinamento dei prezzi numerici
+        function applicaFiltri() {
+            const marca = document.getElementById('tag-marca').value;
+            const modello = document.getElementById('tag-modello').value;
+            const versione = document.getElementById('tag-versione').value;
+            const ordinamento = document.getElementById('price-sort').value;
+
+            let prodottiFiltrati = prodottiTutti.filter(p => {
+                const matchMarca = (marca === 'all') || (p.marca === marca);
+                const matchModello = (modello === 'all') || (p.modello === modello);
+                const matchVersione = (versione === 'all') || (p.versione === versione);
+                return matchMarca && matchModello && matchVersione;
             });
 
-            catRow.appendChild(grid);
-            container.appendChild(catRow);
+            if (ordinamento === 'low-high') {
+                prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
+            } else if (ordinamento === 'high-low') {
+                prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
+            }
+
+            renderShop(prodottiFiltrati);
         }
-    }
 
-    // Gestione filtri logici e ordinamento dei prezzi numerici
-    function applicaFiltri() {
-        const marca = document.getElementById('tag-marca').value;
-        const modello = document.getElementById('tag-modello').value;
-        const versione = document.getElementById('tag-versione').value;
-        const ordinamento = document.getElementById('price-sort').value;
+        document.getElementById('tag-marca').addEventListener('change', applicaFiltri);
+        document.getElementById('tag-modello').addEventListener('change', applicaFiltri);
+        document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
+        document.getElementById('price-sort').addEventListener('change', applicaFiltri);
 
-        let prodottiFiltrati = prodottiTutti.filter(p => {
-            const matchMarca = (marca === 'all') || (p.marca === marca);
-            const matchModello = (modello === 'all') || (p.modello === modello);
-            const matchVersione = (versione === 'all') || (p.versione === versione);
-            return matchMarca && matchModello && matchVersione;
+        // Caricamento asincrono del file JSON reale
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('filediprova.json')
+                .then(response => {
+                    if (!response.ok) throw new Error("File JSON non trovato o non valido");
+                    return response.json();
+                })
+                .then(data => {
+                    prodottiTutti = data;
+                    popolaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                })
+                .catch(err => {
+                    console.log("Errore JSON. Avvio fallback interno dati.", err);
+                    prodottiTutti = fallbackData;
+                    popolaFiltri(prodottiTutti);
+                    renderShop(prodottiTutti);
+                });
         });
-
-        if(ordinamento === 'low-high') {
-            prodottiFiltrati.sort((a, b) => a.prezzo - b.prezzo);
-        } else if(ordinamento === 'high-low') {
-            prodottiFiltrati.sort((a, b) => b.prezzo - a.prezzo);
-        }
-
-        renderShop(prodottiFiltrati);
-    }
-
-    document.getElementById('tag-marca').addEventListener('change', applicaFiltri);
-    document.getElementById('tag-modello').addEventListener('change', applicaFiltri);
-    document.getElementById('tag-versione').addEventListener('change', applicaFiltri);
-    document.getElementById('price-sort').addEventListener('change', applicaFiltri);
-
-    // Caricamento asincrono del file JSON reale
-    window.addEventListener('DOMContentLoaded', () => {
-        fetch('filediprova.json')
-            .then(response => {
-                if (!response.ok) throw new Error("File JSON non trovato o non valido");
-                return response.json();
-            })
-            .then(data => {
-                prodottiTutti = data;
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            })
-            .catch(err => {
-                console.log("Errore JSON. Avvio fallback interno dati.", err);
-                prodottiTutti = fallbackData;
-                popolaFiltri(prodottiTutti);
-                renderShop(prodottiTutti);
-            });
-    });
-</script>
+    </script>
 </body>
+
 </html>
