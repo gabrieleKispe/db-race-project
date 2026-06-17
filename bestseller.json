@@ -18,18 +18,18 @@
     "modello": "Monster",
     "versione": "937",
     "prezzo": 145.00,
-    "immagine": "immagini/shop/specchietto.png",
+    "immagine": "immagini/shop/coso.jpg",
     "descrizione": "Specchietto installabile all'estremità del manubrio. Interamente ricavato dal pieno tramite lavorazione CNC ad alta precisione."
   },
   {
     "numero": 3,
     "categoria": "Specchietti",
-    "nome": "Specchietto Race Evo",
+    "nome": "Specchietto Evo",
     "marca": "Yamaha",
     "modello": "MT-09",
     "versione": "SP",
-    "prezzo": 160.00,
-    "immagine": "immagini/shop/specchietto.png",
+    "prezzo": 1603.00,
+    "immagine": "immagini/shop/freccia-destra.jpeg",
     "descrizione": "Design spigoloso e aggressivo, perfetto per le naked moderne. Vetro azzurrato antiriflesso per una visibilità ottimale in ogni condizione."
   },
   {
