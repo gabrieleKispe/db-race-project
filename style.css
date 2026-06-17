@@ -65,6 +65,10 @@ nav a:hover {
     gap: 20px;
 }
 
+.header-icons a {
+    text-decoration: none;
+}
+
 .header-icons i {
     color: #FFFFFF;
     font-size: 20px;
@@ -74,6 +78,36 @@ nav a:hover {
 
 .header-icons i:hover {
     color: #E30613;
+}
+
+.cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(35%, -35%);
+    background: #E30613;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    line-height: 1;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    box-sizing: border-box;
+    z-index: 2;
 }
 
 /* HERO */
@@ -159,7 +193,7 @@ nav a:hover {
 /* CARD */
 .feature {
     width: 260px;
-    height: 150px;
+    min-height: 150px;
     perspective: 1000px;
 }
 
@@ -167,7 +201,7 @@ nav a:hover {
 .feature-inner {
     position: relative;
     width: 100%;
-    height: 100%;
+    min-height: 150px;
     transition: transform .6s;
     transform-style: preserve-3d;
 }
@@ -183,6 +217,7 @@ nav a:hover {
     position: absolute;
     width: 100%;
     height: 100%;
+    min-height: 150px;
     backface-visibility: hidden;
 
     display: flex;
@@ -193,6 +228,7 @@ nav a:hover {
     border-radius: 12px;
     color: white;
     text-align: center;
+    box-sizing: border-box;
 }
 
 /* FRONTE */
@@ -204,8 +240,9 @@ nav a:hover {
 .feature-back {
     background: #b805114d;
     transform: rotateY(180deg);
-    padding: 15px;
+    padding: 12px 10px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* ICONE */
@@ -218,6 +255,13 @@ nav a:hover {
 .feature-front p,
 .feature-back p {
     margin: 0;
+    max-width: 100%;
+}
+
+.feature-back p {
+    font-size: 14px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
 }
 
 /* WHITE SECTION */
