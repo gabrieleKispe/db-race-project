@@ -1,7 +1,7 @@
 [
   {
     "numero": 1,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Stealth Carbon",
     "marca": "KTM",
     "modello": "Duke",
@@ -12,7 +12,7 @@
   },
   {
     "numero": 2,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Viper End Bar",
     "marca": "Ducati",
     "modello": "Monster",
@@ -23,7 +23,7 @@
   },
   {
     "numero": 3,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Race Evo",
     "marca": "Yamaha",
     "modello": "MT-09",
@@ -34,7 +34,7 @@
   },
   {
     "numero": 4,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Classic Short",
     "marca": "Triumph",
     "modello": "Bonneville",
@@ -45,7 +45,7 @@
   },
   {
     "numero": 5,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Aero Wing",
     "marca": "Aprilia",
     "modello": "Tuono",
@@ -56,7 +56,7 @@
   },
   {
     "numero": 6,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Circuit Naked",
     "marca": "Honda",
     "modello": "CB1000R",
@@ -67,7 +67,7 @@
   },
   {
     "numero": 7,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Tomok GT",
     "marca": "Kawasaki",
     "modello": "Z900",
@@ -78,7 +78,7 @@
   },
   {
     "numero": 8,
-    "categoria": "portatarga",
+    "categoria": "Portatarghe",
     "nome": "portatarga Blade Pro",
     "marca": "BMW",
     "modello": "S1000R",
@@ -415,7 +415,7 @@
     "versione": "-",
     "prezzo": 67.00,
     "immagine": "immagini/shop/freni.jpg",
-    "descrizione": "Flangia di contenimento parastrappi ricavata in CNC. Unisce una resistenza strutturale incrementata ad un impatto estetico superlativo.""descrizione": "Dado di bloccaggio ruota anodizzato duro. Compatibile con i monobracci Ducati per un tocco estetico racing."
+    "descrizione": "Dado di bloccaggio ruota anodizzato duro. Compatibile con i monobracci Ducati per un tocco estetico racing."
   },
   {
     "numero": 39,
