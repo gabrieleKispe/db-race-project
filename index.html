@@ -9,209 +9,196 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
-    /* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
-    .best-sellers {
-        background-color: #DEDEDE;
-        padding: 60px 25px;
-    }
+/* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
+.best-sellers {
+    background-color: #DEDEDE;
+    padding: 60px 25px;
+}
 
-    .container {
-        max-width: 1600px;
-        margin: 0 auto;
-    }
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
-    .best-sellers h2 {
-        font-size: 32px;
-        margin-bottom: 35px;
-        color: #1A1A1A;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        text-align: center;
-        border-bottom: solid 2px;
-    }
+.best-sellers h2 {
+    font-size: 32px;
+    margin-bottom: 35px;
+    color: #1A1A1A;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    border-bottom: solid 2px;
+}
 
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
     .products-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 20px;
-        /* Spazio più ampio tra le card */
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 1024px) {
-        .products-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .products-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .hero-overlay {
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            padding: 0;
-        }
-
-        .hero-content {
-            text-align: center;
-        }
-    }
-
-    .product-card {
-        background-color: #FFFFFF;
-        border-radius: 12px;
-        /* Angoli più morbidi e moderni */
-        padding: 12px;
-        /* Aggiunge spazio interno per non far toccare i bordi esterni */
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        /* Ombra più sfumata e realistica */
-        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
-    }
-
-    /* Effetto di sollevamento premium al passaggio del mouse */
-    .product-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    }
-
-    .product-img {
-        height: 200px;
-        background-color: #F7F7F7;
-        display: flex;
-        align-items: center;
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.7);
         justify-content: center;
-        border-bottom: 1px solid #EEEEEE;
-        overflow: hidden;
-        /* Importante per non far uscire l'immagine */
+        padding: 0;
     }
 
-    .product-img img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
-
-    .product-info {
-        padding: 18px;
-        /* Più spazio interno per far respirare i testi */
-    }
-
-    .color-dots {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 12px;
-    }
-
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        display: inline-block;
-        cursor: pointer;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-    }
-
-    .dot:hover {
-        transform: scale(1.2);
-    }
-
-    .dot.red {
-        background-color: #E30613;
-    }
-
-    /* Sincronizzato con il tuo rosso ufficiale */
-    .dot.grey {
-        background-color: #888888;
-    }
-
-    .dot.lightgrey {
-        background-color: #DDDDDD;
-    }
-
-    .dot.blue {
-        background-color: #5AC8FA;
-    }
-
-
-    .product-info h3 {
-        font-size: 15px;
-        text-transform: uppercase;
-        /* Portato in uppercase per un look racing più aggressivo */
-        font-weight: 700;
-        color: #1A1A1A;
-        margin-bottom: 4px;
-        letter-spacing: 0.5px;
-    }
-
-    .product-info .subtitle {
-        font-size: 12px;
-        color: #777777;
-        margin-bottom: 14px;
-        font-weight: 500;
-    }
-
-    .product-info .price {
-        font-size: 16px;
-        /* Prezzo più grande e visibile */
-        font-weight: 800;
-        color: #E30613;
-        /* Colore del prezzo abbinato al brand */
-    }
-
-    /* COMMUNITY */
-
-    .community {
-        background: #E30613;
+    .hero-content {
         text-align: center;
-        padding: 40px 0;
-        overflow: hidden;
     }
+}
 
-    .community h2 {
-        font-family: 'Courier New', Courier, monospace;
+/* CARD */
+.product-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s ease;
+}
+
+/* hover */
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 🔥 AGGIUNTA IMPORTANTE: LINK CARD CLICCABILE */
+.product-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* IMMAGINE */
+.product-img {
+    height: 200px;
+    background-color: #F7F7F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #EEEEEE;
+    overflow: hidden;
+}
+
+.product-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* INFO */
+.product-info {
+    padding: 18px;
+}
+
+.color-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.dot:hover {
+    transform: scale(1.2);
+}
+
+.dot.red { background-color: #E30613; }
+.dot.grey { background-color: #888888; }
+.dot.lightgrey { background-color: #DDDDDD; }
+.dot.blue { background-color: #5AC8FA; }
+
+.product-info h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.product-info .subtitle {
+    font-size: 12px;
+    color: #777777;
+    margin-bottom: 14px;
+    font-weight: 500;
+}
+
+.product-info .price {
+    font-size: 16px;
+    font-weight: 800;
+    color: #E30613;
+}
+
+/* COMMUNITY */
+.community {
+    background: #E30613;
+    text-align: center;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.community h2 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.community p {
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+}
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+}
+
+.carousel-track img {
+    width: 320px;
+    height: 345px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
     }
-
-    .community p {
-        font-family: 'Courier New', Courier, monospace;
-        color: #fff;
+    to {
+        transform: translateX(-25%);
     }
-
-    .carousel {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .carousel-track {
-        display: flex;
-        gap: 8px;
-        width: max-content;
-        animation: scroll 30s linear infinite;
-    }
-
-    .carousel-track img {
-        width: 320px;
-        height: 345px;
-        object-fit: cover;
-        border-radius: 4px;
-        flex-shrink: 0;
-    }
-
-    @keyframes scroll {
-        from {
-            transform: translateX(0);
-        }
-
-        to {
-            transform: translateX(-25%);
-        }
-    }
+}
 </style>
 
 <body>
@@ -227,7 +214,10 @@
 
         <div class="header-icons">
             <img src="immagini/bandiera-inglese.png" alt="EN">
-            <i class="fa-solid fa-cart-shopping"></i>
+            <a href="cart.html" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
@@ -244,6 +234,32 @@
             </a>
         </div>
     </section>
+
+    <script>
+        const CART_KEY = 'dbrace-cart';
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+
+        function syncCartBadge() {
+            updateCartBadge();
+        }
+
+        window.addEventListener('DOMContentLoaded', syncCartBadge);
+        window.addEventListener('pageshow', syncCartBadge);
+        window.addEventListener('storage', (event) => {
+            if (event.key === CART_KEY) {
+                syncCartBadge();
+            }
+        });
+    </script>
 
     <!-- FEATURES -->
     <section class="features">
@@ -309,6 +325,7 @@
 
             </div>
         </div>
+
     </section>
 
     <section class="best-sellers">
@@ -355,10 +372,10 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-col">
-            <img src="immagini/dbracelogo.png" alt="DB Race Logo">
-            <a href="#">shop</a>
-            <a href="#">chi siamo</a>
-            <a href="#">dealers</a>
+            <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
+            <a href="shop.html">shop</a>
+            <a href="whoweare.html">chi siamo</a>
+            <a href="dealersPage.html">dealers</a>
         </div>
 
         <div class="footer-col">
@@ -379,33 +396,36 @@
 </body>
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        fetch('bestseller.json')
-            .then(res => res.json())
-            .then(data => {
-                const bestSellers = data.slice(0, 5);
-                const container = document.getElementById('best-sellers-container');
+    fetch('bestseller.json')
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('best-sellers-container');
 
-                bestSellers.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    
-                    // Inseriamo l'immagine come tag <img> dinamico
-                    card.innerHTML = `
-                        <a href="prodotto.html?id=${p.numero}&source=bestseller" style="text-decoration:none; color:inherit;">
-                            <div class="product-img">
-                                <img src="${p.immagine}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/200x180?text=No+Img'">
-                            </div>
-                            <div class="product-info">
-                                <h3>${p.nome}</h3>
-                                <p class="subtitle">${p.marca} ${p.modello}</p>
-                                <p class="price">€ ${p.prezzo.toFixed(2)}</p>
-                            </div>
-                        </a>
-                    `;
-                    container.appendChild(card);
-                });
-            })
-            .catch(err => console.error("Errore caricamento:", err));
-    });
+            data.slice(0, 5).forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                card.innerHTML = `
+                    <a href="prodotto.html?id=${p.numero}&source=bestseller">
+                        
+                        <div class="product-img">
+                            <img src="${p.immagine}" alt="${p.nome}"
+                            onerror="this.src='https://via.placeholder.com/200x180?text=No+Img'">
+                        </div>
+
+                        <div class="product-info">
+                            <h3>${p.nome}</h3>
+                            <p class="subtitle">${p.marca} ${p.modello}</p>
+                            <p class="price">€ ${Number(p.prezzo).toFixed(2)}</p>
+                        </div>
+
+                    </a>
+                `;
+
+                container.appendChild(card);
+            });
+        })
+        .catch(err => console.error("Errore caricamento:", err));
+});
 </script>
 </html>
