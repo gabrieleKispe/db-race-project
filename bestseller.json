@@ -1,57 +1,57 @@
 [
   {
     "numero": 1,
-    "categoria": "Specchietti",
-    "nome": "Specchietto Carbon",
-    "marca": "KTM",
-    "modello": "Duke",
-    "versione": "890",
-    "prezzo": 189.00,
-    "immagine": "immagini/shop/specchietto.png",
-    "descrizione": "Specchietto aerodinamico realizzato in fibra di carbonio strutturale. Riduce le turbolenze ad alte velocità e offre un look minimale."
+    "categoria": "Portatarga",
+    "nome": "Portatarga",
+    "marca": "KTM / Ducati",
+    "modello": "Super Duke 1390 / Streetfighter V4",
+    "versione": "-",
+    "prezzo": 319.00,
+    "immagine": "immagini/shop/portatarga.png",
+    "descrizione": "Portatarga regolabile per KTM Super Duke 1390 e Ducati Streetfighter V4, design sportivo e resistente."
   },
   {
     "numero": 2,
-    "categoria": "Specchietti",
-    "nome": "Specchietto Viper End Bar",
-    "marca": "Ducati",
-    "modello": "Monster",
-    "versione": "937",
-    "prezzo": 145.00,
+    "categoria": "Parafango",
+    "nome": "Parafango Posteriore",
+    "marca": "Honda",
+    "modello": "Transalp",
+    "versione": "XL750 2023-2026",
+    "prezzo": 40.00,
     "immagine": "immagini/shop/coso.jpg",
-    "descrizione": "Specchietto installabile all'estremità del manubrio. Interamente ricavato dal pieno tramite lavorazione CNC ad alta precisione."
+    "descrizione": "Parafango posteriore per Honda Transalp XL750, progettato per protezione da sporco e detriti."
   },
   {
     "numero": 3,
     "categoria": "Specchietti",
-    "nome": "Specchietto Evo",
+    "nome": "Specchietto",
     "marca": "Yamaha",
-    "modello": "MT-09",
-    "versione": "SP",
-    "prezzo": 1603.00,
-    "immagine": "immagini/shop/freccia-destra.jpeg",
-    "descrizione": "Design spigoloso e aggressivo, perfetto per le naked moderne. Vetro azzurrato antiriflesso per una visibilità ottimale in ogni condizione."
+    "modello": "MT-07",
+    "versione": "ABS 2021-2025",
+    "prezzo": 25.00,
+    "immagine": "immagini/shop/specchietti.webp",
+    "descrizione": "Specchietto compatto per Yamaha MT-07, design semplice e funzionale per uso urbano."
   },
   {
     "numero": 4,
-    "categoria": "Specchietti",
-    "nome": "Specchietto Classic Short",
-    "marca": "Triumph",
-    "modello": "Bonneville",
-    "versione": "T120",
-    "prezzo": 130.00,
-    "immagine": "immagini/shop/specchietto.png",
-    "descrizione": "Linea retrò rivisitata in chiave moderna. Finitura nera opaca anodizzata resistente ai graffi e agli agenti atmosferici."
+    "categoria": "Sospensioni",
+    "nome": "Ammortizzatore Posteriore",
+    "marca": "BMW",
+    "modello": "R 1300 GS",
+    "versione": "ESA",
+    "prezzo": 999.99,
+    "immagine": "immagini/shop/nonsocosasono.png",
+    "descrizione": "Ammortizzatore posteriore elettronico ESA per BMW R 1300 GS, comfort e regolazione avanzata."
   },
   {
     "numero": 5,
-    "categoria": "Specchietti",
-    "nome": "matteo moranda",
-    "marca": "Aprilia",
-    "modello": "Tuono",
-    "versione": "V4",
-    "prezzo": 175.00,
-    "immagine": "immagini/shop/specchietto.png",
-    "descrizione": "Ispirato alle appendici aerodinamiche della MotoGP. Genera carico verticale alle alte velocità unendo stile e funzionalità."
+    "categoria": "Freni",
+    "nome": "Leva Freno",
+    "marca": "Kawasaki",
+    "modello": "Ninja 650",
+    "versione": "KRT Edition",
+    "prezzo": 30.00,
+    "immagine": "immagini/shop/senzanonfreni.jpg",
+    "descrizione": "Leva freno ergonomica per Kawasaki Ninja 650 KRT Edition, miglior controllo e sensibilità."
   }
 ]
