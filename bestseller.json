@@ -7,7 +7,7 @@
     "modello": "Super Duke 1390 / Streetfighter V4",
     "versione": "-",
     "prezzo": 319.00,
-    "immagine": "immagini/shop/freccia-destra.jpeg",
+    "immagine": "immagini/shop/portatarga.png",
     "descrizione": "Portatarga regolabile per KTM Super Duke 1390 e Ducati Streetfighter V4, design sportivo e resistente."
   },
   {
@@ -29,7 +29,7 @@
     "modello": "MT-07",
     "versione": "ABS 2021-2025",
     "prezzo": 25.00,
-    "immagine": "immagini/shop/specchietto.png",
+    "immagine": "immagini/shop/specchietti.webp",
     "descrizione": "Specchietto compatto per Yamaha MT-07, design semplice e funzionale per uso urbano."
   },
   {
@@ -46,7 +46,7 @@
   {
     "numero": 5,
     "categoria": "Freni",
-    "nome": "Leva Freno moranda",
+    "nome": "Leva Freno",
     "marca": "Kawasaki",
     "modello": "Ninja 650",
     "versione": "KRT Edition",
