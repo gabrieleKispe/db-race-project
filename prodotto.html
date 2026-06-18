@@ -59,8 +59,39 @@
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
+
+        /* --- SELEZIONE PALLINI COLORE DENTRO IL DETTAGLIO --- */
+        .detail-colors-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .detail-colors-box .color-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .detail-colors-box .color-dot:hover,
+        .detail-colors-box .color-dot.active {
+            transform: scale(1.25);
+            border-color: #1A1A1A;
+            box-shadow: 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        /* Classi colore associate ai pallini */
+        .detail-colors-box .color-dot.red { background-color: #E30613; }
+        .detail-colors-box .color-dot.grey { background-color: #888888; }
+        .detail-colors-box .color-dot.lightgrey { background-color: #D6D6D6; }
+        .detail-colors-box .color-dot.blue { background-color: #3498db; }
+        .detail-colors-box .color-dot.black { background-color: #1A1A1A; }
 
         .detail-info h1 {
             font-size: 38px;
@@ -91,7 +122,6 @@
             line-height: 1.6;
             margin-bottom: 30px;
             font-family: sans-serif;
-            /* Più leggibile per testi lunghi */
         }
 
         .detail-action-row {
@@ -177,6 +207,9 @@
             </div>
             <div class="detail-info">
                 <div class="category-badge" id="p-categoria"></div>
+                
+                <div class="detail-colors-box" id="p-colori"></div>
+
                 <h1 id="p-nome"></h1>
 
                 <div class="detail-compat-box">
@@ -205,7 +238,6 @@
             <a href="shop.html">shop</a>
             <a href="whoweare.html">chi siamo</a>
             <a href="dealersPage.html">dealers</a>
-
         </div>
         <div class="footer-col">
             <a href="#">Termini e condizioni</a>
@@ -224,9 +256,10 @@
     <script>
 const CART_KEY = 'dbrace-cart';
 let prodottoCorrente = null;
+let coloreSelezionato = ''; // Conserva il colore selezionato dall'utente
 
 // ==========================
-// CARRELLO (INVARIATO - PRIMO FILE)
+// GESTIONE CARRELLO
 // ==========================
 
 function updateCartBadge() {
@@ -242,26 +275,29 @@ function updateCartBadge() {
 
 function addToCart(prodotto) {
     const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-    const existing = cart.find(item => item.numero === prodotto.numero);
+    
+    // Controlliamo se esiste già lo stesso identico prodotto CON lo stesso colore
+    const existing = cart.find(item => item.numero === prodotto.numero && item.colore === coloreSelezionato);
 
     if (existing) {
         existing.quantita += 1;
     } else {
         cart.push({
             ...prodotto,
-            quantita: 1
+            quantita: 1,
+            colore: coloreSelezionato // Aggiungiamo l'informazione sul colore all'oggetto nel carrello
         });
     }
 
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
     updateCartBadge();
-    alert('Prodotto aggiunto al carrello!');
+    alert(`Prodotto aggiunto al carrello! Colore: ${coloreSelezionato.toUpperCase()}`);
 }
 
 window.addToCart = addToCart;
 
 // ==========================
-// INIT
+// INIZIALIZZAZIONE PAGINA
 // ==========================
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -273,12 +309,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ==========================
-    // URL PARAMS (MIGLIORATO SECONDO FILE)
-    // ==========================
-
     const params = new URLSearchParams(window.location.search);
-
     const idProdotto = parseInt(params.get('id'), 10);
     const source = params.get('source');
 
@@ -288,7 +319,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     let jsonFile = 'prodotti.json';
-
     if (source === 'bestseller') {
         jsonFile = 'bestseller.json';
     }
@@ -299,7 +329,6 @@ window.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(prodotti => {
-
             const prodotto = prodotti.find(
                 p => Number(p.numero) === Number(idProdotto)
             );
@@ -317,7 +346,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================
-// RENDER PRODOTTO
+// RENDERING DINAMICO DATI E PALLINI
 // ==========================
 
 function mostraProdotto(p) {
@@ -334,6 +363,36 @@ function mostraProdotto(p) {
 
     document.getElementById('p-descrizione').innerText = p.descrizione;
     document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
+
+    // --- LOGICA GENERAZIONE DINAMICA PALLINI COLORE ---
+    // Legge l'array dei colori dal tuo file JSON (es: p.colori = ['black', 'grey']).
+    // Se non trova dati nel JSON, applica i 4 colori di default del tuo bozzetto grafico.
+    const coloriDisponibili = p.colori || ['red', 'grey', 'lightgrey', 'blue'];
+    const coloriContainer = document.getElementById('p-colori');
+    
+    // Svuotiamo il contenitore per evitare duplicazioni accidentali
+    coloriContainer.innerHTML = ''; 
+
+    coloriDisponibili.forEach((colore, index) => {
+        const dot = document.createElement('span');
+        dot.className = `color-dot ${colore}`;
+        dot.title = colore.toUpperCase();
+        
+        // Seleziona automaticamente il primo colore disponibile all'apertura
+        if (index === 0) {
+            dot.classList.add('active');
+            coloreSelezionato = colore;
+        }
+
+        // Evento al click per scambiare lo stato attivo tra i pallini
+        dot.addEventListener('click', () => {
+            document.querySelectorAll('.detail-colors-box .color-dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+            coloreSelezionato = colore; // Aggiorna la scelta colore attuale
+        });
+
+        coloriContainer.appendChild(dot);
+    });
 
     document.getElementById('product-card-detail').style.display = 'flex';
 }
