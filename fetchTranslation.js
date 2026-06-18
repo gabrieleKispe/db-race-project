@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const language = document.querySelector(".header-icons")?.children[0];
 
-    let currentLang = "it";
+    let currentLang = localStorage.getItem("language") || "it";
 
     const getValue = (obj, path) =>
         path.split(".").reduce((acc, key) => acc?.[key], obj) ?? "";
@@ -117,7 +117,18 @@ window.addEventListener("DOMContentLoaded", function () {
             { id: "footerContactTitle", path: "footer.contactUs" },
             { id: "footerSupport", path: "footer.support" },
             { id: "footerFacebook", path: "footer.facebook" },
-            { id: "footerInstagram", path: "footer.instagram" }
+            { id: "footerInstagram", path: "footer.instagram" },
+
+            { id: "shopFilterMotoLabel", path: "shop.filterMoto" },
+            { id: "shopSortLabel", path: "shop.sortBy" },
+
+            { id: "optAllBrands", path: "shop.options.allBrands" },
+            { id: "optAllModels", path: "shop.options.allModels" },
+            { id: "optAllVersions", path: "shop.options.allVersions" },
+
+            { id: "sortDefault", path: "shop.sort.default" },
+            { id: "sortLowHigh", path: "shop.sort.lowHigh" },
+            { id: "sortHighLow", path: "shop.sort.highHigh" }
         ];
 
         bindings.forEach(({ id, path, html, attr }) => {
@@ -144,8 +155,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const toggleLanguage = () => {
         currentLang = currentLang === "it" ? "en" : "it";
+        localStorage.setItem("language",currentLang);
         loadTranslation();
     };
+
+    language?.addEventListener("click", toggleLanguage);
+});
 
     language?.addEventListener("click", toggleLanguage);
 });
