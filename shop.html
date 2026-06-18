@@ -363,17 +363,21 @@
     </style>
 </head>
 
+<script src="./fetchTranslation.js" defer></script>
+
 <body>
 
     <header>
-        <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
+        <a href="/"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
+        <!-- NAV -->
         <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
+            <a href="shop.html" id="navShop">SHOP</a>
+            <a href="whoweare.html" id="navWhoWeAre">CHI SIAMO</a>
+            <a href="dealersPage.html" id="navDealers">DEALERS</a>
         </nav>
+
         <div class="header-icons">
-            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <img id="languageFlag" src="immagini/bandiera-inglese.png" alt="EN">
             <a href="cart.html" class="cart-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count" id="cart-count">0</span>
@@ -385,27 +389,30 @@
         <div class="filter-container">
 
             <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-motorcycle"></i> Trova per Moto:</span>
+                <span class="filter-label" id="shopFilterMotoLabel">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    Trova per Moto:
+                </span>
 
                 <select id="tag-marca" class="filter-select">
-                    <option value="all">Tutte le Marche</option>
+                    <option value="all" id="optAllBrands">Tutte le Marche</option>
                 </select>
 
                 <select id="tag-modello" class="filter-select">
-                    <option value="all">Tutti i Modelli</option>
+                    <option value="all" id="optAllModels">Tutti i Modelli</option>
                 </select>
 
                 <select id="tag-versione" class="filter-select">
-                    <option value="all">Tutte le Versioni</option>
+                    <option value="all" id="optAllVersions">Tutte le Versioni</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <span class="filter-label">Ordina per:</span>
+                <span class="filter-label" id="shopSortLabel">Ordina per:</span>
                 <select id="price-sort" class="filter-select">
-                    <option value="default">Rilevanza</option>
-                    <option value="low-high">Prezzo: Crescente</option>
-                    <option value="high-low">Prezzo: Decrescente</option>
+                    <option value="default" id="sortDefault">Rilevanza</option>
+                    <option value="low-high" id="sortLowHigh">Prezzo: Crescente</option>
+                    <option value="high-low" id="sortHighLow">Prezzo: Decrescente</option>
                 </select>
             </div>
 
@@ -425,22 +432,25 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">shop</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
+            <a href="shop.html" id="footerShop">shop</a>
+            <a href="whoweare.html" id="footerWhoWeAre">chi siamo</a>
+            <a href="dealersPage.html" id="footerDealers">dealers</a>
+        </div>
 
-        </div>
         <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
+            <a href="#" id="footerTerms">Termini e condizioni</a>
+            <a href="#" id="footerRefunds">Norme su resi e rimborsi</a>
+            <a href="#" id="footerLegal">Note Legali</a>
+            <a href="#" id="footerCopyright"> Copyright</a>
         </div>
+
         <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span class="footer-title" id="footerContactTitle">
+                contattaci:
+            </span>
+            <a href="#" id="footerSupport">assistenza</a>
+            <a href="#" id="footerFacebook">facebook</a>
+            <a href="#" id="footerInstagram">instagram</a>
         </div>
     </footer>
 
@@ -491,7 +501,9 @@
         function popolaFiltri(prodotti) {
             const selMarca = document.getElementById('tag-marca');
 
-            selMarca.innerHTML = '<option value="all">Tutte le Marche</option>';
+            selMarca.innerHTML = `
+  <option value="all" id="optAllBrands">Tutte le Marche</option>
+`;
 
             const marche = [...new Set(
                 prodotti
@@ -510,20 +522,17 @@
             const marca = document.getElementById('tag-marca').value;
             const selModello = document.getElementById('tag-modello');
 
-            selModello.innerHTML = '<option value="all">Tutti i Modelli</option>';
+            selModello.innerHTML = '<option value="all" id="optAllModels">Tutti i Modelli</option>';
 
             const modelli = [...new Set(
                 prodottiTutti
-                    .filter(p =>
-                        marca === 'all' || p.marca === marca
-                    )
+                    .filter(p => marca === 'all' || p.marca === marca)
                     .map(p => p.modello)
+                    .filter(Boolean)
             )];
 
             modelli.sort().forEach(modello => {
-                if (modello && modello !== '-') {
-                    selModello.innerHTML += `<option value="${modello}">${modello}</option>`;
-                }
+                selModello.innerHTML += `<option value="${modello}">${modello}</option>`;
             });
 
             aggiornaVersioni();
@@ -534,7 +543,9 @@
             const modello = document.getElementById('tag-modello').value;
             const selVersione = document.getElementById('tag-versione');
 
-            selVersione.innerHTML = '<option value="all">Tutte le Versioni</option>';
+            selVersione.innerHTML = `
+  <option value="all" id="optAllVersions">Tutte le Versioni</option>
+`;
 
             const versioni = [...new Set(
                 prodottiTutti
@@ -615,7 +626,6 @@
             <h3>${p.nome}</h3>
 
             <div class="product-compat">
-                Moto:
                 <strong>
                     ${p.marca}
                     ${p.modello}
@@ -711,7 +721,8 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateCartBadge();
 
-            fetch('prodotti.json')
+            let currentLang = localStorage.getItem("language") || "it";
+            fetch(`prodotti-${currentLang}.json`)
                 .then(response => {
 
                     if (!response.ok) {
