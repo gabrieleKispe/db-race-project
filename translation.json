@@ -7,39 +7,66 @@
           "whoWeAre": "Chi siamo",
           "dealers": "Dealers"
         },
-
         "homePage": {
           "heroTitle": "SERVIAMO SOLO<br>I MIGLIORI PEZZI",
           "shopNowButton": "COMPRA ORA ➔",
-
           "fastShippingTitle": "spedizioni<br>veloci",
           "fastShippingDescription": "Effettuiamo spedizioni in tutto il mondo con i migliori corrieri. Tutta la merce in stock viene spedita entro le 36 ore dall'ordine.",
-
           "plugPlayTitle": "plug &<br>play",
           "plugPlayDescription": "Tutti i nostri prodotti sono perfettamente intercambiabili con gli originali.",
-
           "supportTitle": "assistenza<br>post-vendita",
           "supportDescription": "Tutta l'assistenza post vendita viene gestita direttamente dalla sede DB Race in Italia.",
-
           "safeShippingTitle": "spedizione<br>sicura",
           "safeShippingDescription": "Tutte le nostre spedizioni, nazionale ed internazionale, sono affidate a corrieri con sistema di tracciamento ed assicurazione sulla merce.",
-
           "bestSellersTitle": "Best Sellers",
-
           "communityTitle": "#dbracecrew",
           "communitySubtitle": "condividi la tua passione"
         },
-
+        "dealersPage": {
+          "heroTitle": "RETE UFFICIALE<br>DEALERS",
+          "title": "I Nostri Rivenditori",
+          "subtitle": "Trova l'officina autorizzata o lo store ufficiale più vicino a te per toccare con mano la qualità dei nostri componenti.",
+          "regions": {
+            "usa": "USA",
+            "usaCanada": "USA & Canada",
+            "china": "Cina",
+            "hongKong": "Hong Kong",
+            "taiwan": "Taiwan",
+            "japan": "Giappone",
+            "australia": "Australia",
+            "gcc": "GCC & Medio Oriente",
+            "southAfrica": "Sud Africa"
+          }
+        },
+        "b2b": {
+          "title": "Diventa un Partner DB Race",
+          "subtitle": "Sei il titolare di un'officina, un concessionario o un e-commerce di accessori? Unisciti alla nostra rete ufficiale di rivenditori.",
+          "labels": {
+            "company": "Ragione Sociale",
+            "vat": "Partita IVA",
+            "email": "Email Aziendale",
+            "phone": "Telefono",
+            "city": "Città",
+            "address": "Indirizzo"
+          },
+          "submit": "Invia Candidatura"
+        },
+        "placeholders": {
+          "company": "Es. Officina Meccanica S.r.l.",
+          "vat": "IT01234567890",
+          "email": "nome@azienda.it",
+          "phone": "+39 333 1234567",
+          "city": "Es. Milano",
+          "address": "Es. Via Roma 123"
+        },
         "footer": {
-          "shop": "shop",
+          "shop": "negozio",
           "whoWeAre": "chi siamo",
           "dealers": "dealers",
-
           "terms": "Termini e condizioni",
           "returns": "Norme su resi e rimborsi",
           "legal": "Note Legali",
           "copyright": "Copyright",
-
           "contactUs": "contattaci:",
           "support": "assistenza",
           "facebook": "facebook",
@@ -48,7 +75,6 @@
       }
     ]
   },
-
   {
     "en": [
       {
@@ -57,39 +83,66 @@
           "whoWeAre": "Who We Are",
           "dealers": "Dealers"
         },
-
         "homePage": {
           "heroTitle": "WE ONLY SERVE<br>THE BEST PARTS",
           "shopNowButton": "SHOP NOW ➔",
-
           "fastShippingTitle": "fast<br>shipping",
           "fastShippingDescription": "We ship worldwide using the best couriers. All in-stock products are dispatched within 36 hours of the order.",
-
           "plugPlayTitle": "plug &<br>play",
           "plugPlayDescription": "All our products are perfectly interchangeable with the original parts.",
-
           "supportTitle": "after-sales<br>support",
           "supportDescription": "All after-sales support is handled directly by the DB Race headquarters in Italy.",
-
           "safeShippingTitle": "secure<br>shipping",
           "safeShippingDescription": "All domestic and international shipments are entrusted to couriers with tracking systems and cargo insurance.",
-
           "bestSellersTitle": "Best Sellers",
-
           "communityTitle": "#dbracecrew",
           "communitySubtitle": "share your passion"
         },
-
+        "dealersPage": {
+          "heroTitle": "OFFICIAL DEALER NETWORK",
+          "title": "Our Dealers",
+          "subtitle": "Find the nearest authorized workshop or official store and experience the quality of our components.",
+          "regions": {
+            "usa": "USA",
+            "usaCanada": "USA & Canada",
+            "china": "China",
+            "hongKong": "Hong Kong",
+            "taiwan": "Taiwan",
+            "japan": "Japan",
+            "australia": "Australia",
+            "gcc": "GCC & Middle East",
+            "southAfrica": "South Africa"
+          }
+        },
+        "b2b": {
+          "title": "Become a DB Race Partner",
+          "subtitle": "Are you a workshop owner, dealer or e-commerce seller? Join our official reseller network.",
+          "labels": {
+            "company": "Company Name",
+            "vat": "VAT Number",
+            "email": "Business Email",
+            "phone": "Phone",
+            "city": "City",
+            "address": "Address"
+          },
+          "submit": "Submit Application"
+        },
+        "placeholders": {
+          "company": "e.g. Mechanical Workshop Ltd.",
+          "vat": "GB123456789",
+          "email": "name@company.com",
+          "phone": "+44 7700 900123",
+          "city": "e.g. London",
+          "address": "e.g. 123 Main Street"
+        },
         "footer": {
           "shop": "shop",
           "whoWeAre": "who we are",
           "dealers": "dealers",
-
           "terms": "Terms and Conditions",
           "returns": "Returns and Refund Policy",
           "legal": "Legal Notes",
           "copyright": "Copyright",
-
           "contactUs": "contact us:",
           "support": "support",
           "facebook": "facebook",
