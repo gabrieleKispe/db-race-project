@@ -2,14 +2,24 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const language = document.querySelector(".header-icons")?.children[0];
 
-    let currentLang = "it";
-    
+    let currentLang = localStorage.getItem("language") || "it";
+
     const loadTranslation = async () => {
 
         const data = await fetch("./translation.json")
             .then(res => res.json());
 
         const matchedLanguage = data.find(el => Object.keys(el)[0] === currentLang);
+
+        const flag = document.getElementById("languageFlag");
+
+    if (flag) {
+        flag.src = currentLang === "it"
+            ? "immagini/bandiera-inglese.png"
+            : "immagini/bandiera-italiana.png";
+
+        flag.alt = currentLang === "it" ? "EN" : "IT";
+    }
 
         const translatedText = Object.values(matchedLanguage)[0][0];
 
@@ -65,12 +75,16 @@ window.addEventListener("DOMContentLoaded", function () {
             html ? el.innerHTML = value : el.textContent = value;
         });
     };
+    
 
     // prima render (IT di default)
     loadTranslation();
 
     const toggleLanguage = () => {
-        currentLang = (currentLang === "it") ? "en" : "it";
+        currentLang = currentLang === "it" ? "en" : "it";
+
+        localStorage.setItem("language", currentLang);
+
         loadTranslation();
     };
 
