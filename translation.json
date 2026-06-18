@@ -59,6 +59,21 @@
           "city": "Es. Milano",
           "address": "Es. Via Roma 123"
         },
+        "aboutPage": {
+          "heroTitle": "LA NOSTRA STORIA<br>E LA NOSTRA PASSIONE",
+          "title": "CHI SIAMO NOI DI DBRACE?",
+          "text1": "DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di precisione. Progettiamo e realizziamo componenti unici, pensati per chi non accetta compromessi tra estetica e performance.",
+          "text2": "Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su strada e rifiniture artigianali. Utilizziamo solo materiali di altissima qualità per garantire prodotti durevoli, sicuri e con un design che si distingue al primo sguardo.",
+          "valuesTitle": "I NOSTRI PILASTRI",
+          "techTitle": "Tecnologia",
+          "techDesc": "Sviluppo assistito da software all'avanguardia per tolleranze millimetriche.",
+          "qualityTitle": "Qualità",
+          "qualityDesc": "Materiali selezionati e trattamenti superficiali resistenti a ogni condizione.",
+          "customTitle": "Su Misura",
+          "customDesc": "Soluzioni Plug & Play pensate specificatamente per il tuo modello di veicolo.",
+          "teamTitle": "IL TEAM DB RACE",
+          "teamSubtitle": "Le facce e le mani dietro a ogni singolo pezzo"
+        },
         "footer": {
           "shop": "negozio",
           "whoWeAre": "chi siamo",
@@ -134,6 +149,21 @@
           "phone": "+44 7700 900123",
           "city": "e.g. London",
           "address": "e.g. 123 Main Street"
+        },
+        "aboutPage": {
+          "heroTitle": "OUR STORY<br>AND OUR PASSION",
+          "title": "WHO WE ARE AT DBRACE?",
+          "text1": "DB Race was born from a deep passion for motorsport and precision engineering. We design and manufacture unique components for those who refuse to compromise between aesthetics and performance.",
+          "text2": "Every part that leaves our workshop is the result of countless hours of development, road testing, and handcrafted finishing. We use only the highest-quality materials to ensure durable, reliable products with a design that stands out at first glance.",
+          "valuesTitle": "OUR CORE VALUES",
+          "techTitle": "Technology",
+          "techDesc": "Development supported by state-of-the-art software to achieve millimetric precision and tolerances.",
+          "qualityTitle": "Quality",
+          "qualityDesc": "Carefully selected materials and surface treatments designed to withstand any condition.",
+          "customTitle": "Custom Fit",
+          "customDesc": "Plug & Play solutions specifically engineered for your vehicle model.",
+          "teamTitle": "THE DB RACE TEAM",
+          "teamSubtitle": "The people behind every single part"
         },
         "footer": {
           "shop": "shop",
