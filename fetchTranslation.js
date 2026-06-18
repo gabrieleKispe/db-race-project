@@ -80,7 +80,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
             { id: "b2bSubmitBtn", path: "b2b.submit" },
 
-            // ✅ PLACEHOLDER FIX
             { id: "inputCompany", path: "placeholders.company", attr: "placeholder" },
             { id: "inputVat", path: "placeholders.vat", attr: "placeholder" },
             { id: "inputEmail", path: "placeholders.email", attr: "placeholder" },
@@ -88,6 +87,24 @@ window.addEventListener("DOMContentLoaded", function () {
             { id: "inputCity", path: "placeholders.city", attr: "placeholder" },
             { id: "inputAddress", path: "placeholders.address", attr: "placeholder" },
 
+            { id: "aboutHeroTitle", path: "aboutPage.heroTitle", html: true },
+            { id: "aboutTitle", path: "aboutPage.title" },
+            { id: "aboutText1", path: "aboutPage.text1" },
+            { id: "aboutText2", path: "aboutPage.text2" },
+
+            { id: "valuesTitle", path: "aboutPage.valuesTitle" },
+
+            { id: "valueTechTitle", path: "aboutPage.techTitle" },
+            { id: "valueTechDesc", path: "aboutPage.techDesc" },
+
+            { id: "valueQualityTitle", path: "aboutPage.qualityTitle" },
+            { id: "valueQualityDesc", path: "aboutPage.qualityDesc" },
+
+            { id: "valueCustomTitle", path: "aboutPage.customTitle" },
+            { id: "valueCustomDesc", path: "aboutPage.customDesc" },
+
+            { id: "teamTitle", path: "aboutPage.teamTitle" },
+            { id: "teamSubtitle", path: "aboutPage.teamSubtitle" },
             { id: "footerShop", path: "footer.shop" },
             { id: "footerWhoWeAre", path: "footer.whoWeAre" },
             { id: "footerDealers", path: "footer.dealers" },
@@ -126,13 +143,9 @@ window.addEventListener("DOMContentLoaded", function () {
     loadTranslation();
 
     const toggleLanguage = () => {
-    currentLang = currentLang === "it" ? "en" : "it";
-
-    localStorage.setItem("language", currentLang);
-
-    // ricarica tutta la pagina (shop + traduzioni)
-    location.reload();
-};
+        currentLang = currentLang === "it" ? "en" : "it";
+        loadTranslation();
+    };
 
     language?.addEventListener("click", toggleLanguage);
 });
