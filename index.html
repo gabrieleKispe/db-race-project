@@ -219,10 +219,11 @@
     <!-- HEADER -->
     <header>
         <a href="/"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
+        <!-- NAV -->
         <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
+            <a href="shop.html" id="navShop">SHOP</a>
+            <a href="whoweare.html" id="navWhoWeAre">CHI SIAMO</a>
+            <a href="dealersPage.html" id="navDealers">DEALERS</a>
         </nav>
 
         <div class="header-icons">
@@ -237,7 +238,7 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-overlay">
-            <h1>
+            <h1 id="heroTitle">
                 SERVIAMO SOLO<br>
                 I MIGLIORI PEZZI
             </h1>
@@ -280,12 +281,14 @@
 
                 <div class="feature-front">
                     <i class="fa-regular fa-clock"></i>
-                    <p>spedizioni<br>veloci</p>
+                    <p id="featureFastShippingTitle">spedizioni<br>veloci</p>
                 </div>
 
                 <div class="feature-back">
-                    <p>Effettuiamo spedizioni in tutto il mondo con i migliori corrieri. Tutta la merce in stock viene
-                        spedita entro le 36 ore dall'ordine.</p>
+                    <p id="featureFastShippingDesc">
+                        Effettuiamo spedizioni in tutto il mondo con i migliori corrieri.
+                        Tutta la merce in stock viene spedita entro le 36 ore dall'ordine.
+                    </p>
                 </div>
 
             </div>
@@ -296,11 +299,12 @@
 
                 <div class="feature-front">
                     <i class="fa-regular fa-circle-play"></i>
-                    <p>plug &<br>play</p>
+                    <p id="featurePlugPlayTitle">plug &<br>play</p>
                 </div>
 
                 <div class="feature-back">
-                    <p>Tutti i nostri prodotti sono perfettamente intercambiabili con gli originali.</p>
+                    <p id="featurePlugPlayDesc">
+                        Tutti i nostri prodotti sono perfettamente intercambiabili con gli originali.</p>
                 </div>
 
             </div>
@@ -311,13 +315,13 @@
 
                 <div class="feature-front">
                     <i class="fa-regular fa-comments"></i>
-                    <p>assistenza<br>post-vendita</p>
+                    <p id="featureSupportTitle">assistenza<br>post-vendita</p>
                 </div>
 
                 <div class="feature-back">
-                    <p>Tutta l'assistenza post vendita viene gestita direttamente dalla sede DB Race in Italia.</p>
+                    <p id="featureSupportDesc">
+                        Tutta l'assistenza post vendita viene gestita direttamente dalla sede DB Race in Italia.</p>
                 </div>
-
             </div>
         </div>
 
@@ -326,12 +330,13 @@
 
                 <div class="feature-front">
                     <i class="fa-solid fa-box-open"></i>
-                    <p>spedizione<br>sicura</p>
+                    <p id="featureSafeShippingTitle">spedizione<br>sicura</p>
                 </div>
 
                 <div class="feature-back">
-                    <p>Tutte le nostre spedizioni, nazionale ed internazionale, sono affidate a corrieri con sistema di
-                        tracciamento ed assicurazione sulla merce.</p>
+                    <p id="featureSafeShippingDesc">
+                        Tutte le nostre spedizioni, nazionale ed internazionale, sono affidate a corrieri con
+                        sistema di tracciamento ed assicurazione sulla merce.</p>
                 </div>
 
             </div>
@@ -341,7 +346,7 @@
 
     <section class="best-sellers">
         <div class="container">
-            <h2>BEST SELLERS</h2>
+            <h2 id="bestSellersTitle">BEST SELLERS</h2>
             <div class="products-grid" id="best-sellers-container"></div>
         </div>
     </section>
@@ -350,7 +355,9 @@
     <section class="community">
 
         <h2>#dbracecrew</h2>
-        <p>condividi la tua passione</p>
+        <p id="communitySubtitle">
+            condividi la tua passione
+        </p>
 
         <div class="carousel">
             <div class="carousel-track">
@@ -384,23 +391,25 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">shop</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
+            <a href="shop.html" id="footerShop">shop</a>
+            <a href="whoweare.html" id="footerWhoWeAre">chi siamo</a>
+            <a href="dealersPage.html" id="footerDealers">dealers</a>
         </div>
 
         <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
+            <a href="#" id="footerTerms">Termini e condizioni</a>
+            <a href="#" id="footerRefunds">Norme su resi e rimborsi</a>
+            <a href="#" id="footerLegal">Note Legali</a>
+            <a href="#" id="footerCopyright"> Copyright</a>
         </div>
 
         <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="#">facebook</a>
-            <a href="#">instagram</a>
+            <span class="footer-title" id="footerContactTitle">
+                contattaci:
+            </span>
+            <a href="#" id="footerSupport">assistenza</a>
+            <a href="#" id="footerFacebook">facebook</a>
+            <a href="#" id="footerInstagram">instagram</a>
         </div>
     </footer>
 
