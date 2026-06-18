@@ -86,6 +86,20 @@
           "support": "assistenza",
           "facebook": "facebook",
           "instagram": "instagram"
+        },
+        "shop": {
+          "filterMoto": "Trova per Moto:",
+          "sortBy": "Ordina per:",
+          "options": {
+            "allBrands": "Tutte le Marche",
+            "allModels": "Tutti i Modelli",
+            "allVersions": "Tutte le Versioni"
+          },
+          "sort": {
+            "default": "Rilevanza",
+            "lowHigh": "Prezzo: Crescente",
+            "highHigh": "Prezzo: Decrescente"
+          }
         }
       }
     ]
@@ -177,6 +191,20 @@
           "support": "support",
           "facebook": "facebook",
           "instagram": "instagram"
+        },
+        "shop": {
+          "filterMoto": "Find by Bike:",
+          "sortBy": "Sort by:",
+          "options": {
+            "allBrands": "All Brands",
+            "allModels": "All Models",
+            "allVersions": "All Versions"
+          },
+          "sort": {
+            "default": "Relevance",
+            "lowHigh": "Price: Low to High",
+            "highHigh": "Price: High to Low"
+          }
         }
       }
     ]
