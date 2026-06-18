@@ -7,6 +7,7 @@
     <title>DB Race - Chi Siamo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="./fetchTranslation.js" defer></script>
 </head>
 <style>
     /* ==========================================
@@ -215,12 +216,12 @@
     <header>
         <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"> </a>
         <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
+            <a id="navShop" href="shop.html">SHOP</a>
+            <a id="navWhoWeAre" href="whoweare.html">CHI SIAMO</a>
+            <a id="navDealers" href="dealersPage.html">DEALERS</a>
         </nav>
         <div class="header-icons">
-            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <img id="languageFlag" src="immagini/bandiera-inglese.png" alt="EN">
             <a href="cart.html" class="cart-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count" id="cart-count">0</span>
@@ -230,17 +231,19 @@
 
     <section class="hero hero-about">
         <div class="hero-overlay">
-            <h1>LA NOSTRA STORIA<br>E LA NOSTRA PASSIONE</h1>
+            <h1 id="aboutHeroTitle">LA NOSTRA STORIA<br>E LA NOSTRA PASSIONE</h1>
         </div>
     </section>
 
     <section class="about-container">
         <div class="about-text">
-            <h2> CHI SIAMO NOI DI DBRACE?</h2>
-            <p>DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di precisione.
+            <h2 id="aboutTitle">CHI SIAMO NOI DI DBRACE?</h2>
+            <p id="aboutText1">DB Race nasce dalla viscerale passione per il mondo delle corse e della meccanica di
+                precisione.
                 Progettiamo e realizziamo componenti unici, pensati per chi non accetta compromessi tra estetica e
                 performance.</p>
-            <p>Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su strada e rifiniture
+            <p id="aboutText2">Ogni pezzo che esce dalla nostra officina è il risultato di ore di sviluppo, test su
+                strada e rifiniture
                 artigianali. Utilizziamo solo materiali di altissima qualità per garantire prodotti durevoli, sicuri e
                 con un design che si distingue al primo sguardo.</p>
         </div>
@@ -250,29 +253,31 @@
     </section>
 
     <section class="values-section">
-        <h2>I NOSTRI PILASTRI</h2>
+        <h2 id="valuesTitle">I NOSTRI PILASTRI</h2>
         <div class="values-grid">
             <div class="value-card">
                 <i class="fa-solid fa-microchip"></i>
-                <h3>Tecnologia</h3>
-                <p>Sviluppo assistito da software all'avanguardia per tolleranze millimetriche.</p>
+                <h3 id="valueTechTitle">Tecnologia</h3>
+                <p id="valueTechDesc">Sviluppo assistito da software all'avanguardia per tolleranze millimetriche.</p>
             </div>
             <div class="value-card">
                 <i class="fa-solid fa-gem"></i>
-                <h3>Qualità</h3>
-                <p>Materiali selezionati e trattamenti superficiali resistenti a ogni condizione.</p>
+                <h3 id="valueQualityTitle">Qualità</h3>
+                <p id="valueQualityDesc">Materiali selezionati e trattamenti superficiali resistenti a ogni condizione.
+                </p>
             </div>
             <div class="value-card">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
-                <h3>Su Misura</h3>
-                <p>Soluzioni Plug & Play pensate specificatamente per il tuo modello di veicolo.</p>
+                <h3 id="valueCustomTitle">Su Misura</h3>
+                <p id="valueCustomDesc">Soluzioni Plug & Play pensate specificatamente per il tuo modello di veicolo.
+                </p>
             </div>
         </div>
     </section>
 
     <section class="team-section">
-        <h2>IL TEAM DB RACE</h2>
-        <p class="team-subtitle">Le facce e le mani dietro a ogni singolo pezzo</p>
+        <h2 id="teamTitle">IL TEAM DB RACE</h2>
+        <p id="teamSubtitle">Le facce e le mani dietro a ogni singolo pezzo</p>
 
         <div class="team-image-container">
             <div class="team-image-container-line">
@@ -310,7 +315,7 @@
                     <div class="member-text">Nome e Ruolo</div>
                 </div>
                 <div class="single-member">
-                    <img src="immagini/team/memberD.png" alt="Team 1" class="immag">
+                    <img src="immagini/team/member8.png" alt="Team 1" class="immag">
                     <div class="member-text">Nome e Ruolo</div>
                 </div>
 
@@ -320,25 +325,28 @@
     </section>
     <section class="white-space"></section>
     <footer>
-        <div class="footer-col">
-            <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">shop</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
 
-        </div>
         <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
+            <a href="index.html"><img src="immagini/dbracelogo.png"></a>
+            <a id="footerShop" href="shop.html">shop</a>
+            <a id="footerWhoWeAre" href="whoweare.html">chi siamo</a>
+            <a id="footerDealers" href="dealersPage.html">dealers</a>
         </div>
+
         <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a id="footerTerms" href="#">Termini e condizioni</a>
+            <a id="footerReturns" href="#">Norme su resi e rimborsi</a>
+            <a id="footerLegal" href="#">Note Legali</a>
+            <a id="footerCopyright" href="#">Copyright</a>
         </div>
+
+        <div class="footer-col">
+            <span id="footerContactTitle">contattaci:</span>
+            <a id="footerSupport" href="#">assistenza</a>
+            <a id="footerFacebook" href="#">facebook</a>
+            <a id="footerInstagram" href="#">instagram</a>
+        </div>
+
     </footer>
 
     <script>
