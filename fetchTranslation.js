@@ -126,9 +126,13 @@ window.addEventListener("DOMContentLoaded", function () {
     loadTranslation();
 
     const toggleLanguage = () => {
-        currentLang = currentLang === "it" ? "en" : "it";
-        loadTranslation();
-    };
+    currentLang = currentLang === "it" ? "en" : "it";
+
+    localStorage.setItem("language", currentLang);
+
+    // ricarica tutta la pagina (shop + traduzioni)
+    location.reload();
+};
 
     language?.addEventListener("click", toggleLanguage);
 });
