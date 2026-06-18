@@ -7,6 +7,7 @@
     <title>DB Race - Dealers</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="./fetchTranslation.js" type="text/javascript" defer></script>
 </head>
 
 <style>
@@ -23,7 +24,7 @@
         position: absolute;
         inset: 0;
         background: rgba(0, 0, 0, 0.6);
-        
+
     }
 
     /* --- SEZIONE PRINCIPALE --- */
@@ -289,432 +290,397 @@
     }
 </style>
 
-<body>
+<!-- HEADER -->
+<header>
+    <a href="index.html">
+        <img src="immagini/dbracelogo.png" alt="DB Race">
+    </a>
 
-    <!-- HEADER -->
-    <header>
-        <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
-        <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
-        </nav>
+    <nav>
+        <a id="navShop" href="shop.html">SHOP</a>
+        <a id="navWhoWeAre" href="whoweare.html">CHI SIAMO</a>
+        <a id="navDealers" href="dealersPage.html">DEALERS</a>
+    </nav>
 
-        <div class="header-icons">
-            <img src="immagini/bandiera-inglese.png" alt="EN">
-            <a href="cart.html" class="cart-link">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-count" id="cart-count">0</span>
-            </a>
-        </div>
-    </header>
+    <div class="header-icons">
+        <img id="languageFlag" src="immagini/bandiera-inglese.png" alt="EN">
+        <a href="cart.html" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </a>
+    </div>
+</header>
 
-    <!-- HERO -->
-    <section class="hero hero-dealers">
-        <div class="hero-overlay">
-            <h1>
-                RETE UFFICIALE<br>
-                DEALERS
-            </h1>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero hero-dealers">
+    <div class="hero-overlay">
+        <h1 id="dealersHeroTitle">
+            RETE UFFICIALE<br>
+            DEALERS
+        </h1>
+    </div>
+</section>
 
-    <!-- SEZIONE RIVENDITORI -->
-    <section class="dealers-section">
-        <div class="dealers-container">
-            <h2>I Nostri Rivenditori</h2>
-            <p class="dealers-subtitle">Trova l'officina autorizzata o lo store ufficiale più vicino a te per toccare
-                con mano la qualità dei nostri componenti.</p>
-            <div class="dealers-worldwide">
-                <!-- USA -->
-                <div class="macro-region">
-                    <h3>USA</h3>
+<!-- SEZIONE RIVENDITORI -->
+<section class="dealers-section">
+    <div class="dealers-container">
 
-                    <div class="dealers-grid">
+        <h2 id="dealersTitle">I Nostri Rivenditori</h2>
 
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>BELLISSIMOTO</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>6175 S. Pecos Rd, 89120 Las Vegas, NV, U.S.A.</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+1 702 285 1101</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <span>info@bellissimoto.com</span>
-                                </div>
-                            </div>
+        <p class="dealers-subtitle" id="dealersSubtitle">
+            Trova l'officina autorizzata o lo store ufficiale più vicino a te per toccare
+            con mano la qualità dei nostri componenti.
+        </p>
+
+        <div class="dealers-worldwide">
+
+            <!-- USA -->
+            <div class="macro-region">
+                <h3 id="regionUSA">USA</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>BELLISSIMOTO</h4>
                         </div>
 
-                    </div>
-                </div>
-
-                <!-- USA & CANADA -->
-                <div class="macro-region">
-                    <h3>USA & Canada</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>OPP Racing Inc.</h4>
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>6175 S. Pecos Rd, 89120 Las Vegas, NV, U.S.A.</span>
                             </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>101B-1952 Kingsway Avenue, Port Coquitlam, British Columbia</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>1-866-212-7251</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <span>sales@oppracing.com</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span>www.oppracing.com</span>
-                                </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+1 702 285 1101</span>
                             </div>
-                            <a href="https://www.oppracing.com" target="_blank" class="dealer-link">Visita il Sito →</a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- CINA -->
-                <div class="macro-region">
-                    <h3>Cina</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>Shanghai Qidi Auto & Moto Parts Co., Ltd.</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>A3106, No.1272 Tongpu Road, Putuo District, Shanghai, China, 200333</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>Tel & WeChat: 18501708858</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- HONG KONG -->
-                <div class="macro-region">
-                    <h3>Hong Kong</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>Shanghai Qidi Auto & Moto Parts Co., Ltd.</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>A3106, No.1272 Tongpu Road, Putuo District, Shanghai, China</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>Tel & WeChat: 18501708858</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- TAIWAN -->
-                <div class="macro-region">
-                    <h3>Taiwan</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>DENNISPOWERSPORT Co. Ltd</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>NO.193, Fuxing C. Rd, Songshan Dist, Taipei, Taiwan 10596</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+886 982 260 332</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span>www.dennispowersport.com</span>
-                                </div>
-                            </div>
-                            <a href="http://www.dennispowersport.com" target="_blank" class="dealer-link">Visita il Sito
-                                →</a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- GIAPPONE -->
-                <div class="macro-region">
-                    <h3>Giappone</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>RAID-ZERO CO., LTD</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Hazukashifurukawacho 165-1-C, Fushimi-Ku, Kyoto 612-8486</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>075-925-8037</span>
-                                </div>
-                            </div>
-
-                            <div class="dealer-header">
-                                <h4>Gigastation Inc</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Mogusaekimae Build 2F, Hino-Shi, Tokyo 191-0034</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+81 425 069 590</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span>http://gigastation-inc.com</span>
-                                </div>
-                            </div>
-                            <a href="http://gigastation-inc.com" target="_blank" class="dealer-link">Visita il Sito
-                                →</a><br>
-
-                            <div class="dealer-header">
-                                <h4>GARUDA INCORPORATED</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>1196-1 Onoji, Machida City, Tokyo 195-0064</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>0427 365 507 / 0427 050 8</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <span>info@garuda.ws</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span>www.garuda.ws</span>
-                                </div>
-                            </div>
-                            <a href="http://www.garuda.ws" target="_blank" class="dealer-link">Visita il Sito →</a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- AUSTRALIA -->
-                <div class="macro-region">
-                    <h3>Australia</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>SPORTSBIKE</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Sydney, P.O. Box 933 Stanhope Gardens</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+61 298 360 774</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <span>www.ducationly.com.au</span>
-                                </div>
-                            </div>
-                            <a href="http://www.ducationly.com.au" target="_blank" class="dealer-link">Visita il Sito
-                                →</a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- GCC -->
-                <div class="macro-region">
-                    <h3>GCC & Medio Oriente</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>Extreme Zone Kuwait</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+965 9933 7711</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <span>@extremezone.kw</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- SUD AFRICA -->
-                <div class="macro-region">
-                    <h3>Sud Africa</h3>
-
-                    <div class="dealers-grid">
-
-                        <div class="dealer-card">
-                            <div class="dealer-header">
-                                <h4>Specialized Moto (PTY) Ltd</h4>
-                            </div>
-                            <div class="dealer-details">
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>3 James Scott Street, Westdene, Bloemfontein 9301</span>
-                                </div>
-                                <div class="dealer-detail-item">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>+27 82 789 2255</span>
-                                </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>info@bellissimoto.com</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- SEZIONE B2B (FORM DIVENTA DEALER) -->
-    <section class="b2b-section">
-        <div class="b2b-container">
-            <h2>Diventa un Partner DB Race</h2>
-            <p>Sei il titolare di un'officina, un concessionario o un e-commerce di accessori? Unisciti alla nostra rete
-                ufficiale di rivenditori.</p>
+            <!-- USA & CANADA -->
+            <div class="macro-region">
+                <h3 id="regionUSACanada">USA & Canada</h3>
 
-            <form class="b2b-form" action="#" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="company">Ragione Sociale</label>
-                        <input type="text" id="company" name="company" required
-                            placeholder="Es. Officina Meccanica S.r.l.">
-                    </div>
-                    <div class="form-group">
-                        <label for="vat">Partita IVA</label>
-                        <input type="text" id="vat" name="vat" required placeholder="IT01234567890">
-                    </div>
-                </div>
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>OPP Racing Inc.</h4>
+                        </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email Aziendale</label>
-                        <input type="email" id="email" name="email" required placeholder="nome@azienda.it">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Telefono</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+39 333 1234567">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="city">Città</label>
-                        <input type="text" id="city" name="city" required placeholder="Es. Milano">
-                    </div>
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>101B-1952 Kingsway Avenue, Port Coquitlam, British Columbia</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>1-866-212-7251</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>sales@oppracing.com</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-globe"></i>
+                                <span>www.oppracing.com</span>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="address">Indirizzo</label>
-                        <input type="text" id="address" name="address" required placeholder="Es. Via Roma 123">
+                        <a href="https://www.oppracing.com" class="dealer-link">Visita il Sito →</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-btn-container">
-                    <button type="submit" class="b2b-submit-btn">Invia Candidatura</button>
+            <!-- CINA -->
+            <div class="macro-region">
+                <h3 id="regionChina">Cina</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>Shanghai Qidi Auto & Moto Parts Co., Ltd.</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>A3106, No.1272 Tongpu Road, Putuo District, Shanghai, China, 200333</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>Tel & WeChat: 18501708858</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
 
-    <!-- SPACER -->
-    <section class="white-space"></section>
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-col">
-            <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"> </a>
-            <a href="shop.html">shop</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
-        </div>
-        <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
-        </div>
-        <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="#">facebook</a>
-            <a href="#">instagram</a>
-        </div>
-    </footer>
+            <!-- HONG KONG -->
+            <div class="macro-region">
+                <h3 id="regionHongKong">Hong Kong</h3>
 
-    <script>
-        const CART_KEY = 'dbrace-cart';
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>Shanghai Qidi Auto & Moto Parts Co., Ltd.</h4>
+                        </div>
 
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
-            const badge = document.getElementById('cart-count');
-            if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
-            }
-        }
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>A3106, No.1272 Tongpu Road, Putuo District, Shanghai, China</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>Tel & WeChat: 18501708858</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        window.addEventListener('DOMContentLoaded', updateCartBadge);
-        window.addEventListener('pageshow', updateCartBadge);
-        window.addEventListener('storage', (event) => {
-            if (event.key === CART_KEY) {
-                updateCartBadge();
-            }
-        });
-    </script>
+            <!-- TAIWAN -->
+            <div class="macro-region">
+                <h3 id="regionTaiwan">Taiwan</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>DENNISPOWERSPORT Co. Ltd</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>NO.193, Fuxing C. Rd, Songshan Dist, Taipei, Taiwan 10596</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+886 982 260 332</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-globe"></i>
+                                <span>www.dennispowersport.com</span>
+                            </div>
+                        </div>
+
+                        <a href="http://www.dennispowersport.com" class="dealer-link">Visita il Sito →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIAPPONE -->
+            <div class="macro-region">
+                <h3 id="regionJapan">Giappone</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>RAID-ZERO CO., LTD</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Hazukashifurukawacho 165-1-C, Fushimi-Ku, Kyoto 612-8486</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>075-925-8037</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUSTRALIA -->
+            <div class="macro-region">
+                <h3 id="regionAustralia">Australia</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>SPORTSBIKE</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Sydney, P.O. Box 933 Stanhope Gardens</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+61 298 360 774</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GCC -->
+            <div class="macro-region">
+                <h3 id="regionGCC">GCC & Medio Oriente</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>Extreme Zone Kuwait</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+965 9933 7711</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-brands fa-instagram"></i>
+                                <span>@extremezone.kw</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUD AFRICA -->
+            <div class="macro-region">
+                <h3 id="regionSouthAfrica">Sud Africa</h3>
+
+                <div class="dealers-grid">
+                    <div class="dealer-card">
+                        <div class="dealer-header">
+                            <h4>Specialized Moto (PTY) Ltd</h4>
+                        </div>
+
+                        <div class="dealer-details">
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>3 James Scott Street, Westdene, Bloemfontein 9301</span>
+                            </div>
+                            <div class="dealer-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span>+27 82 789 2255</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- B2B -->
+<section class="b2b-section">
+
+    <div class="b2b-container">
+
+        <h2 id="b2bTitle">Diventa un Partner DB Race</h2>
+
+        <p id="b2bSubtitle">
+            Sei il titolare di un'officina, un concessionario o un e-commerce di accessori?
+            Unisciti alla nostra rete ufficiale di rivenditori.
+        </p>
+
+        <form class="b2b-form">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label id="labelCompany">Ragione Sociale</label>
+                    <input id="inputCompany" type="text" placeholder="Es. Officina Meccanica S.r.l.">
+                </div>
+
+                <div class="form-group">
+                    <label id="labelVat">Partita IVA</label>
+                    <input id="inputVat" type="text" placeholder="IT01234567890">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label id="labelEmail">Email Aziendale</label>
+                    <input id="inputEmail" type="email" placeholder="nome@azienda.it">
+                </div>
+
+                <div class="form-group">
+                    <label id="labelPhone">Telefono</label>
+                    <input id="inputPhone" type="tel" placeholder="+39 333 1234567">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label id="labelCity">Città</label>
+                    <input id="inputCity" type="text" placeholder="Es. Milano">
+                </div>
+
+                <div class="form-group">
+                    <label id="labelAddress">Indirizzo</label>
+                    <input id="inputAddress" type="text" placeholder="Es. Via Roma 123">
+                </div>
+            </div>
+
+            <div class="form-btn-container">
+                <button type="submit" id="b2bSubmitBtn">Invia Candidatura</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-col">
+        <a href="index.html"><img src="immagini/dbracelogo.png"></a>
+        <a id="footerShop" href="shop.html">shop</a>
+        <a id="footerWhoWeAre" href="whoweare.html">chi siamo</a>
+        <a id="footerDealers" href="dealersPage.html">dealers</a>
+    </div>
+
+    <div class="footer-col">
+        <a id="footerTerms" href="#">Termini e condizioni</a>
+        <a id="footerReturns" href="#">Norme su resi e rimborsi</a>
+        <a id="footerLegal" href="#">Note Legali</a>
+        <a id="footerCopyright" href="#">Copyright</a>
+    </div>
+
+    <div class="footer-col">
+        <span id="footerContactTitle">contattaci:</span>
+        <a id="footerSupport" href="#">assistenza</a>
+        <a id="footerFacebook" href="#">facebook</a>
+        <a id="footerInstagram" href="#">instagram</a>
+    </div>
+
+</footer>
+
 </body>
+<script>
+    const CART_KEY = 'dbrace-cart';
+
+    function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) {
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'flex' : 'none';
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', updateCartBadge);
+    window.addEventListener('pageshow', updateCartBadge);
+    window.addEventListener('storage', (event) => {
+        if (event.key === CART_KEY) {
+            updateCartBadge();
+        }
+    });
+</script>
 
 </html>
