@@ -7,198 +7,211 @@
     <title>DB Race Store</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="./fetchTranslation.js" type="text/javascript" defer></script>
 </head>
 <style>
-/* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
-.best-sellers {
-    background-color: #DEDEDE;
-    padding: 60px 25px;
-}
-
-.container {
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.best-sellers h2 {
-    font-size: 32px;
-    margin-bottom: 35px;
-    color: #1A1A1A;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-    border-bottom: solid 2px;
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-}
-
-@media (max-width: 1024px) {
-    .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
+    /* --- BEST SELLERS (COMPLETAMENTE OTTIMIZZATI) --- */
+    .best-sellers {
+        background-color: #DEDEDE;
+        padding: 60px 25px;
     }
 
-    .hero-overlay {
-        background: rgba(0, 0, 0, 0.7);
-        justify-content: center;
-        padding: 0;
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
     }
 
-    .hero-content {
+    .best-sellers h2 {
+        font-size: 32px;
+        margin-bottom: 35px;
+        color: #1A1A1A;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         text-align: center;
+        border-bottom: solid 2px;
     }
-}
 
-/* CARD */
-.product-card {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.3s ease;
-}
-
-/* hover */
-.product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-}
-
-/* 🔥 AGGIUNTA IMPORTANTE: LINK CARD CLICCABILE */
-.product-card a {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-}
-
-/* IMMAGINE */
-.product-img {
-    height: 200px;
-    background-color: #F7F7F7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #EEEEEE;
-    overflow: hidden;
-}
-
-.product-img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* INFO */
-.product-info {
-    padding: 18px;
-}
-
-.color-dots {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.dot:hover {
-    transform: scale(1.2);
-}
-
-.dot.red { background-color: #E30613; }
-.dot.grey { background-color: #888888; }
-.dot.lightgrey { background-color: #DDDDDD; }
-.dot.blue { background-color: #5AC8FA; }
-
-.product-info h3 {
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #1A1A1A;
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-}
-
-.product-info .subtitle {
-    font-size: 12px;
-    color: #777777;
-    margin-bottom: 14px;
-    font-weight: 500;
-}
-
-.product-info .price {
-    font-size: 16px;
-    font-weight: 800;
-    color: #E30613;
-}
-
-/* COMMUNITY */
-.community {
-    background: #E30613;
-    text-align: center;
-    padding: 40px 0;
-    overflow: hidden;
-}
-
-.community h2 {
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.community p {
-    font-family: 'Courier New', Courier, monospace;
-    color: #fff;
-}
-
-.carousel {
-    width: 100%;
-    overflow: hidden;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 8px;
-    width: max-content;
-    animation: scroll 30s linear infinite;
-}
-
-.carousel-track img {
-    width: 320px;
-    height: 345px;
-    object-fit: cover;
-    border-radius: 4px;
-    flex-shrink: 0;
-}
-
-@keyframes scroll {
-    from {
-        transform: translateX(0);
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
     }
-    to {
-        transform: translateX(-25%);
+
+    @media (max-width: 1024px) {
+        .products-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
-}
+
+    @media (max-width: 768px) {
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            padding: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+    }
+
+    /* CARD */
+    .product-card {
+        background-color: #FFFFFF;
+        border-radius: 12px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            box-shadow 0.3s ease;
+    }
+
+    /* hover */
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    /* 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 AGGIUNTA IMPORTANTE: LINK CARD CLICCABILE */
+    .product-card a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* IMMAGINE */
+    .product-img {
+        height: 200px;
+        background-color: #F7F7F7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #EEEEEE;
+        overflow: hidden;
+    }
+
+    .product-img img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    /* INFO */
+    .product-info {
+        padding: 18px;
+    }
+
+    .color-dots {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+
+    .dot:hover {
+        transform: scale(1.2);
+    }
+
+    .dot.red {
+        background-color: #E30613;
+    }
+
+    .dot.grey {
+        background-color: #888888;
+    }
+
+    .dot.lightgrey {
+        background-color: #DDDDDD;
+    }
+
+    .dot.blue {
+        background-color: #5AC8FA;
+    }
+
+    .product-info h3 {
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #1A1A1A;
+        margin-bottom: 4px;
+        letter-spacing: 0.5px;
+    }
+
+    .product-info .subtitle {
+        font-size: 12px;
+        color: #777777;
+        margin-bottom: 14px;
+        font-weight: 500;
+    }
+
+    .product-info .price {
+        font-size: 16px;
+        font-weight: 800;
+        color: #E30613;
+    }
+
+    /* COMMUNITY */
+    .community {
+        background: #E30613;
+        text-align: center;
+        padding: 40px 0;
+        overflow: hidden;
+    }
+
+    .community h2 {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .community p {
+        font-family: 'Courier New', Courier, monospace;
+        color: #fff;
+    }
+
+    .carousel {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 8px;
+        width: max-content;
+        animation: scroll 30s linear infinite;
+    }
+
+    .carousel-track img {
+        width: 320px;
+        height: 345px;
+        object-fit: cover;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-25%);
+        }
+    }
 </style>
 
 <body>
@@ -229,9 +242,7 @@
                 I MIGLIORI PEZZI
             </h1>
 
-            <a href="shop.html" class="hero-btn">
-                COMPRA ORA →
-            </a>
+            <a href="shop.html" class="hero-btn" id="shopNow"></a>
         </div>
     </section>
 
@@ -376,35 +387,36 @@
             <a href="shop.html">shop</a>
             <a href="whoweare.html">chi siamo</a>
             <a href="dealersPage.html">dealers</a>
-
         </div>
+
         <div class="footer-col">
             <a href="#">Termini e condizioni</a>
             <a href="#">Norme su resi e rimborsi</a>
             <a href="#">Note Legali</a>
             <a href="#">Copyright</a>
         </div>
+
         <div class="footer-col">
             <span class="footer-title">contattaci:</span>
             <a href="#">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
         </div>
     </footer>
 
 </body>
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-    fetch('bestseller.json')
-        .then(res => res.json())
-        .then(data => {
-            const container = document.getElementById('best-sellers-container');
+        fetch('bestseller.json')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('best-sellers-container');
 
-            data.slice(0, 5).forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
+                data.slice(0, 5).forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
 
-                card.innerHTML = `
+                    card.innerHTML = `
                     <a href="prodotto.html?id=${p.numero}&source=bestseller">
                         
                         <div class="product-img">
@@ -421,10 +433,11 @@
                     </a>
                 `;
 
-                container.appendChild(card);
-            });
-        })
-        .catch(err => console.error("Errore caricamento:", err));
-});
+                    container.appendChild(card);
+                });
+            })
+            .catch(err => console.error("Errore caricamento:", err));
+    });
 </script>
+
 </html>

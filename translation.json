@@ -1,0 +1,27 @@
+[
+  {
+    "it": [
+      {
+        "header": {
+          "shop": "Negozio"
+        },
+        "homePage": {
+          "shopNowButton": "Compra ora"
+        }
+        
+      }
+    ]
+  },
+  {
+    "en": [
+      {
+        "header": {
+          "shop": "Shop"
+        },
+        "homePage": {
+          "shopNowButton": "Shop now"
+        }
+      }
+    ]
+  }
+]
