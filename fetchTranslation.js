@@ -2,27 +2,34 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const language = document.querySelector(".header-icons")?.children[0];
 
-    let currentLang = localStorage.getItem("language") || "it";
+    let currentLang = "it";
+
+    const getValue = (obj, path) =>
+        path.split(".").reduce((acc, key) => acc?.[key], obj) ?? "";
 
     const loadTranslation = async () => {
 
-        const data = await fetch("./translation.json")
+        const data = await fetch("./translation.json?v=" + new Date().getTime())
             .then(res => res.json());
 
         const matchedLanguage = data.find(el => Object.keys(el)[0] === currentLang);
 
-        const flag = document.getElementById("languageFlag");
-
-    if (flag) {
-        flag.src = currentLang === "it"
-            ? "immagini/bandiera-inglese.png"
-            : "immagini/bandiera-italiana.png";
-
-        flag.alt = currentLang === "it" ? "EN" : "IT";
-    }
+        if (!matchedLanguage) return;
 
         const translatedText = Object.values(matchedLanguage)[0][0];
 
+        // ================= FLAG =================
+        const flag = document.getElementById("languageFlag");
+
+        if (flag) {
+            flag.src = currentLang === "it"
+                ? "immagini/bandiera-inglese.png"
+                : "immagini/bandiera-italiana.png";
+
+            flag.alt = currentLang === "it" ? "EN" : "IT";
+        }
+
+        // ================= BINDINGS =================
         const bindings = [
             { id: "navShop", path: "header.shop" },
             { id: "navWhoWeAre", path: "header.whoWeAre" },
@@ -44,9 +51,42 @@ window.addEventListener("DOMContentLoaded", function () {
             { id: "featureSafeShippingDesc", path: "homePage.safeShippingDescription" },
 
             { id: "bestSellersTitle", path: "homePage.bestSellersTitle" },
-
             { id: "communityTitle", path: "homePage.communityTitle" },
             { id: "communitySubtitle", path: "homePage.communitySubtitle" },
+
+            { id: "dealersHeroTitle", path: "dealersPage.heroTitle", html: true },
+            { id: "dealersTitle", path: "dealersPage.title" },
+            { id: "dealersSubtitle", path: "dealersPage.subtitle" },
+
+            { id: "regionUSA", path: "dealersPage.regions.usa" },
+            { id: "regionUSACanada", path: "dealersPage.regions.usaCanada" },
+            { id: "regionChina", path: "dealersPage.regions.china" },
+            { id: "regionHongKong", path: "dealersPage.regions.hongKong" },
+            { id: "regionTaiwan", path: "dealersPage.regions.taiwan" },
+            { id: "regionJapan", path: "dealersPage.regions.japan" },
+            { id: "regionAustralia", path: "dealersPage.regions.australia" },
+            { id: "regionGCC", path: "dealersPage.regions.gcc" },
+            { id: "regionSouthAfrica", path: "dealersPage.regions.southAfrica" },
+
+            { id: "b2bTitle", path: "b2b.title" },
+            { id: "b2bSubtitle", path: "b2b.subtitle" },
+
+            { id: "labelCompany", path: "b2b.labels.company" },
+            { id: "labelVat", path: "b2b.labels.vat" },
+            { id: "labelEmail", path: "b2b.labels.email" },
+            { id: "labelPhone", path: "b2b.labels.phone" },
+            { id: "labelCity", path: "b2b.labels.city" },
+            { id: "labelAddress", path: "b2b.labels.address" },
+
+            { id: "b2bSubmitBtn", path: "b2b.submit" },
+
+            // ✅ PLACEHOLDER FIX
+            { id: "inputCompany", path: "placeholders.company", attr: "placeholder" },
+            { id: "inputVat", path: "placeholders.vat", attr: "placeholder" },
+            { id: "inputEmail", path: "placeholders.email", attr: "placeholder" },
+            { id: "inputPhone", path: "placeholders.phone", attr: "placeholder" },
+            { id: "inputCity", path: "placeholders.city", attr: "placeholder" },
+            { id: "inputAddress", path: "placeholders.address", attr: "placeholder" },
 
             { id: "footerShop", path: "footer.shop" },
             { id: "footerWhoWeAre", path: "footer.whoWeAre" },
@@ -60,34 +100,35 @@ window.addEventListener("DOMContentLoaded", function () {
             { id: "footerContactTitle", path: "footer.contactUs" },
             { id: "footerSupport", path: "footer.support" },
             { id: "footerFacebook", path: "footer.facebook" },
-            { id: "footerInstagram", path: "footer.instagram" },
+            { id: "footerInstagram", path: "footer.instagram" }
         ];
 
-        const getValue = (obj, path) =>
-            path.split(".").reduce((acc, key) => acc?.[key], obj);
-
-        bindings.forEach(({ id, path, html }) => {
+        bindings.forEach(({ id, path, html, attr }) => {
             const el = document.querySelector(`#${id}`);
             if (!el) return;
 
             const value = getValue(translatedText, path);
 
-            html ? el.innerHTML = value : el.textContent = value;
+            // 🔥 FIX DEFINITIVO: niente undefined
+            if (!value) return;
+
+            if (attr) {
+                el.setAttribute(attr, value);
+            } else if (html) {
+                el.innerHTML = value;
+            } else {
+                el.textContent = value;
+            }
         });
     };
-    
 
-    // prima render (IT di default)
+    // default IT
     loadTranslation();
 
     const toggleLanguage = () => {
         currentLang = currentLang === "it" ? "en" : "it";
-
-        localStorage.setItem("language", currentLang);
-
         loadTranslation();
     };
 
-    language.addEventListener("click", toggleLanguage);
-
+    language?.addEventListener("click", toggleLanguage);
 });
