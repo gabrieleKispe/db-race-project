@@ -1,0 +1,57 @@
+[
+  {
+    "numero": 1,
+    "categoria": "Portatarga",
+    "nome": "Portatarga",
+    "marca": "KTM / Ducati",
+    "modello": "Super Duke 1390 / Streetfighter V4",
+    "versione": "-",
+    "prezzo": 319.00,
+    "immagine": "immagini/shop/portatarga.png",
+    "descrizione": "Portatarga regolabile per KTM Super Duke 1390 e Ducati Streetfighter V4, design sportivo e resistente."
+  },
+  {
+    "numero": 2,
+    "categoria": "Parafango",
+    "nome": "Parafango Posteriore",
+    "marca": "Honda",
+    "modello": "Transalp",
+    "versione": "XL750 2023-2026",
+    "prezzo": 40.00,
+    "immagine": "immagini/shop/coso.jpg",
+    "descrizione": "Parafango posteriore per Honda Transalp XL750, progettato per protezione da sporco e detriti."
+  },
+  {
+    "numero": 3,
+    "categoria": "Specchietti",
+    "nome": "Specchietto",
+    "marca": "Yamaha",
+    "modello": "MT-07",
+    "versione": "ABS 2021-2025",
+    "prezzo": 25.00,
+    "immagine": "immagini/shop/specchietti.webp",
+    "descrizione": "Specchietto compatto per Yamaha MT-07, design semplice e funzionale per uso urbano."
+  },
+  {
+    "numero": 4,
+    "categoria": "Sospensioni",
+    "nome": "Ammortizzatore Posteriore",
+    "marca": "BMW",
+    "modello": "R 1300 GS",
+    "versione": "ESA",
+    "prezzo": 999.99,
+    "immagine": "immagini/shop/nonsocosasono.png",
+    "descrizione": "Ammortizzatore posteriore elettronico ESA per BMW R 1300 GS, comfort e regolazione avanzata."
+  },
+  {
+    "numero": 5,
+    "categoria": "Freni",
+    "nome": "Leva Freno",
+    "marca": "Kawasaki",
+    "modello": "Ninja 650",
+    "versione": "KRT Edition",
+    "prezzo": 30.00,
+    "immagine": "immagini/shop/senzanonfreni.jpg",
+    "descrizione": "Leva freno ergonomica per Kawasaki Ninja 650 KRT Edition, miglior controllo e sensibilità."
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "numero": 1,
+    "categoria": "License Plate Holders",
+    "nome": "License Plate Holder",
+    "marca": "KTM / Ducati",
+    "modello": "Super Duke 1390 / Streetfighter V4",
+    "versione": "-",
+    "prezzo": 319.00,
+    "immagine": "immagini/shop/portatarga.png",
+    "descrizione": "Adjustable license plate holder for KTM Super Duke 1390 and Ducati Streetfighter V4, featuring a sporty and durable design."
+  },
+  {
+    "numero": 2,
+    "categoria": "Fenders",
+    "nome": "Rear Fender",
+    "marca": "Honda",
+    "modello": "Transalp",
+    "versione": "XL750 2023-2026",
+    "prezzo": 40.00,
+    "immagine": "immagini/shop/coso.jpg",
+    "descrizione": "Rear fender for Honda Transalp XL750, designed to protect against dirt and road debris."
+  },
+  {
+    "numero": 3,
+    "categoria": "Mirrors",
+    "nome": "Mirror",
+    "marca": "Yamaha",
+    "modello": "MT-07",
+    "versione": "ABS 2021-2025",
+    "prezzo": 25.00,
+    "immagine": "immagini/shop/specchietti.webp",
+    "descrizione": "Compact mirror for Yamaha MT-07, featuring a simple and functional design for urban riding."
+  },
+  {
+    "numero": 4,
+    "categoria": "Suspensions",
+    "nome": "Rear Shock Absorber",
+    "marca": "BMW",
+    "modello": "R 1300 GS",
+    "versione": "ESA",
+    "prezzo": 999.99,
+    "immagine": "immagini/shop/nonsocosasono.png",
+    "descrizione": "Electronic ESA rear shock absorber for BMW R 1300 GS, offering advanced comfort and adjustability."
+  },
+  {
+    "numero": 5,
+    "categoria": "Brakes",
+    "nome": "Brake Lever",
+    "marca": "Kawasaki",
+    "modello": "Ninja 650",
+    "versione": "KRT Edition",
+    "prezzo": 30.00,
+    "immagine": "immagini/shop/senzanonfreni.jpg",
+    "descrizione": "Ergonomic brake lever for Kawasaki Ninja 650 KRT Edition, providing improved control and braking feel."
+  }
+]
