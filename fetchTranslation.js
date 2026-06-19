@@ -104,7 +104,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
             { id: "teamTitle", path: "aboutPage.teamTitle" },
             { id: "teamSubtitle", path: "aboutPage.teamSubtitle" },
-            
+
             { id: "footerShop", path: "footer.shop" },
             { id: "footerWhoWeAre", path: "footer.whoWeAre" },
             { id: "footerDealers", path: "footer.dealers" },
@@ -128,7 +128,13 @@ window.addEventListener("DOMContentLoaded", function () {
 
             { id: "sortDefault", path: "shop.sort.default" },
             { id: "sortLowHigh", path: "shop.sort.lowHigh" },
-            { id: "sortHighLow", path: "shop.sort.highHigh" }
+            { id: "sortHighLow", path: "shop.sort.highHigh" },
+
+            { id: "cartTitle", path: "cart.title" },
+            { id: "summaryTitle", path: "cart.summary" },
+            { id: "subtotalLabel", path: "cart.subtotal" },
+            { id: "shippingLabel", path: "cart.shipping" },
+            { id: "totalLabel", path: "cart.total" }
         ];
 
         bindings.forEach(({ id, path, html, attr }) => {
@@ -155,7 +161,7 @@ window.addEventListener("DOMContentLoaded", function () {
         currentLang = currentLang === "it" ? "en" : "it";
         localStorage.setItem("language", currentLang);
         // Forza il reload della pagina per far ricaricare anche i JSON dei prodotti nella lingua corretta
-        window.location.reload(); 
+        window.location.reload();
     };
 
     language?.addEventListener("click", toggleLanguage);
