@@ -482,14 +482,15 @@
                 existing.quantita += 1;
             } else {
                 cart.push({
-                    ...prodotto,
+                    numero: prodotto.numero,
                     quantita: 1
                 });
             }
 
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
             updateCartBadge();
-            alert('Prodotto aggiunto al carrello!');
+            const lang = localStorage.getItem("language") || "it";
+            alert(lang === "en" ? "Product added to cart!" : "Prodotto aggiunto al carrello!");
         }
 
         window.addToCart = addToCart;
