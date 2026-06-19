@@ -308,50 +308,66 @@
         return `€ ${value.toFixed(2)}`;
     }
 
-    function renderCart() {
+    async function renderCart() {
+
         const cart = getCart();
         const container = document.getElementById('cart-items');
         const subtotalEl = document.getElementById('subtotal');
         const totalEl = document.getElementById('total');
 
-        if (!cart.length) {
-            const lang = localStorage.getItem("language") || "it";
+        const lang = localStorage.getItem("language") || "it";
 
+        if (!cart.length) {
             container.innerHTML = `
-                <div class="empty-cart">
-                 ${lang === "it"
-                    ? "Il tuo carrello è vuoto"
-                    : "Your cart is empty"}
-                 </div>
-            `;
+            <div class="empty-cart">
+                ${lang === "it" ? "Il tuo carrello è vuoto" : "Your cart is empty"}
+            </div>
+        `;
             subtotalEl.textContent = formatEuro(0);
             totalEl.textContent = formatEuro(0);
             return;
         }
 
+        // 🔥 carico database prodotti in base lingua
+        const res = await fetch(`prodotti-${lang}.json`);
+        const prodotti = await res.json();
+
         let subtotal = 0;
         container.innerHTML = '';
 
         cart.forEach(item => {
-            const itemTotal = item.prezzo * item.quantita;
+
+            const prodotto = prodotti.find(p => p.numero === item.numero);
+            if (!prodotto) return;
+
+            const itemTotal = prodotto.prezzo * item.quantita;
             subtotal += itemTotal;
 
             const row = document.createElement('div');
             row.className = 'cart-item';
+
             row.innerHTML = `
-                    <img src="${item.immagine}" alt="${item.nome}" onerror="this.src='https://via.placeholder.com/120x110?text=DB+Race'">
-                    <div class="cart-item-info">
-                        <h3>${item.nome}</h3>
-                        <p>${item.marca} ${item.modello} ${item.versione !== '-' ? item.versione : ''}</p>
-                    </div>
-                    <div class="cart-item-controls">
-                        <button class="qty-btn" data-action="decrease" data-id="${item.numero}">−</button>
-                        <span>${item.quantita}</span>
-                        <button class="qty-btn" data-action="increase" data-id="${item.numero}">+</button>
-                        <button class="remove-btn" data-action="remove" data-id="${item.numero}"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                    <div class="cart-item-price">${formatEuro(itemTotal)}</div>
-                `;
+            <img src="${prodotto.immagine}" alt="${prodotto.nome}">
+            
+            <div class="cart-item-info">
+                <h3>${prodotto.nome}</h3>
+                <p>${prodotto.marca} ${prodotto.modello} ${prodotto.versione !== '-' ? prodotto.versione : ''}</p>
+            </div>
+
+            <div class="cart-item-controls">
+                <button class="qty-btn" data-action="decrease" data-id="${prodotto.numero}">−</button>
+                <span>${item.quantita}</span>
+                <button class="qty-btn" data-action="increase" data-id="${prodotto.numero}">+</button>
+                <button class="remove-btn" data-action="remove" data-id="${prodotto.numero}">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="cart-item-price">
+                ${formatEuro(itemTotal)}
+            </div>
+        `;
+
             container.appendChild(row);
         });
 
@@ -360,22 +376,28 @@
 
         container.querySelectorAll('[data-action]').forEach(btn => {
             btn.addEventListener('click', () => {
+
                 const id = Number(btn.dataset.id);
                 const action = btn.dataset.action;
+
                 const updated = getCart();
                 const item = updated.find(p => p.numero === id);
 
                 if (!item) return;
 
                 if (action === 'increase') {
-                    item.quantita += 1;
-                } else if (action === 'decrease') {
-                    item.quantita -= 1;
+                    item.quantita++;
+                }
+
+                if (action === 'decrease') {
+                    item.quantita--;
                     if (item.quantita <= 0) {
                         const index = updated.findIndex(p => p.numero === id);
                         updated.splice(index, 1);
                     }
-                } else if (action === 'remove') {
+                }
+
+                if (action === 'remove') {
                     const index = updated.findIndex(p => p.numero === id);
                     if (index !== -1) updated.splice(index, 1);
                 }
