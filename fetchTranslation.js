@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", function () {
 
     const language = document.querySelector(".header-icons")?.children[0];
-
     let currentLang = localStorage.getItem("language") || "it";
 
     const getValue = (obj, path) =>
@@ -105,6 +104,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
             { id: "teamTitle", path: "aboutPage.teamTitle" },
             { id: "teamSubtitle", path: "aboutPage.teamSubtitle" },
+            
             { id: "footerShop", path: "footer.shop" },
             { id: "footerWhoWeAre", path: "footer.whoWeAre" },
             { id: "footerDealers", path: "footer.dealers" },
@@ -137,7 +137,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
             const value = getValue(translatedText, path);
 
-            // 🔥 FIX DEFINITIVO: niente undefined
             if (!value) return;
 
             if (attr) {
@@ -150,17 +149,14 @@ window.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    // default IT
     loadTranslation();
 
     const toggleLanguage = () => {
         currentLang = currentLang === "it" ? "en" : "it";
-        localStorage.setItem("language",currentLang);
-        loadTranslation();
+        localStorage.setItem("language", currentLang);
+        // Forza il reload della pagina per far ricaricare anche i JSON dei prodotti nella lingua corretta
+        window.location.reload(); 
     };
-
-    language?.addEventListener("click", toggleLanguage);
-});
 
     language?.addEventListener("click", toggleLanguage);
 });
