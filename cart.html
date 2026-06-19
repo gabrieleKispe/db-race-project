@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrello - DB Race</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="./fetchTranslation.js" type="text/javascript" defer></script>
     <style>
         .cart-page {
             background: #DEDEDE;
@@ -197,16 +199,17 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
         <nav>
-            <a href="shop.html">SHOP</a>
-            <a href="whoweare.html">CHI SIAMO</a>
-            <a href="dealersPage.html">DEALERS</a>
+            <a id="navShop" href="shop.html">SHOP</a>
+            <a id="navWhoWeAre" href="whoweare.html">CHI SIAMO</a>
+            <a id="navDealers" href="dealersPage.html">DEALERS</a>
         </nav>
         <div class="header-icons">
-            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <img id="languageFlag" src="immagini/bandiera-inglese.png" alt="EN">
             <a href="cart.html" class="cart-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count" id="cart-count">0</span>
@@ -217,23 +220,23 @@
     <section class="cart-page">
         <div class="cart-container">
             <div class="cart-header-row">
-                <h1>Carrello</h1>
+                <h1 id="cartTitle">Carrello</h1>
             </div>
             <div class="cart-layout">
                 <div class="cart-items" id="cart-items"></div>
                 <div class="cart-summary">
                     <div class="summary-box">
-                        <h2>Riepilogo</h2>
+                        <h2 id="summaryTitle">Riepilogo</h2>
                         <div class="summary-row">
-                            <span>Subtotale</span>
+                            <span id="subtotalLabel">Subtotale</span>
                             <span id="subtotal">€ 0.00</span>
                         </div>
                         <div class="summary-row">
-                            <span>Spedizione</span>
-                            <span>Gratis</span>
+                            <span id="shippingLabel">Spedizione</span>
+                            <span>€ 0.00</span>
                         </div>
                         <div class="summary-total">
-                            <span>Totale</span>
+                            <span id="totalLabel">Totale</span>
                             <span id="total">€ 0.00</span>
                         </div>
                         <button class="checkout-btn" id="checkout-btn">Procedi all'ordine</button>
@@ -254,76 +257,88 @@
 
         </div>
         <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
+            <a id="footerTerms" href="#">Termini e condizioni</a>
+            <a id="footerReturns" href="#">Norme su resi e rimborsi</a>
+            <a id="footerLegal" href="#">Note Legali</a>
+            <a id="footerCopyright" href="#">Copyright</a>
         </div>
         <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span class="footer-title" id="footerContactTitle">
+                contattaci:
+            </span>
+            <a href="#" id="footerSupport">assistenza</a>
+            <a href="#" id="footerFacebook">facebook</a>
+            <a href="#" id="footerInstagram">instagram</a>
         </div>
     </footer>
 
-    <script>
-        const CART_KEY = 'dbrace-cart';
+</body>
 
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
-            const badge = document.getElementById('cart-count');
-            if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
-            }
+<script>
+    const CART_KEY = 'dbrace-cart';
+
+    function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) {
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'flex' : 'none';
         }
+    }
 
-        window.addEventListener('pageshow', updateCartBadge);
-        window.addEventListener('storage', (event) => {
-            if (event.key === CART_KEY) {
-                updateCartBadge();
-            }
-        });
-
-        function getCart() {
-            return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-        }
-
-        function saveCart(cart) {
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    window.addEventListener('pageshow', updateCartBadge);
+    window.addEventListener('storage', (event) => {
+        if (event.key === CART_KEY) {
             updateCartBadge();
-            renderCart();
+        }
+    });
+
+    function getCart() {
+        return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        updateCartBadge();
+        renderCart();
+    }
+
+    function formatEuro(value) {
+        return `€ ${value.toFixed(2)}`;
+    }
+
+    function renderCart() {
+        const cart = getCart();
+        const container = document.getElementById('cart-items');
+        const subtotalEl = document.getElementById('subtotal');
+        const totalEl = document.getElementById('total');
+
+        if (!cart.length) {
+            const lang = localStorage.getItem("language") || "it";
+
+            container.innerHTML = `
+                <div class="empty-cart">
+                 ${lang === "it"
+                    ? "Il tuo carrello è vuoto"
+                    : "Your cart is empty"}
+                 </div>
+            `;
+            subtotalEl.textContent = formatEuro(0);
+            totalEl.textContent = formatEuro(0);
+            return;
         }
 
-        function formatEuro(value) {
-            return `€ ${value.toFixed(2)}`;
-        }
+        let subtotal = 0;
+        container.innerHTML = '';
 
-        function renderCart() {
-            const cart = getCart();
-            const container = document.getElementById('cart-items');
-            const subtotalEl = document.getElementById('subtotal');
-            const totalEl = document.getElementById('total');
+        cart.forEach(item => {
+            const itemTotal = item.prezzo * item.quantita;
+            subtotal += itemTotal;
 
-            if (!cart.length) {
-                container.innerHTML = '<div class="empty-cart">Il tuo carrello è vuoto</div>';
-                subtotalEl.textContent = formatEuro(0);
-                totalEl.textContent = formatEuro(0);
-                return;
-            }
-
-            let subtotal = 0;
-            container.innerHTML = '';
-
-            cart.forEach(item => {
-                const itemTotal = item.prezzo * item.quantita;
-                subtotal += itemTotal;
-
-                const row = document.createElement('div');
-                row.className = 'cart-item';
-                row.innerHTML = `
+            const row = document.createElement('div');
+            row.className = 'cart-item';
+            row.innerHTML = `
                     <img src="${item.immagine}" alt="${item.nome}" onerror="this.src='https://via.placeholder.com/120x110?text=DB+Race'">
                     <div class="cart-item-info">
                         <h3>${item.nome}</h3>
@@ -337,51 +352,56 @@
                     </div>
                     <div class="cart-item-price">${formatEuro(itemTotal)}</div>
                 `;
-                container.appendChild(row);
-            });
+            container.appendChild(row);
+        });
 
-            subtotalEl.textContent = formatEuro(subtotal);
-            totalEl.textContent = formatEuro(subtotal);
+        subtotalEl.textContent = formatEuro(subtotal);
+        totalEl.textContent = formatEuro(subtotal);
 
-            container.querySelectorAll('[data-action]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = Number(btn.dataset.id);
-                    const action = btn.dataset.action;
-                    const updated = getCart();
-                    const item = updated.find(p => p.numero === id);
+        container.querySelectorAll('[data-action]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = Number(btn.dataset.id);
+                const action = btn.dataset.action;
+                const updated = getCart();
+                const item = updated.find(p => p.numero === id);
 
-                    if (!item) return;
+                if (!item) return;
 
-                    if (action === 'increase') {
-                        item.quantita += 1;
-                    } else if (action === 'decrease') {
-                        item.quantita -= 1;
-                        if (item.quantita <= 0) {
-                            const index = updated.findIndex(p => p.numero === id);
-                            updated.splice(index, 1);
-                        }
-                    } else if (action === 'remove') {
+                if (action === 'increase') {
+                    item.quantita += 1;
+                } else if (action === 'decrease') {
+                    item.quantita -= 1;
+                    if (item.quantita <= 0) {
                         const index = updated.findIndex(p => p.numero === id);
-                        if (index !== -1) updated.splice(index, 1);
+                        updated.splice(index, 1);
                     }
+                } else if (action === 'remove') {
+                    const index = updated.findIndex(p => p.numero === id);
+                    if (index !== -1) updated.splice(index, 1);
+                }
 
-                    saveCart(updated);
-                });
+                saveCart(updated);
             });
-        }
-
-        document.getElementById('checkout-btn').addEventListener('click', () => {
-            localStorage.removeItem(CART_KEY);
-            updateCartBadge();
-            renderCart();
-            alert('Ordine confermato!');
         });
+    }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            updateCartBadge();
-            renderCart();
-        });
-    </script>
-</body>
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+        localStorage.removeItem(CART_KEY);
+        updateCartBadge();
+        renderCart();
+        const lang = localStorage.getItem("language") || "it";
+
+        alert(
+            lang === "it"
+                ? "Ordine confermato!"
+                : "Order confirmed!"
+        );
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        updateCartBadge();
+        renderCart();
+    });
+</script>
+
 </html>
-
