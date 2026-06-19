@@ -415,37 +415,65 @@
 
 </body>
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        fetch('bestseller.json')
-            .then(res => res.json())
-            .then(data => {
-                const container = document.getElementById('best-sellers-container');
+    // ==========================
+    // BEST SELLERS MULTILINGUA
+    // ==========================
 
-                data.slice(0, 5).forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
+    window.addEventListener('DOMContentLoaded', async () => {
 
-                    card.innerHTML = `
-                    <a href="prodotto.html?id=${p.numero}&source=bestseller">
-                        
-                        <div class="product-img">
-                            <img src="${p.immagine}" alt="${p.nome}"
-                            onerror="this.src='https://via.placeholder.com/200x180?text=No+Img'">
-                        </div>
+        const container = document.getElementById('best-sellers-container');
 
-                        <div class="product-info">
-                            <h3>${p.nome}</h3>
-                            <p class="subtitle">${p.marca} ${p.modello}</p>
-                            <p class="price">€ ${Number(p.prezzo).toFixed(2)}</p>
-                        </div>
+        let currentLang = localStorage.getItem("language") || "it";
 
-                    </a>
-                `;
+        // mapping file lingua
+        const fileMap = {
+            it: "bestseller-it.json",
+            en: "bestseller-en.json"
+        };
 
-                    container.appendChild(card);
-                });
-            })
-            .catch(err => console.error("Errore caricamento:", err));
+        const file = fileMap[currentLang] || fileMap.it;
+
+        try {
+
+            const res = await fetch(file);
+
+            if (!res.ok) {
+                throw new Error("Impossibile caricare best sellers");
+            }
+
+            const data = await res.json();
+
+            container.innerHTML = '';
+
+            data.slice(0, 5).forEach(p => {
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                card.innerHTML = `
+                <a href="prodotto.html?id=${p.numero}&source=bestseller">
+
+                    <div class="product-img">
+                        <img src="${p.immagine}" 
+                             alt="${p.nome}"
+                             onerror="this.src='https://via.placeholder.com/200x180?text=No+Img'">
+                    </div>
+
+                    <div class="product-info">
+                        <h3>${p.nome}</h3>
+                        <p class="subtitle">${p.marca} ${p.modello}</p>
+                        <p class="price">€ ${Number(p.prezzo).toFixed(2)}</p>
+                    </div>
+
+                </a>
+            `;
+
+                container.appendChild(card);
+            });
+
+        } catch (err) {
+            console.error("Errore caricamento best sellers:", err);
+        }
     });
 </script>
 
