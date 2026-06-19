@@ -215,8 +215,10 @@
         <div class="footer-col">
             <span class="footer-title" id="footerContactTitle">contattaci:</span>
             <a href="#" id="footerSupport">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer" id="footerFacebook">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer" id="footerInstagram">Instagram</a>
+            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer"
+                id="footerFacebook">facebook</a>
+            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer"
+                id="footerInstagram">Instagram</a>
         </div>
     </footer>
 
@@ -224,6 +226,9 @@
         const CART_KEY = 'dbrace-cart';
         let prodottoCorrente = null;
 
+        // ==========================
+        // CART
+        // ==========================
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
             const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
@@ -243,45 +248,45 @@
                 existing.quantita += 1;
             } else {
                 cart.push({
-                    ...prodotto,
+                    numero: prodotto.numero,
                     quantita: 1
                 });
             }
 
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
             updateCartBadge();
-            
-            let currentLang = localStorage.getItem("language") || "it";
-            if(currentLang === "en") {
-                alert('Product added to cart!');
-            } else {
-                alert('Prodotto aggiunto al carrello!');
-            }
+
+            const lang = localStorage.getItem("language") || "it";
+            alert(lang === "en" ? "Product added to cart!" : "Prodotto aggiunto al carrello!");
         }
 
         window.addToCart = addToCart;
 
+        // ==========================
+        // INIT
+        // ==========================
         window.addEventListener('DOMContentLoaded', () => {
+
             updateCartBadge();
 
-            // 🔥 FIX: Definiamo esplicitamente la lingua corrente recuperandola dal localStorage
-            let currentLang = localStorage.getItem("language") || "it";
+            const lang = localStorage.getItem("language") || "it";
 
-            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
-                if (prodottoCorrente) {
-                    addToCart(prodottoCorrente);
-                }
-            });
-
-            // Traduzione delle etichette statiche della scheda prodotto (non presenti in translation.json)
-            if (currentLang === "en") {
+            // UI STATICA
+            if (lang === "en") {
                 document.getElementById('label-compatibilita').textContent = "Compatibility:";
                 document.getElementById('label-add-cart').textContent = "Add to cart";
                 document.getElementById('error-box').textContent = "Product not found or invalid ID.";
             }
 
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                if (prodottoCorrente) addToCart(prodottoCorrente);
+            });
+
+            // ==========================
+            // PARAMETRI URL
+            // ==========================
             const params = new URLSearchParams(window.location.search);
-            const idProdotto = parseInt(params.get('id'), 10);
+            const idProdotto = Number(params.get('id'));
             const source = params.get('source');
 
             if (!idProdotto) {
@@ -289,21 +294,26 @@
                 return;
             }
 
-            // Ora la variabile `currentLang` è visibile e cercherà correttamente prodotti-it.json o prodotti-en.json
-            let jsonFile = `prodotti-${currentLang}.json`;
+            // ==========================
+            // SCELTA FILE JSON (FIX DEFINITIVO)
+            // ==========================
+            const jsonFile =
+                source === 'bestseller'
+                    ? `bestseller-${lang}.json`
+                    : `prodotti-${lang}.json`;
 
-            if (source === 'bestseller') {
-                jsonFile = 'bestseller.json'; 
-            }
-
+            // ==========================
+            // FETCH PRODOTTO
+            // ==========================
             fetch(jsonFile)
-                .then(response => {
-                    if (!response.ok) throw new Error();
-                    return response.json();
+                .then(res => {
+                    if (!res.ok) throw new Error("JSON non trovato");
+                    return res.json();
                 })
                 .then(prodotti => {
+
                     const prodotto = prodotti.find(
-                        p => Number(p.numero) === Number(idProdotto)
+                        p => Number(p.numero) === idProdotto
                     );
 
                     if (prodotto) {
@@ -313,29 +323,37 @@
                     }
                 })
                 .catch(err => {
-                    console.log("Errore nel caricamento dettagli.");
+                    console.error("Errore caricamento prodotto:", err);
                     mostraErrore();
                 });
         });
 
+        // ==========================
+        // RENDER PRODOTTO
+        // ==========================
         function mostraProdotto(p) {
+
             prodottoCorrente = p;
 
             document.getElementById('p-img').src = p.immagine;
             document.getElementById('p-img').alt = p.nome;
+
             document.getElementById('p-categoria').innerText = p.categoria;
             document.getElementById('p-nome').innerText = p.nome;
 
-            const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
+            const versione = p.versione && p.versione !== '-' ? p.versione : '';
             document.getElementById('p-compatibilita').innerText =
-                `${p.marca} ${p.modello} ${versioneTesto}`;
+                `${p.marca} ${p.modello} ${versione}`;
 
             document.getElementById('p-descrizione').innerText = p.descrizione;
-            document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
+            document.getElementById('p-prezzo').innerText = `€ ${Number(p.prezzo).toFixed(2)}`;
 
             document.getElementById('product-card-detail').style.display = 'flex';
         }
 
+        // ==========================
+        // ERROR
+        // ==========================
         function mostraErrore() {
             document.getElementById('error-box').style.display = 'block';
         }
