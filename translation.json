@@ -100,6 +100,14 @@
             "lowHigh": "Prezzo: Crescente",
             "highHigh": "Prezzo: Decrescente"
           }
+        },
+        "cart": {
+          "title": "Carrello",
+          "summary": "Riepilogo",
+          "subtotal": "Subtotale",
+          "shipping": "Spedizione",
+          "total": "Totale",
+          "checkout": "Procedi all'ordine"
         }
       }
     ]
@@ -205,6 +213,14 @@
             "lowHigh": "Price: Low to High",
             "highHigh": "Price: High to Low"
           }
+        },
+        "cart": {
+          "title": "Cart",
+          "summary": "Summary",
+          "subtotal": "Subtotal",
+          "shipping": "Shipping",
+          "total": "Total",
+          "checkout": "Proceed to checkout"
         }
       }
     ]
