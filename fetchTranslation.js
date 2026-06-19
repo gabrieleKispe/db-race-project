@@ -134,7 +134,8 @@ window.addEventListener("DOMContentLoaded", function () {
             { id: "summaryTitle", path: "cart.summary" },
             { id: "subtotalLabel", path: "cart.subtotal" },
             { id: "shippingLabel", path: "cart.shipping" },
-            { id: "totalLabel", path: "cart.total" }
+            { id: "totalLabel", path: "cart.total" },
+            { id: "checkout-btn", path: "cart.checkout" }
         ];
 
         bindings.forEach(({ id, path, html, attr }) => {
