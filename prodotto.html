@@ -7,6 +7,7 @@
     <title>Dettaglio Prodotto - DB Race</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="fetchTranslation.js" defer></script>
 
     <style>
         /* Stili specifici per la scheda prodotto dettagliata */
@@ -59,39 +60,8 @@
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-
-        /* --- SELEZIONE PALLINI COLORE DENTRO IL DETTAGLIO --- */
-        .detail-colors-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-
-        .detail-colors-box .color-dot {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .detail-colors-box .color-dot:hover,
-        .detail-colors-box .color-dot.active {
-            transform: scale(1.25);
-            border-color: #1A1A1A;
-            box-shadow: 0 0 6px rgba(0,0,0,0.3);
-        }
-
-        /* Classi colore associate ai pallini */
-        .detail-colors-box .color-dot.red { background-color: #E30613; }
-        .detail-colors-box .color-dot.grey { background-color: #888888; }
-        .detail-colors-box .color-dot.lightgrey { background-color: #D6D6D6; }
-        .detail-colors-box .color-dot.blue { background-color: #3498db; }
-        .detail-colors-box .color-dot.black { background-color: #1A1A1A; }
 
         .detail-info h1 {
             font-size: 38px;
@@ -187,12 +157,12 @@
     <header>
         <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race"></a>
         <nav>
-            <a href="shop.html" data-i18n="navShop">SHOP</a>
-            <a href="whoweare.html" data-i18n="navAbout">CHI SIAMO</a>
-            <a href="dealersPage.html" data-i18n="navDealers">DEALERS</a>
+            <a href="shop.html" id="navShop">SHOP</a>
+            <a href="whoweare.html" id="navWhoWeAre">CHI SIAMO</a>
+            <a href="dealersPage.html" id="navDealers">DEALERS</a>
         </nav>
         <div class="header-icons">
-            <img src="immagini/bandiera-inglese.png" alt="EN">
+            <img id="languageFlag" src="immagini/bandiera-inglese.png" alt="EN">
             <a href="cart.html" class="cart-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count" id="cart-count">0</span>
@@ -207,13 +177,10 @@
             </div>
             <div class="detail-info">
                 <div class="category-badge" id="p-categoria"></div>
-                
-                <div class="detail-colors-box" id="p-colori"></div>
-
                 <h1 id="p-nome"></h1>
 
                 <div class="detail-compat-box">
-                    Compatibilità: <strong id="p-compatibilita"></strong>
+                    <span id="label-compatibilita">Compatibilità:</span> <strong id="p-compatibilita"></strong>
                 </div>
 
                 <div class="detail-description" id="p-descrizione"></div>
@@ -221,7 +188,7 @@
                 <div class="detail-action-row">
                     <div class="detail-price" id="p-prezzo"></div>
                     <button class="buy-now-btn" id="add-to-cart-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> Aggiungi al carrello
+                        <i class="fa-solid fa-cart-shopping"></i> <span id="label-add-cart">Aggiungi al carrello</span>
                     </button>
                 </div>
             </div>
@@ -235,172 +202,144 @@
     <footer>
         <div class="footer-col">
             <a href="index.html"><img src="immagini/dbracelogo.png" alt="DB Race Logo"></a>
-            <a href="shop.html">shop</a>
-            <a href="whoweare.html">chi siamo</a>
-            <a href="dealersPage.html">dealers</a>
+            <a href="shop.html" id="footerShop">shop</a>
+            <a href="whoweare.html" id="footerWhoWeAre">chi siamo</a>
+            <a href="dealersPage.html" id="footerDealers">dealers</a>
         </div>
         <div class="footer-col">
-            <a href="#">Termini e condizioni</a>
-            <a href="#">Norme su resi e rimborsi</a>
-            <a href="#">Note Legali</a>
-            <a href="#">Copyright</a>
+            <a href="#" id="footerTerms">Termini e condizioni</a>
+            <a href="#" id="footerRefunds">Norme su resi e rimborsi</a>
+            <a href="#" id="footerLegal">Note Legali</a>
+            <a href="#" id="footerCopyright">Copyright</a>
         </div>
         <div class="footer-col">
-            <span class="footer-title">contattaci:</span>
-            <a href="#">assistenza</a>
-            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer">facebook</a>
-            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span class="footer-title" id="footerContactTitle">contattaci:</span>
+            <a href="#" id="footerSupport">assistenza</a>
+            <a href="https://www.facebook.com/DB.RACE.official/reels/" target="_blank" rel="noopener noreferrer" id="footerFacebook">facebook</a>
+            <a href="https://www.instagram.com/db.race/" target="_blank" rel="noopener noreferrer" id="footerInstagram">Instagram</a>
         </div>
     </footer>
 
     <script>
-const CART_KEY = 'dbrace-cart';
-let prodottoCorrente = null;
-let coloreSelezionato = ''; // Conserva il colore selezionato dall'utente
+        const CART_KEY = 'dbrace-cart';
+        let prodottoCorrente = null;
 
-// ==========================
-// GESTIONE CARRELLO
-// ==========================
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
 
-function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-    const count = cart.reduce((sum, item) => sum + (item.quantita || 1), 0);
-
-    const badge = document.getElementById('cart-count');
-    if (badge) {
-        badge.textContent = count;
-        badge.style.display = count > 0 ? 'flex' : 'none';
-    }
-}
-
-function addToCart(prodotto) {
-    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-    
-    // Controlliamo se esiste già lo stesso identico prodotto CON lo stesso colore
-    const existing = cart.find(item => item.numero === prodotto.numero && item.colore === coloreSelezionato);
-
-    if (existing) {
-        existing.quantita += 1;
-    } else {
-        cart.push({
-            ...prodotto,
-            quantita: 1,
-            colore: coloreSelezionato // Aggiungiamo l'informazione sul colore all'oggetto nel carrello
-        });
-    }
-
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    updateCartBadge();
-    alert(`Prodotto aggiunto al carrello! Colore: ${coloreSelezionato.toUpperCase()}`);
-}
-
-window.addToCart = addToCart;
-
-// ==========================
-// INIZIALIZZAZIONE PAGINA
-// ==========================
-
-window.addEventListener('DOMContentLoaded', () => {
-    updateCartBadge();
-
-    document.getElementById('add-to-cart-btn').addEventListener('click', () => {
-        if (prodottoCorrente) {
-            addToCart(prodottoCorrente);
-        }
-    });
-
-    const params = new URLSearchParams(window.location.search);
-    const idProdotto = parseInt(params.get('id'), 10);
-    const source = params.get('source');
-
-    if (!idProdotto) {
-        mostraErrore();
-        return;
-    }
-
-    let jsonFile = 'prodotti.json';
-    if (source === 'bestseller') {
-        jsonFile = 'bestseller.json';
-    }
-
-    fetch(jsonFile)
-        .then(response => {
-            if (!response.ok) throw new Error();
-            return response.json();
-        })
-        .then(prodotti => {
-            const prodotto = prodotti.find(
-                p => Number(p.numero) === Number(idProdotto)
-            );
-
-            if (prodotto) {
-                mostraProdotto(prodotto);
-            } else {
-                mostraErrore();
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
             }
-        })
-        .catch(err => {
-            console.log("Errore nel caricamento dettagli.");
-            mostraErrore();
-        });
-});
-
-// ==========================
-// RENDERING DINAMICO DATI E PALLINI
-// ==========================
-
-function mostraProdotto(p) {
-    prodottoCorrente = p;
-
-    document.getElementById('p-img').src = p.immagine;
-    document.getElementById('p-img').alt = p.nome;
-    document.getElementById('p-categoria').innerText = p.categoria;
-    document.getElementById('p-nome').innerText = p.nome;
-
-    const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
-    document.getElementById('p-compatibilita').innerText =
-        `${p.marca} ${p.modello} ${versioneTesto}`;
-
-    document.getElementById('p-descrizione').innerText = p.descrizione;
-    document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
-
-    // --- LOGICA GENERAZIONE DINAMICA PALLINI COLORE ---
-    // Legge l'array dei colori dal tuo file JSON (es: p.colori = ['black', 'grey']).
-    // Se non trova dati nel JSON, applica i 4 colori di default del tuo bozzetto grafico.
-    const coloriDisponibili = p.colori || ['red', 'grey', 'lightgrey', 'blue'];
-    const coloriContainer = document.getElementById('p-colori');
-    
-    // Svuotiamo il contenitore per evitare duplicazioni accidentali
-    coloriContainer.innerHTML = ''; 
-
-    coloriDisponibili.forEach((colore, index) => {
-        const dot = document.createElement('span');
-        dot.className = `color-dot ${colore}`;
-        dot.title = colore.toUpperCase();
-        
-        // Seleziona automaticamente il primo colore disponibile all'apertura
-        if (index === 0) {
-            dot.classList.add('active');
-            coloreSelezionato = colore;
         }
 
-        // Evento al click per scambiare lo stato attivo tra i pallini
-        dot.addEventListener('click', () => {
-            document.querySelectorAll('.detail-colors-box .color-dot').forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
-            coloreSelezionato = colore; // Aggiorna la scelta colore attuale
+        function addToCart(prodotto) {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            const existing = cart.find(item => item.numero === prodotto.numero);
+
+            if (existing) {
+                existing.quantita += 1;
+            } else {
+                cart.push({
+                    ...prodotto,
+                    quantita: 1
+                });
+            }
+
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            updateCartBadge();
+            
+            let currentLang = localStorage.getItem("language") || "it";
+            if(currentLang === "en") {
+                alert('Product added to cart!');
+            } else {
+                alert('Prodotto aggiunto al carrello!');
+            }
+        }
+
+        window.addToCart = addToCart;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+
+            // 🔥 FIX: Definiamo esplicitamente la lingua corrente recuperandola dal localStorage
+            let currentLang = localStorage.getItem("language") || "it";
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                if (prodottoCorrente) {
+                    addToCart(prodottoCorrente);
+                }
+            });
+
+            // Traduzione delle etichette statiche della scheda prodotto (non presenti in translation.json)
+            if (currentLang === "en") {
+                document.getElementById('label-compatibilita').textContent = "Compatibility:";
+                document.getElementById('label-add-cart').textContent = "Add to cart";
+                document.getElementById('error-box').textContent = "Product not found or invalid ID.";
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const idProdotto = parseInt(params.get('id'), 10);
+            const source = params.get('source');
+
+            if (!idProdotto) {
+                mostraErrore();
+                return;
+            }
+
+            // Ora la variabile `currentLang` è visibile e cercherà correttamente prodotti-it.json o prodotti-en.json
+            let jsonFile = `prodotti-${currentLang}.json`;
+
+            if (source === 'bestseller') {
+                jsonFile = 'bestseller.json'; 
+            }
+
+            fetch(jsonFile)
+                .then(response => {
+                    if (!response.ok) throw new Error();
+                    return response.json();
+                })
+                .then(prodotti => {
+                    const prodotto = prodotti.find(
+                        p => Number(p.numero) === Number(idProdotto)
+                    );
+
+                    if (prodotto) {
+                        mostraProdotto(prodotto);
+                    } else {
+                        mostraErrore();
+                    }
+                })
+                .catch(err => {
+                    console.log("Errore nel caricamento dettagli.");
+                    mostraErrore();
+                });
         });
 
-        coloriContainer.appendChild(dot);
-    });
+        function mostraProdotto(p) {
+            prodottoCorrente = p;
 
-    document.getElementById('product-card-detail').style.display = 'flex';
-}
+            document.getElementById('p-img').src = p.immagine;
+            document.getElementById('p-img').alt = p.nome;
+            document.getElementById('p-categoria').innerText = p.categoria;
+            document.getElementById('p-nome').innerText = p.nome;
 
-function mostraErrore() {
-    document.getElementById('error-box').style.display = 'block';
-}
-</script>
+            const versioneTesto = p.versione && p.versione !== '-' ? p.versione : '';
+            document.getElementById('p-compatibilita').innerText =
+                `${p.marca} ${p.modello} ${versioneTesto}`;
+
+            document.getElementById('p-descrizione').innerText = p.descrizione;
+            document.getElementById('p-prezzo').innerText = `€ ${p.prezzo.toFixed(2)}`;
+
+            document.getElementById('product-card-detail').style.display = 'flex';
+        }
+
+        function mostraErrore() {
+            document.getElementById('error-box').style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>
